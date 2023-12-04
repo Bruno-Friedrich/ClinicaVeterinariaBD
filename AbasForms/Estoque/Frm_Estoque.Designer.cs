@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Estoque));
             panel1 = new Panel();
             Btn_EditProduto = new Bunifu.Framework.UI.BunifuThinButton2();
             Btn_RemoveProduto = new Bunifu.Framework.UI.BunifuThinButton2();
             Btn_AddProduto = new Bunifu.Framework.UI.BunifuThinButton2();
+            dbConnectionBindingSource = new BindingSource(components);
+            Dt_Estoque = new DataGridView();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dbConnectionBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Dt_Estoque).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -119,6 +124,22 @@
             Btn_AddProduto.Size = new Size(226, 42);
             Btn_AddProduto.TabIndex = 0;
             Btn_AddProduto.TextAlign = ContentAlignment.MiddleCenter;
+            Btn_AddProduto.Click += Btn_AddProduto_Click;
+            // 
+            // dbConnectionBindingSource
+            // 
+            dbConnectionBindingSource.DataSource = typeof(Arquitetura.DbConnection);
+            // 
+            // Dt_Estoque
+            // 
+            Dt_Estoque.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            Dt_Estoque.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Dt_Estoque.Location = new Point(27, 173);
+            Dt_Estoque.Name = "Dt_Estoque";
+            Dt_Estoque.RowHeadersWidth = 51;
+            Dt_Estoque.RowTemplate.Height = 29;
+            Dt_Estoque.Size = new Size(742, 236);
+            Dt_Estoque.TabIndex = 1;
             // 
             // Frm_Estoque
             // 
@@ -126,10 +147,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(800, 450);
+            Controls.Add(Dt_Estoque);
             Controls.Add(panel1);
             Name = "Frm_Estoque";
             Text = "Frm_Estoque";
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dbConnectionBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Dt_Estoque).EndInit();
             ResumeLayout(false);
         }
 
@@ -139,5 +163,7 @@
         private Bunifu.Framework.UI.BunifuThinButton2 Btn_AddProduto;
         private Bunifu.Framework.UI.BunifuThinButton2 Btn_EditProduto;
         private Bunifu.Framework.UI.BunifuThinButton2 Btn_RemoveProduto;
+        private BindingSource dbConnectionBindingSource;
+        private DataGridView Dt_Estoque;
     }
 }

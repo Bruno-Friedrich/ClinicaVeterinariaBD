@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClinicaVeterinariaBD.AbasForms
+namespace ClinicaVeterinariaBD.AbasForms.Estoque
 {
-    public partial class Frm_Estoque : Form
+    public partial class Frm_InfoProduto : Form
     {
-        public Frm_Estoque()
+        public Frm_InfoProduto()
         {
             InitializeComponent();
         }

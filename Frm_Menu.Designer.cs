@@ -343,6 +343,7 @@
             Controls.Add(panel1);
             Controls.Add(Pnl_Menu);
             Name = "Frm_Menu";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Pnl_Menu.ResumeLayout(false);
             Pnl_Logo.ResumeLayout(false);
