@@ -17,7 +17,7 @@ namespace ClinicaVeterinariaBD.AbasForms
         public Frm_Estoque()
         {
             InitializeComponent();
-            NpgsqlConnection Connection = new NpgsqlConnection("Server=localhost;Port=5432;Database=CliniVet;User Id=postgres;Password=admin;");
+            NpgsqlConnection Connection = new NpgsqlConnection("Server=localhost;Port=5432;Database=CliniVet;User Id=postgres;Password=abcde0900;");
             Connection.Open();
             NpgsqlCommand Command = new NpgsqlCommand();
             Command.Connection = Connection;
