@@ -36,6 +36,7 @@
             Btn_AddProduto = new Bunifu.Framework.UI.BunifuThinButton2();
             dbConnectionBindingSource = new BindingSource(components);
             Dt_Estoque = new DataGridView();
+            Txt_Pesquisa = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dbConnectionBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Dt_Estoque).BeginInit();
@@ -132,14 +133,30 @@
             // 
             // Dt_Estoque
             // 
-            Dt_Estoque.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            Dt_Estoque.AllowUserToAddRows = false;
+            Dt_Estoque.AllowUserToDeleteRows = false;
+            Dt_Estoque.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Dt_Estoque.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Dt_Estoque.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            Dt_Estoque.CausesValidation = false;
             Dt_Estoque.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Dt_Estoque.Location = new Point(27, 173);
             Dt_Estoque.Name = "Dt_Estoque";
+            Dt_Estoque.ReadOnly = true;
             Dt_Estoque.RowHeadersWidth = 51;
             Dt_Estoque.RowTemplate.Height = 29;
+            Dt_Estoque.RowTemplate.Resizable = DataGridViewTriState.True;
             Dt_Estoque.Size = new Size(742, 236);
             Dt_Estoque.TabIndex = 1;
+            // 
+            // Txt_Pesquisa
+            // 
+            Txt_Pesquisa.Location = new Point(27, 123);
+            Txt_Pesquisa.Name = "Txt_Pesquisa";
+            Txt_Pesquisa.Size = new Size(467, 27);
+            Txt_Pesquisa.TabIndex = 2;
+            Txt_Pesquisa.TextChanged += Txt_Pesquisa_TextChanged;
+            Txt_Pesquisa.KeyDown += Txt_Pesquisa_KeyDown;
             // 
             // Frm_Estoque
             // 
@@ -147,6 +164,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(800, 450);
+            Controls.Add(Txt_Pesquisa);
             Controls.Add(Dt_Estoque);
             Controls.Add(panel1);
             Name = "Frm_Estoque";
@@ -155,6 +173,7 @@
             ((System.ComponentModel.ISupportInitialize)dbConnectionBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)Dt_Estoque).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -165,5 +184,6 @@
         private Bunifu.Framework.UI.BunifuThinButton2 Btn_RemoveProduto;
         private BindingSource dbConnectionBindingSource;
         private DataGridView Dt_Estoque;
+        private TextBox Txt_Pesquisa;
     }
 }
