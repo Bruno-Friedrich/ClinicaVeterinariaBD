@@ -50,8 +50,9 @@
             panel1.Controls.Add(Btn_AddProduto);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(800, 55);
+            panel1.Size = new Size(700, 41);
             panel1.TabIndex = 0;
             // 
             // Btn_EditProduto
@@ -71,10 +72,10 @@
             Btn_EditProduto.IdleFillColor = Color.White;
             Btn_EditProduto.IdleForecolor = Color.FromArgb(47, 33, 74);
             Btn_EditProduto.IdleLineColor = Color.FromArgb(47, 33, 74);
-            Btn_EditProduto.Location = new Point(521, 5);
-            Btn_EditProduto.Margin = new Padding(6, 5, 6, 5);
+            Btn_EditProduto.Location = new Point(456, 4);
+            Btn_EditProduto.Margin = new Padding(5, 4, 5, 4);
             Btn_EditProduto.Name = "Btn_EditProduto";
-            Btn_EditProduto.Size = new Size(226, 42);
+            Btn_EditProduto.Size = new Size(198, 32);
             Btn_EditProduto.TabIndex = 2;
             Btn_EditProduto.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -95,10 +96,10 @@
             Btn_RemoveProduto.IdleFillColor = Color.White;
             Btn_RemoveProduto.IdleForecolor = Color.FromArgb(47, 33, 74);
             Btn_RemoveProduto.IdleLineColor = Color.FromArgb(47, 33, 74);
-            Btn_RemoveProduto.Location = new Point(283, 5);
-            Btn_RemoveProduto.Margin = new Padding(6, 5, 6, 5);
+            Btn_RemoveProduto.Location = new Point(248, 4);
+            Btn_RemoveProduto.Margin = new Padding(5, 4, 5, 4);
             Btn_RemoveProduto.Name = "Btn_RemoveProduto";
-            Btn_RemoveProduto.Size = new Size(226, 42);
+            Btn_RemoveProduto.Size = new Size(198, 32);
             Btn_RemoveProduto.TabIndex = 1;
             Btn_RemoveProduto.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -119,10 +120,10 @@
             Btn_AddProduto.IdleFillColor = Color.White;
             Btn_AddProduto.IdleForecolor = Color.FromArgb(47, 33, 74);
             Btn_AddProduto.IdleLineColor = Color.FromArgb(47, 33, 74);
-            Btn_AddProduto.Location = new Point(45, 5);
-            Btn_AddProduto.Margin = new Padding(6, 5, 6, 5);
+            Btn_AddProduto.Location = new Point(39, 4);
+            Btn_AddProduto.Margin = new Padding(5, 4, 5, 4);
             Btn_AddProduto.Name = "Btn_AddProduto";
-            Btn_AddProduto.Size = new Size(226, 42);
+            Btn_AddProduto.Size = new Size(198, 32);
             Btn_AddProduto.TabIndex = 0;
             Btn_AddProduto.TextAlign = ContentAlignment.MiddleCenter;
             Btn_AddProduto.Click += Btn_AddProduto_Click;
@@ -140,7 +141,8 @@
             Dt_Estoque.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             Dt_Estoque.CausesValidation = false;
             Dt_Estoque.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Dt_Estoque.Location = new Point(27, 173);
+            Dt_Estoque.Location = new Point(24, 130);
+            Dt_Estoque.Margin = new Padding(3, 2, 3, 2);
             Dt_Estoque.Name = "Dt_Estoque";
             Dt_Estoque.ReadOnly = true;
             Dt_Estoque.RowHeadersWidth = 51;
@@ -160,13 +162,14 @@
             // 
             // Frm_Estoque
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(800, 450);
             Controls.Add(Txt_Pesquisa);
             Controls.Add(Dt_Estoque);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Frm_Estoque";
             Text = "Frm_Estoque";
             panel1.ResumeLayout(false);
