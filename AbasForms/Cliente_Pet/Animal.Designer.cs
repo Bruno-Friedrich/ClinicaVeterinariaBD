@@ -169,7 +169,7 @@
             Controls.Add(dataGridView2);
             Controls.Add(panel1);
             Name = "Animal";
-            Text = "Form1";
+            Text = "Pets do Cliente";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).EndInit();

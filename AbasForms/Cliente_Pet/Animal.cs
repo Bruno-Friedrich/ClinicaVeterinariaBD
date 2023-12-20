@@ -14,11 +14,11 @@ using System.Windows.Input;
 
 namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 {
-
     public partial class Animal : Form
     {
         public Animal instance;
         public TextBox tb1;
+        public string Id_Cliente { get; set; }
 
         public void ProcurarCliente(string Id)
         {
@@ -33,8 +33,6 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
                     DataTable dt = new DataTable();
                     dt.Load(dr);
                     dataGridView2.DataSource = dt;
-                    Command.Dispose();
-                    Connection.Connection.Close();
                 }
             }
         }
@@ -52,8 +50,6 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
                     DataTable dt2 = new DataTable();
                     dt2.Load(dr2);
                     dataGridView1.DataSource = dt2;
-                    Command.Dispose();
-                    Connection.Connection.Close();
                 }
             }
         }
@@ -61,7 +57,6 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         public Animal()
         {
             InitializeComponent();
-            
             instance = this;
             tb1 = textBox1;
         }
