@@ -34,6 +34,7 @@
             btnExit = new FontAwesome.Sharp.IconPictureBox();
             Pnl_Shadow = new Panel();
             textBox1 = new TextBox();
+            label1 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -111,12 +112,24 @@
             textBox1.Size = new Size(161, 27);
             textBox1.TabIndex = 4;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Gainsboro;
+            label1.Location = new Point(22, 89);
+            label1.Name = "label1";
+            label1.Size = new Size(242, 23);
+            label1.TabIndex = 10;
+            label1.Text = "Adicionar novo produto";
+            // 
             // Frm_InfoProduto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(25, 26, 72);
             ClientSize = new Size(660, 481);
+            Controls.Add(label1);
             Controls.Add(textBox1);
             Controls.Add(Pnl_Shadow);
             Controls.Add(panel1);
@@ -142,5 +155,6 @@
         private Label Lbl_Titulo;
         private FontAwesome.Sharp.IconPictureBox Icn_Titulo;
         private TextBox textBox1;
+        private Label label1;
     }
 }

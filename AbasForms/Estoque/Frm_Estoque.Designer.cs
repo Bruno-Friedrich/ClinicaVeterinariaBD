@@ -137,7 +137,7 @@
             Dt_Estoque.AllowUserToDeleteRows = false;
             Dt_Estoque.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             Dt_Estoque.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            Dt_Estoque.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            Dt_Estoque.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             Dt_Estoque.CausesValidation = false;
             Dt_Estoque.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Dt_Estoque.Location = new Point(27, 173);

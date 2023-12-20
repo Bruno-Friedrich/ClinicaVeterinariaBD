@@ -32,12 +32,12 @@ namespace ClinicaVeterinariaBD.AbasForms
                         Dt_Estoque.DataSource = dt;
 
                         // Renomear as colunas conforme necessário
-                        Dt_Estoque.Columns["NomeProd"].HeaderText = "Nome do Produto";
+                        Dt_Estoque.Columns["NomeProd"].HeaderText = "Nome";
                         Dt_Estoque.Columns["Preco"].HeaderText = "Preço";
                         Dt_Estoque.Columns["QntEstoque"].HeaderText = "Quantidade em Estoque";
                         Dt_Estoque.Columns["Descricao"].HeaderText = "Descrição";
                         Dt_Estoque.Columns["DataVenc"].HeaderText = "Data de Vencimento";
-                        Dt_Estoque.Columns["Id"].HeaderText = "Código do Produto";
+                        Dt_Estoque.Columns["Id"].HeaderText = "Código   ";
                         Dt_Estoque.Columns["marca"].HeaderText = "Marca";
                         Dt_Estoque.Columns["lote"].HeaderText = "Lote";
                         Dt_Estoque.Columns["dose"].HeaderText = "Dose";
