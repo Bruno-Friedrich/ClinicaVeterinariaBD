@@ -13,7 +13,7 @@ namespace ClinicaVeterinariaBD.Arquitetura
         
         public DbConnection()
         {
-                Connection = new NpgsqlConnection("Server=localhost;Port=5432;Database=CliniVet;User Id=postgres;Password=123;");
+                Connection = new NpgsqlConnection("Server=localhost;Port=5432;Database=CliniVet;User Id=postgres;Password=abcde0900;");
                 Connection.Open();
         }
 
