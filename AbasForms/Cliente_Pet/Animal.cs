@@ -24,11 +24,11 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente' AND cast(id as varchar) LIKE @IdBuscado";
+                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente' AND id = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
-                    Command.Parameters.AddWithValue("@IdBuscado", "%" + Id + "%");
+                    Command.Parameters.AddWithValue("@IdBuscado", Id);
                     NpgsqlDataReader dr = Command.ExecuteReader();
                     DataTable dt = new DataTable();
                     dt.Load(dr);
@@ -43,11 +43,11 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Animal WHERE cast(iddono as varchar) LIKE @IdBuscado";
+                string query = "SELECT * FROM clinicaveterinaria2.Animal WHERE iddono = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
-                    Command.Parameters.AddWithValue("@IdBuscado", "%" + Id + "%");
+                    Command.Parameters.AddWithValue("@IdBuscado", Id);
                     NpgsqlDataReader dr2 = Command.ExecuteReader();
                     DataTable dt2 = new DataTable();
                     dt2.Load(dr2);

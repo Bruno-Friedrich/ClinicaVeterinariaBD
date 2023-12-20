@@ -58,11 +58,11 @@ namespace ClinicaVeterinariaBD.AbasForms
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT id FROM clinicaveterinaria2.Pessoa WHERE cast(id as varchar) LIKE @IdBuscado";
+                string query = "SELECT id FROM clinicaveterinaria2.Pessoa WHERE id = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
-                    Command.Parameters.AddWithValue("@IdBuscado", "%" + UserInputText + "%");
+                    Command.Parameters.AddWithValue("@IdBuscado", UserInputText);
                     NpgsqlDataReader dr = Command.ExecuteReader();
                     if ((UserInputText == ""))
                     {
