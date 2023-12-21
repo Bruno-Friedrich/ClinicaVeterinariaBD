@@ -197,7 +197,7 @@
             cpfOwner.Name = "cpfOwner";
             cpfOwner.Size = new Size(181, 23);
             cpfOwner.TabIndex = 20;
-            cpfOwner.KeyDown += cpfOwner_KeyDown;
+            cpfOwner.Leave += cpfOwner_Leave;
             // 
             // cpfInvalido
             // 

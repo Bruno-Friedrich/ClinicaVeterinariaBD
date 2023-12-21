@@ -27,7 +27,8 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
 
         }
 
-        private void cpfOwner_KeyDown(object sender, KeyEventArgs e)
+
+        private void cpfOwner_Leave(object sender, EventArgs e)
         {
 
             DbConnection connection = new DbConnection();
@@ -38,34 +39,32 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
 
-            if (e.KeyCode == Keys.Enter)
+
+            string query = $" {connection.search_path} SELECT * FROM PESSOA WHERE CPF = '{cpfOwner.Text}';";
+            command.CommandText = query;
+            NpgsqlDataReader cpfReader = command.ExecuteReader();
+            cpfInvalido.Visible = false;
+
+            if (cpfOwner.Text.Length > 11 || !(cpfReader.HasRows)) // Nao pode ser >, tem q ser !=. Fiz por facilidade de testes.
             {
-
-                string query = $" {connection.search_path} SELECT * FROM PESSOA WHERE CPF = '{cpfOwner.Text}';";
-                command.CommandText = query;
-                NpgsqlDataReader cpfReader = command.ExecuteReader();
-                cpfInvalido.Visible = false;
-
-                if (cpfOwner.Text.Length > 11 || !(cpfReader.HasRows)) // Nao pode ser >, tem q ser !=. Fiz por facilidade de testes.
-                {
-                    cpfInvalido.Visible = true;
-                    btrConfirm.Enabled = false;
-
-                }
-                else
-                {
-                    animalName.Enabled = true;
-                    cpfInvalido.Visible = false;
-                    if (previousCPF != cpfOwner.Text)
-                    {
-                        animalName.SelectedItem = "";
-                        animalName.Items.Clear();
-                        ReadAnimalsDataReader();
-                        previousCPF = cpfOwner.Text;
-                    }
-                }
+                cpfInvalido.Visible = true;
+                btrConfirm.Enabled = false;
 
             }
+            else
+            {
+                animalName.Enabled = true;
+                cpfInvalido.Visible = false;
+                if (previousCPF != cpfOwner.Text)
+                {
+                    animalName.SelectedItem = "";
+                    animalName.Items.Clear();
+                    ReadAnimalsDataReader();
+                    previousCPF = cpfOwner.Text;
+                }
+            }
+
+
             command.Dispose();
             connection.Connection.Close();
 
