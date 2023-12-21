@@ -56,33 +56,37 @@ namespace ClinicaVeterinariaBD.AbasForms
                 return;
             }
 
+            int idCliente = Int32.Parse(UserInputText);
+
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT id FROM clinicaveterinaria2.Pessoa WHERE id = cast(@IdBuscado as int)";
-
+                string query = $"{Connection.search_path} SELECT * FROM Pessoa WHERE id = '{idCliente}';";
+                
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
-                    Command.Parameters.AddWithValue("@IdBuscado", UserInputText);
                     try
                     {
-                        if (UserInputText == "")
-                        {
-                            MessageBox.Show("Insira um ID", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            NpgsqlDataReader dr = Command.ExecuteReader();
-                            Animal animal = new Animal();
-                            animal.instance.tb1.Text = UserInputText;
-                            animal.Id_Cliente = UserInputText;
+                        Command.CommandText = query;
+                        NpgsqlDataReader dr = Command.ExecuteReader();
 
-                            //Animal DataGrid1
-                            animal.ProcurarAnimal(UserInputText);
-
-                            //Animal DataGrid2
-                            animal.ProcurarCliente(UserInputText);
-                            animal.Show();
+                        if(!dr.HasRows)
+                        {
+                            MessageBox.Show("Digite um ID válido!", "Erro", MessageBoxButtons.OK
+                                , MessageBoxIcon.Error );
+                            return;
                         }
+
+                        Animal animal = new Animal();
+                        animal.instance.tb1.Text = UserInputText;
+                        animal.Id_Cliente = UserInputText;
+
+                        //Animal DataGrid1
+                        animal.ProcurarAnimal(UserInputText);
+
+                        //Animal DataGrid2
+                        animal.ProcurarCliente(UserInputText);
+                        animal.Show();
+                        
                         Command.Dispose();
                         Connection.Connection.Close();
                     }
@@ -156,6 +160,11 @@ namespace ClinicaVeterinariaBD.AbasForms
 
         }
         private void Dt_Consulta_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void textBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
         }
