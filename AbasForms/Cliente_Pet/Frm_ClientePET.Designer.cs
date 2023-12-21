@@ -35,6 +35,8 @@
             Dt_Consulta = new DataGridView();
             textBox1 = new TextBox();
             button1 = new Button();
+            textBox2 = new TextBox();
+            button2 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -121,7 +123,7 @@
             textBox1.Location = new Point(25, 110);
             textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Digite o ID do cliente...";
+            textBox1.PlaceholderText = "Digite o CPF do cliente...";
             textBox1.Size = new Size(128, 23);
             textBox1.TabIndex = 7;
             textBox1.TextChanged += textBox1_TextChanged;
@@ -138,6 +140,30 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // textBox2
+            // 
+            textBox2.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            textBox2.ForeColor = Color.Black;
+            textBox2.Location = new Point(25, 64);
+            textBox2.Margin = new Padding(3, 2, 3, 2);
+            textBox2.Name = "textBox2";
+            textBox2.PlaceholderText = "Digite o Nome do cliente...";
+            textBox2.Size = new Size(201, 23);
+            textBox2.TabIndex = 9;
+            textBox2.TextChanged += textBox2_TextChanged;
+            // 
+            // button2
+            // 
+            button2.AutoSize = true;
+            button2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            button2.Location = new Point(559, 64);
+            button2.Name = "button2";
+            button2.Size = new Size(108, 25);
+            button2.TabIndex = 10;
+            button2.Text = "Adicionar Cliente";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // Frm_ClientePET
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -145,13 +171,15 @@
             BackColor = Color.FromArgb(34, 33, 74);
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(700, 338);
+            Controls.Add(button2);
+            Controls.Add(textBox2);
             Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(Dt_Consulta);
             Controls.Add(panel1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Frm_ClientePET";
-            Text = "Frm_ClientePET";
+            Text = "Clientes Ativos";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).EndInit();
@@ -177,5 +205,7 @@
         private DataGridView Dt_Consulta;
         private TextBox textBox1;
         private Button button1;
+        private TextBox textBox2;
+        private Button button2;
     }
 }

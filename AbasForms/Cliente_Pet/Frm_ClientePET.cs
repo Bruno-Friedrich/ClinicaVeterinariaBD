@@ -10,26 +10,118 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClinicaVeterinariaBD.Arquitetura;
+using System.Linq.Expressions;
 
 namespace ClinicaVeterinariaBD.AbasForms
 {
     public partial class Frm_ClientePET : Form
     {
+        private void inicializar()
+        {
+            using (DbConnection Connection = new DbConnection())
+            {
+                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente'";
+
+                using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
+                {
+                    try
+                    {
+                        NpgsqlDataReader dr = Command.ExecuteReader();
+
+                        DataTable dt = new DataTable();
+                        dt.Load(dr);
+                        Dt_Consulta.DataSource = dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao executar a consulta: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+            }
+        }
         public Frm_ClientePET()
         {
             InitializeComponent();
+            inicializar();
+        }
 
-            DbConnection Connection = new DbConnection();
-            NpgsqlCommand Command = new NpgsqlCommand();
-            Command.Connection = Connection.Connection;
-            Command.CommandType = CommandType.Text;
-            Command.CommandText = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente'";
-            NpgsqlDataReader dr = Command.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            Dt_Consulta.DataSource = dt;
-            Command.Dispose();
-            Connection.Connection.Close();
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string UserInputText = textBox1.Text.ToLower().Trim();
+
+            using (DbConnection Connection = new DbConnection())
+            {
+                string query = "SELECT id FROM clinicaveterinaria2.Pessoa WHERE id = cast(@IdBuscado as int)";
+
+                using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
+                {
+                    Command.Parameters.AddWithValue("@IdBuscado", UserInputText);
+                    try
+                    {
+                        if (UserInputText == "")
+                        {
+                            MessageBox.Show("Insira um ID", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            NpgsqlDataReader dr = Command.ExecuteReader();
+                            Animal animal = new Animal();
+                            animal.instance.tb1.Text = UserInputText;
+                            animal.Id_Cliente = UserInputText;
+
+                            //Animal DataGrid1
+                            animal.ProcurarAnimal(UserInputText);
+
+                            //Animal DataGrid2
+                            animal.ProcurarCliente(UserInputText);
+                            animal.Show();
+                        }
+                        Command.Dispose();
+                        Connection.Connection.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("ID não encontrado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            string Nome_Cliente = textBox2.Text.ToLower().Trim();
+
+            using (DbConnection Connection = new DbConnection())
+            {
+                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente' AND LOWER(nome) LIKE @Nome_cliente";
+
+                using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
+                {
+                    Command.Parameters.AddWithValue("@Nome_cliente", "%" + Nome_Cliente + "%");
+
+                    try
+                    {
+                        NpgsqlDataReader dr = Command.ExecuteReader();
+
+                        DataTable dt = new DataTable();
+                        dt.Load(dr);
+                        Dt_Consulta.DataSource = dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao executar a consulta: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Adiciona_Cliente adiciona_cliente = new Adiciona_Cliente();
+            adiciona_cliente.Show();
         }
 
         private void iconPictureBox1_Click(object sender, EventArgs e)
@@ -51,41 +143,6 @@ namespace ClinicaVeterinariaBD.AbasForms
         {
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string UserInputText = textBox1.Text.ToLower().Trim();
-
-            using (DbConnection Connection = new DbConnection())
-            {
-                string query = "SELECT id FROM clinicaveterinaria2.Pessoa WHERE id = cast(@IdBuscado as int)";
-
-                using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
-                {
-                    Command.Parameters.AddWithValue("@IdBuscado", UserInputText);
-                    NpgsqlDataReader dr = Command.ExecuteReader();
-                    if ((UserInputText == ""))
-                    {
-                        MessageBox.Show("Insira um ID", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        Animal animal = new Animal();
-                        animal.instance.tb1.Text = UserInputText;
-
-                        //Animal DataGrid1
-                        animal.ProcurarAnimal(UserInputText);
-
-                        //Animal DataGrid2
-                        animal.ProcurarCliente(UserInputText);
-                        animal.Show();
-                    }
-                    Command.Dispose();
-                    Connection.Connection.Close();
-                }
-            }
-        }
-
         private void Dt_Consulta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
