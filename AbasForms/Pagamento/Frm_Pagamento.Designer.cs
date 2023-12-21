@@ -70,7 +70,7 @@
             Btn_VisualizarNF.Location = new Point(542, 288);
             Btn_VisualizarNF.Margin = new Padding(6, 5, 6, 5);
             Btn_VisualizarNF.Name = "Btn_VisualizarNF";
-            Btn_VisualizarNF.Size = new Size(226, 57);
+            Btn_VisualizarNF.Size = new Size(226, 63);
             Btn_VisualizarNF.TabIndex = 2;
             Btn_VisualizarNF.TextAlign = ContentAlignment.MiddleCenter;
             Btn_VisualizarNF.Click += Btn_VisualizarNF_Click;
@@ -95,7 +95,7 @@
             Btn_VisualizaServico.Location = new Point(291, 288);
             Btn_VisualizaServico.Margin = new Padding(6, 5, 6, 5);
             Btn_VisualizaServico.Name = "Btn_VisualizaServico";
-            Btn_VisualizaServico.Size = new Size(226, 57);
+            Btn_VisualizaServico.Size = new Size(226, 63);
             Btn_VisualizaServico.TabIndex = 1;
             Btn_VisualizaServico.TextAlign = ContentAlignment.MiddleCenter;
             Btn_VisualizaServico.Click += Btn_VisualizaServico_Click;
@@ -120,7 +120,7 @@
             Btn_RealizarConsulta.Location = new Point(43, 288);
             Btn_RealizarConsulta.Margin = new Padding(6, 5, 6, 5);
             Btn_RealizarConsulta.Name = "Btn_RealizarConsulta";
-            Btn_RealizarConsulta.Size = new Size(226, 57);
+            Btn_RealizarConsulta.Size = new Size(226, 63);
             Btn_RealizarConsulta.TabIndex = 0;
             Btn_RealizarConsulta.TextAlign = ContentAlignment.MiddleCenter;
             Btn_RealizarConsulta.Click += Btn_RealizarConsulta_Click;
@@ -132,10 +132,10 @@
             iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.ShieldDog;
             iconPictureBox1.IconColor = Color.Gainsboro;
             iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconPictureBox1.IconSize = 219;
+            iconPictureBox1.IconSize = 225;
             iconPictureBox1.Location = new Point(43, 61);
             iconPictureBox1.Name = "iconPictureBox1";
-            iconPictureBox1.Size = new Size(246, 219);
+            iconPictureBox1.Size = new Size(246, 225);
             iconPictureBox1.TabIndex = 3;
             iconPictureBox1.TabStop = false;
             // 
@@ -146,10 +146,10 @@
             iconPictureBox2.IconChar = FontAwesome.Sharp.IconChar.FileInvoiceDollar;
             iconPictureBox2.IconColor = Color.Gainsboro;
             iconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconPictureBox2.IconSize = 219;
+            iconPictureBox2.IconSize = 225;
             iconPictureBox2.Location = new Point(542, 61);
             iconPictureBox2.Name = "iconPictureBox2";
-            iconPictureBox2.Size = new Size(246, 219);
+            iconPictureBox2.Size = new Size(246, 225);
             iconPictureBox2.TabIndex = 4;
             iconPictureBox2.TabStop = false;
             // 
@@ -160,10 +160,10 @@
             iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.BriefcaseMedical;
             iconPictureBox3.IconColor = Color.Gainsboro;
             iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconPictureBox3.IconSize = 219;
+            iconPictureBox3.IconSize = 225;
             iconPictureBox3.Location = new Point(291, 61);
             iconPictureBox3.Name = "iconPictureBox3";
-            iconPictureBox3.Size = new Size(246, 219);
+            iconPictureBox3.Size = new Size(246, 225);
             iconPictureBox3.TabIndex = 5;
             iconPictureBox3.TabStop = false;
             // 
@@ -172,7 +172,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 392);
             Controls.Add(iconPictureBox3);
             Controls.Add(iconPictureBox2);
             Controls.Add(iconPictureBox1);

@@ -38,7 +38,6 @@
             label8 = new Label();
             label9 = new Label();
             label10 = new Label();
-            valorServico = new TextBox();
             obsServico = new TextBox();
             tipoServico = new ComboBox();
             funcionarioServico = new ComboBox();
@@ -55,6 +54,7 @@
             horaIni = new MaskedTextBox();
             horaFim = new MaskedTextBox();
             Icn_Titulo = new FontAwesome.Sharp.IconPictureBox();
+            valorServico = new MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)todaysScheduleDataGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             SuspendLayout();
@@ -157,15 +157,6 @@
             label10.Size = new Size(105, 19);
             label10.TabIndex = 9;
             label10.Text = "Observação";
-            // 
-            // valorServico
-            // 
-            valorServico.Enabled = false;
-            valorServico.Location = new Point(46, 518);
-            valorServico.Name = "valorServico";
-            valorServico.Size = new Size(181, 23);
-            valorServico.TabIndex = 12;
-            valorServico.TextChanged += valorServico_TextChanged;
             // 
             // obsServico
             // 
@@ -334,12 +325,24 @@
             Icn_Titulo.TabIndex = 34;
             Icn_Titulo.TabStop = false;
             // 
+            // valorServico
+            // 
+            valorServico.Enabled = false;
+            valorServico.Location = new Point(46, 518);
+            valorServico.Mask = "00000";
+            valorServico.Name = "valorServico";
+            valorServico.Size = new Size(177, 23);
+            valorServico.TabIndex = 35;
+            valorServico.ValidatingType = typeof(int);
+            valorServico.KeyUp += maskedTextBox1_KeyUp;
+            // 
             // s
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(977, 589);
+            Controls.Add(valorServico);
             Controls.Add(Icn_Titulo);
             Controls.Add(horaFim);
             Controls.Add(horaIni);
@@ -355,7 +358,6 @@
             Controls.Add(funcionarioServico);
             Controls.Add(tipoServico);
             Controls.Add(obsServico);
-            Controls.Add(valorServico);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(label8);
@@ -384,7 +386,6 @@
         private Label label8;
         private Label label9;
         private Label label10;
-        private TextBox valorServico;
         private TextBox obsServico;
         private ComboBox tipoServico;
         private ComboBox funcionarioServico;
@@ -401,5 +402,6 @@
         private MaskedTextBox horaIni;
         private MaskedTextBox horaFim;
         private FontAwesome.Sharp.IconPictureBox Icn_Titulo;
+        private MaskedTextBox valorServico;
     }
 }
