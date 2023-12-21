@@ -31,6 +31,7 @@
             SchedulingViewer = new DataGridView();
             btn_BuscaServico = new Button();
             label1 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)SchedulingViewer).BeginInit();
             SuspendLayout();
             // 
@@ -63,17 +64,29 @@
             label1.TabIndex = 2;
             label1.Text = "Consultas do dia";
             // 
+            // button1
+            // 
+            button1.Location = new Point(393, 252);
+            button1.Name = "button1";
+            button1.Size = new Size(201, 45);
+            button1.TabIndex = 3;
+            button1.Text = "Agendar serviço";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Frm_Consulta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(700, 338);
+            Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(btn_BuscaServico);
             Controls.Add(SchedulingViewer);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Frm_Consulta";
             Text = "Frm_Consulta";
+            Load += Frm_Consulta_Load;
             ((System.ComponentModel.ISupportInitialize)SchedulingViewer).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -84,5 +97,6 @@
         private DataGridView SchedulingViewer;
         private Button btn_BuscaServico;
         private Label label1;
+        private Button button1;
     }
 }
