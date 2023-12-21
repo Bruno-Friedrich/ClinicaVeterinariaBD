@@ -41,7 +41,6 @@
             box_cidade = new TextBox();
             box_bairro = new TextBox();
             box_endereco = new TextBox();
-            box_num = new TextBox();
             label1 = new Label();
             box_compl = new TextBox();
             label3 = new Label();
@@ -56,6 +55,7 @@
             label12 = new Label();
             label13 = new Label();
             button1 = new Button();
+            box_num = new MaskedTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -218,17 +218,6 @@
             box_endereco.Size = new Size(208, 23);
             box_endereco.TabIndex = 16;
             // 
-            // box_num
-            // 
-            box_num.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            box_num.ForeColor = Color.Black;
-            box_num.Location = new Point(341, 357);
-            box_num.Margin = new Padding(3, 2, 3, 2);
-            box_num.Name = "box_num";
-            box_num.PlaceholderText = "1350";
-            box_num.Size = new Size(208, 23);
-            box_num.TabIndex = 17;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -387,12 +376,21 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click_1;
             // 
+            // box_num
+            // 
+            box_num.Location = new Point(341, 356);
+            box_num.Mask = "0000";
+            box_num.Name = "box_num";
+            box_num.Size = new Size(208, 23);
+            box_num.TabIndex = 61;
+            // 
             // Adiciona_Cliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(794, 445);
+            Controls.Add(box_num);
             Controls.Add(button1);
             Controls.Add(label13);
             Controls.Add(label12);
@@ -407,7 +405,6 @@
             Controls.Add(label3);
             Controls.Add(box_compl);
             Controls.Add(label1);
-            Controls.Add(box_num);
             Controls.Add(box_endereco);
             Controls.Add(box_bairro);
             Controls.Add(box_cidade);
@@ -444,7 +441,6 @@
         private TextBox box_cidade;
         private TextBox box_bairro;
         private TextBox box_endereco;
-        private TextBox box_num;
         private Label label1;
         private TextBox box_compl;
         private Label label3;
@@ -459,5 +455,6 @@
         private Label label12;
         private Label label13;
         private Button button1;
+        private MaskedTextBox box_num;
     }
 }

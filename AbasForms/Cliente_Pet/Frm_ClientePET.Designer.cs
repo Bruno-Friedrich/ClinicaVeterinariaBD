@@ -33,11 +33,11 @@
             Lbl_Titulo = new Label();
             btnExit = new FontAwesome.Sharp.IconPictureBox();
             Dt_Consulta = new DataGridView();
-            textBox1 = new TextBox();
             button1 = new Button();
             textBox2 = new TextBox();
             button2 = new Button();
             button3 = new Button();
+            textBox1 = new MaskedTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -117,18 +117,6 @@
             Dt_Consulta.TabIndex = 6;
             Dt_Consulta.CellContentClick += Dt_Consulta_CellContentClick;
             // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            textBox1.ForeColor = Color.Black;
-            textBox1.Location = new Point(25, 110);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Digite o ID do cliente...";
-            textBox1.Size = new Size(128, 23);
-            textBox1.TabIndex = 7;
-            textBox1.TextChanged += textBox1_TextChanged;
-            // 
             // button1
             // 
             button1.AutoSize = true;
@@ -177,6 +165,14 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(25, 110);
+            textBox1.Mask = "0000";
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(128, 23);
+            textBox1.TabIndex = 12;
+            // 
             // Frm_ClientePET
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -184,11 +180,11 @@
             BackColor = Color.FromArgb(34, 33, 74);
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(700, 338);
+            Controls.Add(textBox1);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(textBox2);
             Controls.Add(button1);
-            Controls.Add(textBox1);
             Controls.Add(Dt_Consulta);
             Controls.Add(panel1);
             Margin = new Padding(3, 2, 3, 2);
@@ -217,10 +213,10 @@
         private Label Lbl_Titulo;
         private FontAwesome.Sharp.IconPictureBox btnExit;
         private DataGridView Dt_Consulta;
-        private TextBox textBox1;
         private Button button1;
         private TextBox textBox2;
         private Button button2;
         private Button button3;
+        private MaskedTextBox textBox1;
     }
 }
