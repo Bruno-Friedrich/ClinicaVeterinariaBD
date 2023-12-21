@@ -50,9 +50,15 @@ namespace ClinicaVeterinariaBD.AbasForms
         {
             string UserInputText = textBox1.Text.ToLower().Trim();
 
+            if (string.IsNullOrEmpty(UserInputText))
+            {
+                MessageBox.Show("Insira o Id", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             using (DbConnection Connection = new DbConnection())
             {
-                string query = $"{Connection.search_path} SELECT id FROM Pessoa WHERE id = cast(@IdBuscado as int)";
+                string query = "SELECT id FROM clinicaveterinaria2.Pessoa WHERE id = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {

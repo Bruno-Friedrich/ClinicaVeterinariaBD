@@ -36,8 +36,6 @@
             label15 = new Label();
             label14 = new Label();
             box_animal_sexo = new ComboBox();
-            box_animal_peso = new TextBox();
-            box_animal_idade = new TextBox();
             box_animal_especie = new TextBox();
             box_animal_raca = new TextBox();
             box_animal_nome = new TextBox();
@@ -46,8 +44,10 @@
             Icn_Titulo = new FontAwesome.Sharp.IconPictureBox();
             Lbl_Titulo = new Label();
             btnExit = new FontAwesome.Sharp.IconPictureBox();
-            box_idCliente = new TextBox();
             label1 = new Label();
+            box_idCliente = new MaskedTextBox();
+            box_animal_idade = new MaskedTextBox();
+            box_animal_peso = new MaskedTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -139,28 +139,6 @@
             box_animal_sexo.Name = "box_animal_sexo";
             box_animal_sexo.Size = new Size(208, 23);
             box_animal_sexo.TabIndex = 52;
-            // 
-            // box_animal_peso
-            // 
-            box_animal_peso.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            box_animal_peso.ForeColor = Color.Black;
-            box_animal_peso.Location = new Point(309, 262);
-            box_animal_peso.Margin = new Padding(3, 2, 3, 2);
-            box_animal_peso.Name = "box_animal_peso";
-            box_animal_peso.PlaceholderText = "78";
-            box_animal_peso.Size = new Size(208, 23);
-            box_animal_peso.TabIndex = 51;
-            // 
-            // box_animal_idade
-            // 
-            box_animal_idade.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            box_animal_idade.ForeColor = Color.Black;
-            box_animal_idade.Location = new Point(309, 235);
-            box_animal_idade.Margin = new Padding(3, 2, 3, 2);
-            box_animal_idade.Name = "box_animal_idade";
-            box_animal_idade.PlaceholderText = "2";
-            box_animal_idade.Size = new Size(208, 23);
-            box_animal_idade.TabIndex = 50;
             // 
             // box_animal_especie
             // 
@@ -261,17 +239,6 @@
             btnExit.TabIndex = 7;
             btnExit.TabStop = false;
             // 
-            // box_idCliente
-            // 
-            box_idCliente.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            box_idCliente.ForeColor = Color.Black;
-            box_idCliente.Location = new Point(309, 127);
-            box_idCliente.Margin = new Padding(3, 2, 3, 2);
-            box_idCliente.Name = "box_idCliente";
-            box_idCliente.PlaceholderText = "14";
-            box_idCliente.Size = new Size(208, 23);
-            box_idCliente.TabIndex = 62;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -283,14 +250,40 @@
             label1.TabIndex = 63;
             label1.Text = "Id Cliente* :";
             // 
+            // box_idCliente
+            // 
+            box_idCliente.Location = new Point(309, 127);
+            box_idCliente.Mask = "0000";
+            box_idCliente.Name = "box_idCliente";
+            box_idCliente.Size = new Size(208, 23);
+            box_idCliente.TabIndex = 64;
+            // 
+            // box_animal_idade
+            // 
+            box_animal_idade.Location = new Point(309, 235);
+            box_animal_idade.Mask = "000";
+            box_animal_idade.Name = "box_animal_idade";
+            box_animal_idade.Size = new Size(208, 23);
+            box_animal_idade.TabIndex = 65;
+            // 
+            // box_animal_peso
+            // 
+            box_animal_peso.Location = new Point(309, 262);
+            box_animal_peso.Mask = "0000";
+            box_animal_peso.Name = "box_animal_peso";
+            box_animal_peso.Size = new Size(208, 23);
+            box_animal_peso.TabIndex = 67;
+            // 
             // Adiciona_Animal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(800, 450);
-            Controls.Add(label1);
+            Controls.Add(box_animal_peso);
+            Controls.Add(box_animal_idade);
             Controls.Add(box_idCliente);
+            Controls.Add(label1);
             Controls.Add(panel1);
             Controls.Add(button2);
             Controls.Add(label19);
@@ -300,8 +293,6 @@
             Controls.Add(label15);
             Controls.Add(label14);
             Controls.Add(box_animal_sexo);
-            Controls.Add(box_animal_peso);
-            Controls.Add(box_animal_idade);
             Controls.Add(box_animal_especie);
             Controls.Add(box_animal_raca);
             Controls.Add(box_animal_nome);
@@ -326,8 +317,6 @@
         private Label label15;
         private Label label14;
         private ComboBox box_animal_sexo;
-        private TextBox box_animal_peso;
-        private TextBox box_animal_idade;
         private TextBox box_animal_especie;
         private TextBox box_animal_raca;
         private TextBox box_animal_nome;
@@ -336,7 +325,10 @@
         private FontAwesome.Sharp.IconPictureBox Icn_Titulo;
         private Label Lbl_Titulo;
         private FontAwesome.Sharp.IconPictureBox btnExit;
-        private TextBox box_idCliente;
         private Label label1;
+        private MaskedTextBox box_idCliente;
+        private MaskedTextBox box_animal_idade;
+        private MaskedTextBox maskedTextBox2;
+        private MaskedTextBox box_animal_peso;
     }
 }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClinicaVeterinariaBD.Arquitetura;
+using System.Speech.Synthesis.TtsEngine;
 
 namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 {
@@ -33,9 +34,18 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 
         private void insereAlergia()
         {
-            int idDono = Int32.Parse(box_IdDono.Text);
+            string temp = box_IdDono.Text;
+            
             string nomeAnimal = box_NomeAnimal.Text.ToLower().Trim();
             string Alergia = box_Alergia.Text.ToLower().Trim();
+
+            if ((string.IsNullOrEmpty(temp)) || (string.IsNullOrEmpty(nomeAnimal)) || (string.IsNullOrEmpty(Alergia)))
+            {
+                MessageBox.Show("Insira os dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int idDono = Int32.Parse(temp);
 
             using (DbConnection Connection = new DbConnection())
             {
@@ -56,7 +66,14 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 
         public void verificaAlergias()
         {
-            int idDono = Int32.Parse(box_IdDono.Text);
+            string temp = box_IdDono.Text;
+            if (string.IsNullOrEmpty(temp))
+            {
+                MessageBox.Show("Insira o Id", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            int idDono = Int32.Parse(temp);
 
             using (DbConnection Connection = new DbConnection())
             {

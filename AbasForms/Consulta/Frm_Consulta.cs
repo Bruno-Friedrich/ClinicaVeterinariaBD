@@ -28,7 +28,7 @@ namespace ClinicaVeterinariaBD
             //Configuração do comando de busca
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
-            string query = $"{connection.search_path} SELECT nomeanimal, iddono, funcid, horaini, horafim, custo, tipo FROM SERVICO WHERE data = '{currentDate.ToString("yyyy-MM-dd")}'";
+            string query = $"{connection.search_path} SELECT PCLIENTE.nome AS nomecliente, PFUNC.nome AS nomefuncionario,nomeanimal, horaini, horafim, custo, SERVICO.tipo  FROM SERVICO, FUNCIONARIO, CLIENTE, PESSOA AS PFUNC, PESSOA AS PCLIENTE  WHERE data = '{currentDate.ToString("yyyy-MM-dd")}' AND FUNCIONARIO.id = SERVICO.funcid  AND CLIENTE.id = SERVICO.iddono AND PFUNC.id = FUNCIONARIO.id AND PCLIENTE.id = CLIENTE.id ORDER BY horaini";
             command.CommandText = query;
 
 
@@ -38,6 +38,15 @@ namespace ClinicaVeterinariaBD
             DataTable dataTable = new DataTable();
             dataTable.Load(dataReader);
             SchedulingViewer.DataSource = dataTable;
+
+            SchedulingViewer.Columns["nomecliente"].HeaderText = "Nome do Cliente";
+            SchedulingViewer.Columns["nomefuncionario"].HeaderText = "Nome do Funcionario";
+            SchedulingViewer.Columns["nomeanimal"].HeaderText = "Nome do Animal";
+            SchedulingViewer.Columns["horaini"].HeaderText = "Horário de início";
+            SchedulingViewer.Columns["horafim"].HeaderText = "Horário de fim";
+            SchedulingViewer.Columns["custo"].HeaderText = "Custo";
+            SchedulingViewer.Columns["tipo"].HeaderText = "Tipo";
+            
             command.Dispose();
             connection.Connection.Close();
         }

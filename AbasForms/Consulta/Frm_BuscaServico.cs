@@ -22,12 +22,6 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
         {
             InitializeComponent();
 
-            INPUT_ID_cliente.Visible = false;
-            INPUT_ID_funcionario.Visible = false;
-            label_id_cliente.Visible = false;
-            label_id_funcionario.Visible = false;
-            Btn_confirmarbusca.Enabled = false;
-
         }
 
 
@@ -40,7 +34,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
 
-            string query = $"{connection.search_path} SELECT * FROM SERVICO WHERE ";
+            string query = $"{connection.search_path} SELECT PCLIENTE.nome as nomecliente, PFUNC.nome AS nomefuncionario, nomeanimal, data, horaini, horafim, custo, observacoes, SERVICO.tipo FROM SERVICO, PESSOA AS PFUNC, PESSOA AS PCLIENTE WHERE";
             DateTime currentDate = DateTime.Now;
 
             if (Buscaporsemana.Checked)
@@ -51,8 +45,8 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
                 string firstDayWeek_s = firstDayWeek.ToString("yyyy-MM-dd");
                 string lastDayWeek_s = lastDayWeek.ToString("yyyy-MM-dd");
 
-                query =  query + $"data BETWEEN ' {firstDayWeek_s} ' AND  '{lastDayWeek_s}';";
-                command.CommandText = query;  
+                query =  query + $" data BETWEEN ' {firstDayWeek_s} ' AND  '{lastDayWeek_s}'";
+                 
             }
 
             else if (Buscapormes.Checked)
@@ -62,32 +56,49 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
                 string firstDayMonth_s = firstDayMonth.ToString("yyyy-MM-dd");
                 string lastDayMonth_s = lastDayMonth.ToString("yyyy-MM-dd");
 
-                query = query + $"data BETWEEN ' {firstDayMonth_s} ' AND  '{lastDayMonth_s}';";
-                command.CommandText = query;
+                query = query + $" data BETWEEN ' {firstDayMonth_s} ' AND  '{lastDayMonth_s}'";
+              
             }
 
             else if (Buscaporcliente.Checked)
 
             {
-                string entrada = INPUT_ID_cliente.Text;
-                query = query + $" iddono = {entrada};";
-                command.CommandText = query;
+                string entrada = INPUT_CPF_cliente.Text;
+                query = query + $" PCLIENTE.CPF = '{entrada}'";
+             
             }
 
             else if (Buscaporfuncionario.Checked)
 
             {
-                string entrada = INPUT_ID_funcionario.Text;
+                string entrada = INPUT_CPF_funcionario.Text;
 
-                query = query + $" funcid = {entrada};";
-                command.CommandText = query;          
+                query = query + $" PFUNC.CPF = '{entrada}'";
+                         
 
             }
 
+            query = query + " AND PFUNC.id = funcid AND PCLIENTE.id = iddono ORDER BY data, horaini";
+
+            command.CommandText = query;
             NpgsqlDataReader dataReader = command.ExecuteReader();
             DataTable dataTable = new DataTable();
             dataTable.Load(dataReader);
             SchedulingViewer.DataSource = dataTable;
+
+            SchedulingViewer.Columns["nomecliente"].HeaderText = "Nome do Cliente";
+            SchedulingViewer.Columns["nomefuncionario"].HeaderText = "Nome do Funcionario";
+            SchedulingViewer.Columns["nomeanimal"].HeaderText = "Nome do Animal";
+            SchedulingViewer.Columns["horaini"].HeaderText = "Horário de início";
+            SchedulingViewer.Columns["horafim"].HeaderText = "Horário de fim";
+            SchedulingViewer.Columns["custo"].HeaderText = "Custo";
+            SchedulingViewer.Columns["tipo"].HeaderText = "Tipo";
+            SchedulingViewer.Columns["observacoes"].HeaderText = "Observações";
+            SchedulingViewer.Columns["data"].HeaderText = "Data";
+
+
+
+
             command.Dispose();
             connection.Connection.Close();
 
@@ -95,15 +106,22 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
 
         private void Buscaporsemana_CheckedChanged(object sender, EventArgs e)
         {
-            INPUT_ID_cliente.Visible = false;
             Btn_confirmarbusca.Enabled = true;
+            INPUT_CPF_cliente.Text = null;
+            INPUT_CPF_funcionario.Text = null;
+            INPUT_CPF_cliente.Enabled = false;
+            INPUT_CPF_funcionario.Enabled = false;
 
 
         }
 
         private void Buscapormes_CheckedChanged(object sender, EventArgs e)
         {
-            INPUT_ID_cliente.Visible = false;
+            INPUT_CPF_cliente.Text = null;
+            INPUT_CPF_funcionario.Text = null;
+            INPUT_CPF_cliente.Enabled = false;
+            INPUT_CPF_funcionario.Enabled = false;
+
             Btn_confirmarbusca.Enabled = true;
 
 
@@ -111,11 +129,10 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
 
         private void Buscaporcliente_CheckedChanged(object sender, EventArgs e)
         {
-            label_id_cliente.Visible = true;
-            INPUT_ID_cliente.Visible = true;
+ 
+            INPUT_CPF_cliente.Enabled = true;
+            INPUT_CPF_funcionario.Enabled = false;
 
-            label_id_funcionario.Visible = false;
-            INPUT_ID_funcionario.Visible = false;
             Btn_confirmarbusca.Enabled = false;
 
 
@@ -123,11 +140,9 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
 
         private void Buscaporfuncionario_CheckedChanged(object sender, EventArgs e)
         {
-            label_id_funcionario.Visible = true;
-            INPUT_ID_funcionario.Visible = true;
+            INPUT_CPF_funcionario.Enabled = true;
+            INPUT_CPF_cliente.Enabled = false;
 
-            label_id_cliente.Visible = false;
-            INPUT_ID_cliente.Visible = false;
             Btn_confirmarbusca.Enabled = false;
 
 
