@@ -121,7 +121,7 @@
             // 
             button1.AutoSize = true;
             button1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button1.Location = new Point(159, 110);
+            button1.Location = new Point(159, 108);
             button1.Name = "button1";
             button1.Size = new Size(67, 25);
             button1.TabIndex = 8;
@@ -145,7 +145,7 @@
             // 
             button2.AutoSize = true;
             button2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button2.Location = new Point(424, 64);
+            button2.Location = new Point(269, 62);
             button2.Name = "button2";
             button2.Size = new Size(108, 25);
             button2.TabIndex = 10;
@@ -157,7 +157,7 @@
             // 
             button3.AutoSize = true;
             button3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button3.Location = new Point(564, 64);
+            button3.Location = new Point(420, 62);
             button3.Name = "button3";
             button3.Size = new Size(109, 25);
             button3.TabIndex = 11;

@@ -55,6 +55,30 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             }
         }
 
+        private bool verificaAlergiaExistente(int idCliente, string nomeAnimal)
+        {
+            using (DbConnection Connection = new DbConnection())
+            {
+                string query = $"{Connection.search_path} SELECT * FROM Alergia_animal WHERE iddono = '{idCliente}' " +
+                    $"AND nomeanimal = '{nomeAnimal}';";
+
+                using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
+                {
+
+                    Command.CommandText = query;
+                    NpgsqlDataReader dr = Command.ExecuteReader();
+
+                    if (!dr.HasRows)
+                    {
+                        MessageBox.Show("Animal com Alergia já inserida!", "Erro", MessageBoxButtons.OK
+                            , MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         private void insereAlergia()
         {
             string temp = box_IdDono.Text;
@@ -74,14 +98,11 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = $"{Connection.search_path} INSERT INTO Alergia_animal (iddono, nomeanimal, alergia) " +
-                    "VALUES (@iddono, @nome, @alergia)";
-
+                string query = $"{Connection.search_path} INSERT INTO Alergia_animal (Iddono, NomeAnimal, Alergia) VALUES ('{idDono}', '{nomeAnimal}', '{Alergia}');";
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
-                    Command.Parameters.AddWithValue("@iddono", idDono);
-                    Command.Parameters.AddWithValue("@nome", nomeAnimal);
-                    Command.Parameters.AddWithValue("@alergia", Alergia);
+                    if (!verificaAlergiaExistente(idDono, nomeAnimal))
+                        return;
 
                     NpgsqlDataReader dr = Command.ExecuteReader();
                     MessageBox.Show("Adicionado com sucesso!");

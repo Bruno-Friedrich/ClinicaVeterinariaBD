@@ -33,11 +33,7 @@
             Lbl_Titulo = new Label();
             btnExit = new FontAwesome.Sharp.IconPictureBox();
             box_nome = new TextBox();
-            box_cpf = new TextBox();
             box_email = new TextBox();
-            box_cel1 = new TextBox();
-            box_cel2 = new TextBox();
-            box_cep = new TextBox();
             box_cidade = new TextBox();
             box_bairro = new TextBox();
             box_endereco = new TextBox();
@@ -56,6 +52,10 @@
             label13 = new Label();
             button1 = new Button();
             box_num = new MaskedTextBox();
+            box_cel1 = new MaskedTextBox();
+            box_cel2 = new MaskedTextBox();
+            box_cep = new MaskedTextBox();
+            box_cpf = new MaskedTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -127,18 +127,6 @@
             box_nome.Size = new Size(208, 23);
             box_nome.TabIndex = 8;
             // 
-            // box_cpf
-            // 
-            box_cpf.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            box_cpf.ForeColor = Color.Black;
-            box_cpf.Location = new Point(341, 141);
-            box_cpf.Margin = new Padding(3, 2, 3, 2);
-            box_cpf.Name = "box_cpf";
-            box_cpf.PlaceholderText = "12345678901";
-            box_cpf.Size = new Size(208, 23);
-            box_cpf.TabIndex = 9;
-            box_cpf.Tag = "";
-            // 
             // box_email
             // 
             box_email.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
@@ -149,39 +137,6 @@
             box_email.PlaceholderText = "@usp.br";
             box_email.Size = new Size(208, 23);
             box_email.TabIndex = 10;
-            // 
-            // box_cel1
-            // 
-            box_cel1.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            box_cel1.ForeColor = Color.Black;
-            box_cel1.Location = new Point(341, 195);
-            box_cel1.Margin = new Padding(3, 2, 3, 2);
-            box_cel1.Name = "box_cel1";
-            box_cel1.PlaceholderText = "(11) 911327785";
-            box_cel1.Size = new Size(208, 23);
-            box_cel1.TabIndex = 11;
-            // 
-            // box_cel2
-            // 
-            box_cel2.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            box_cel2.ForeColor = Color.Black;
-            box_cel2.Location = new Point(341, 222);
-            box_cel2.Margin = new Padding(3, 2, 3, 2);
-            box_cel2.Name = "box_cel2";
-            box_cel2.PlaceholderText = "(41) 954170984";
-            box_cel2.Size = new Size(208, 23);
-            box_cel2.TabIndex = 12;
-            // 
-            // box_cep
-            // 
-            box_cep.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            box_cep.ForeColor = Color.Black;
-            box_cep.Location = new Point(341, 249);
-            box_cep.Margin = new Padding(3, 2, 3, 2);
-            box_cep.Name = "box_cep";
-            box_cep.PlaceholderText = "01823000";
-            box_cep.Size = new Size(208, 23);
-            box_cep.TabIndex = 13;
             // 
             // box_cidade
             // 
@@ -378,12 +333,49 @@
             box_num.Size = new Size(208, 23);
             box_num.TabIndex = 61;
             // 
+            // box_cel1
+            // 
+            box_cel1.Location = new Point(341, 195);
+            box_cel1.Mask = "(00) 000000000";
+            box_cel1.Name = "box_cel1";
+            box_cel1.Size = new Size(208, 23);
+            box_cel1.TabIndex = 62;
+            box_cel1.MaskInputRejected += box_cel1_MaskInputRejected;
+            // 
+            // box_cel2
+            // 
+            box_cel2.Location = new Point(341, 222);
+            box_cel2.Mask = "(00) 000000000";
+            box_cel2.Name = "box_cel2";
+            box_cel2.Size = new Size(208, 23);
+            box_cel2.TabIndex = 63;
+            // 
+            // box_cep
+            // 
+            box_cep.Location = new Point(341, 249);
+            box_cep.Mask = "00000000";
+            box_cep.Name = "box_cep";
+            box_cep.Size = new Size(208, 23);
+            box_cep.TabIndex = 64;
+            // 
+            // box_cpf
+            // 
+            box_cpf.Location = new Point(341, 141);
+            box_cpf.Mask = "00000000000";
+            box_cpf.Name = "box_cpf";
+            box_cpf.Size = new Size(208, 23);
+            box_cpf.TabIndex = 65;
+            // 
             // Adiciona_Cliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(794, 445);
+            Controls.Add(box_cpf);
+            Controls.Add(box_cep);
+            Controls.Add(box_cel2);
+            Controls.Add(box_cel1);
             Controls.Add(box_num);
             Controls.Add(button1);
             Controls.Add(label13);
@@ -402,11 +394,7 @@
             Controls.Add(box_endereco);
             Controls.Add(box_bairro);
             Controls.Add(box_cidade);
-            Controls.Add(box_cep);
-            Controls.Add(box_cel2);
-            Controls.Add(box_cel1);
             Controls.Add(box_email);
-            Controls.Add(box_cpf);
             Controls.Add(box_nome);
             Controls.Add(panel1);
             ForeColor = SystemColors.ControlText;
@@ -427,11 +415,7 @@
         private Label Lbl_Titulo;
         private FontAwesome.Sharp.IconPictureBox btnExit;
         private TextBox box_nome;
-        private TextBox box_cpf;
         private TextBox box_email;
-        private TextBox box_cel1;
-        private TextBox box_cel2;
-        private TextBox box_cep;
         private TextBox box_cidade;
         private TextBox box_bairro;
         private TextBox box_endereco;
@@ -450,5 +434,9 @@
         private Label label13;
         private Button button1;
         private MaskedTextBox box_num;
+        private MaskedTextBox box_cel1;
+        private MaskedTextBox box_cel2;
+        private MaskedTextBox box_cep;
+        private MaskedTextBox box_cpf;
     }
 }

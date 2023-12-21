@@ -158,11 +158,11 @@
             // button1
             // 
             button1.AutoSize = true;
-            button1.Location = new Point(350, 388);
+            button1.Location = new Point(349, 389);
             button1.Name = "button1";
-            button1.Size = new Size(108, 25);
+            button1.Size = new Size(111, 25);
             button1.TabIndex = 11;
-            button1.Text = "Adicionar Alergia";
+            button1.Text = "Visualizar Alergias";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 

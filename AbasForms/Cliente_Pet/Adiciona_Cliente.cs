@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using ClinicaVeterinariaBD.Arquitetura;
 using ClinicaVeterinariaBD.AbasForms.Cliente_Pet;
 using System.CodeDom.Compiler;
+using System.Text.RegularExpressions;
 
 namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 {
@@ -37,9 +38,13 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 
             string temp = box_num.Text;
 
-            if((string.IsNullOrEmpty(nomeCliente)) || (string.IsNullOrEmpty(cpf)) || (string.IsNullOrEmpty(email)) 
-                || (string.IsNullOrEmpty(cel1)) || (string.IsNullOrEmpty(cep)) 
-                || (string.IsNullOrEmpty(cidade)) || (string.IsNullOrEmpty(bairro)) 
+            string novoCel1 = cel1;
+            novoCel1 = Regex.Replace(novoCel1, @"[^\d,]", "");
+
+
+            if ((string.IsNullOrEmpty(nomeCliente)) || (string.IsNullOrEmpty(cpf)) || (string.IsNullOrEmpty(email))
+                || (string.IsNullOrEmpty(novoCel1)) || (string.IsNullOrEmpty(cep))
+                || (string.IsNullOrEmpty(cidade)) || (string.IsNullOrEmpty(bairro))
                 || (string.IsNullOrEmpty(endereco)) || (string.IsNullOrEmpty(temp)))
             {
                 MessageBox.Show("Insira os Dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -55,7 +60,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
                 MessageBox.Show("Insira os Dados Corretamente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
 
             //Pessoa
             using (DbConnection Connection = new DbConnection())
@@ -101,7 +106,22 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            /*if (box_cel1.Text == "")
+            {
+                MessageBox.Show("Insira os Dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }*/
             inserirPessoa();
+        }
+
+        private void box_cel2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void box_cel1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
         }
     }
 }
