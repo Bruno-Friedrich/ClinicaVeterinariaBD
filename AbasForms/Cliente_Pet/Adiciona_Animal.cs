@@ -45,13 +45,24 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             nomeAnimal = box_animal_nome.Text.ToLower().Trim();
             especieAnimal = box_animal_especie.Text.ToLower().Trim();
             racaAnimal = box_animal_raca.Text.ToLower().Trim();
-            idadeAnimal = Int32.Parse(box_animal_idade.Text);
-            pesoAnimal = Int32.Parse(box_animal_peso.Text);
+
+            string temp1 = box_animal_idade.Text;
+            string temp2 = box_animal_peso.Text;
 
             if (box_animal_sexo.Text == "Masculino")
                 sexoAnimal = 'm';
             else
                 sexoAnimal = 'f';
+
+            if ((string.IsNullOrEmpty(nomeAnimal)) || (string.IsNullOrEmpty(racaAnimal)) || (string.IsNullOrEmpty(especieAnimal))
+                ||  (string.IsNullOrEmpty(temp1)) || (string.IsNullOrEmpty(temp2)))
+            {
+                MessageBox.Show("Insira os dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            idadeAnimal = Int32.Parse(temp1);
+            pesoAnimal = Int32.Parse(temp2);
 
             using (DbConnection Connection = new DbConnection())
             {
@@ -83,6 +94,13 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         {
             string userImput = box_idCliente.Text;
             //insereIdEmPessoa(Int32.Parse(userImput));
+
+            if(string.IsNullOrEmpty(userImput))
+            {
+                MessageBox.Show("Insira o Id", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             insereAnimal(Int32.Parse(userImput));
         }
 

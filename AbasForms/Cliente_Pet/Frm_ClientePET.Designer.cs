@@ -38,7 +38,6 @@
             textBox2 = new TextBox();
             button2 = new Button();
             button3 = new Button();
-            button4 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -158,7 +157,7 @@
             // 
             button2.AutoSize = true;
             button2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button2.Location = new Point(295, 64);
+            button2.Location = new Point(424, 64);
             button2.Name = "button2";
             button2.Size = new Size(108, 25);
             button2.TabIndex = 10;
@@ -170,24 +169,13 @@
             // 
             button3.AutoSize = true;
             button3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button3.Location = new Point(419, 64);
+            button3.Location = new Point(564, 64);
             button3.Name = "button3";
             button3.Size = new Size(109, 25);
             button3.TabIndex = 11;
             button3.Text = "Adicionar Animal";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
-            // 
-            // button4
-            // 
-            button4.AutoSize = true;
-            button4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button4.Location = new Point(543, 64);
-            button4.Name = "button4";
-            button4.Size = new Size(134, 25);
-            button4.TabIndex = 12;
-            button4.Text = "Adicionar Funcionário";
-            button4.UseVisualStyleBackColor = true;
             // 
             // Frm_ClientePET
             // 
@@ -196,7 +184,6 @@
             BackColor = Color.FromArgb(34, 33, 74);
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(700, 338);
-            Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(textBox2);
@@ -235,6 +222,5 @@
         private TextBox textBox2;
         private Button button2;
         private Button button3;
-        private Button button4;
     }
 }

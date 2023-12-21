@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClinicaVeterinariaBD.Arquitetura;
 using ClinicaVeterinariaBD.AbasForms.Cliente_Pet;
+using System.CodeDom.Compiler;
 
 namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 {
@@ -20,7 +21,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             string nomeCliente, cpf, email, cel1, cel2, cep,
                 cidade, bairro, endereco, compl;
 
-            int numEndereco;
+            int numEndereco = 0;
 
             //Pessoa
             nomeCliente = box_nome.Text.ToLower().Trim();
@@ -33,7 +34,28 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             bairro = box_bairro.Text.ToLower().Trim();
             endereco = box_endereco.Text.ToLower().Trim();
             compl = box_compl.Text.ToLower().Trim();
-            numEndereco = Int32.Parse(box_num.Text);
+
+            string temp = box_num.Text;
+
+            if((string.IsNullOrEmpty(nomeCliente)) || (string.IsNullOrEmpty(cpf)) || (string.IsNullOrEmpty(email)) 
+                || (string.IsNullOrEmpty(cel1)) || (string.IsNullOrEmpty(cep)) 
+                || (string.IsNullOrEmpty(cidade)) || (string.IsNullOrEmpty(bairro)) 
+                || (string.IsNullOrEmpty(endereco)) || (string.IsNullOrEmpty(temp)))
+            {
+                MessageBox.Show("Insira os Dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                numEndereco = Int32.Parse(temp);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Insira os Dados Corretamente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
 
             //Pessoa
             using (DbConnection Connection = new DbConnection())
