@@ -28,6 +28,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
         {
             InitializeComponent();
 
+            todaysScheduleLabel.Visible = true;
             todaysScheduleLabel.Text = $"Serviços agendados de hoje";
             ReadTodaysSchedule(DateTime.Today);
 
@@ -93,6 +94,16 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
         private void animalName_SelectedIndexChanged(object sender, EventArgs e)
         {
             tipoServico.Enabled = true;
+            tipoServico.Text= null;
+            horaIni.Text = null;
+            horaFim.Text = null;
+            horaIni.Enabled = false;
+            horaFim.Enabled = false;
+            btrConfirm.Enabled = false;
+            valorServico.Enabled = false;
+            valorServico.Text = null;
+            obsServico.Text = null;
+            obsServico.Enabled = false;
 
         }
 
@@ -164,6 +175,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
         private void horaIni_KeyUp(object sender, KeyEventArgs e)
         {
             horaFim.Enabled = true;
+            horaFim.Text = null;
 
         }
 
@@ -173,7 +185,8 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             string timeEnd = horaFim.Text;
             if (timeBeggining.Length == 5 && timeEnd.Length == 5)
             {
-                bool TimeValidation = ValidateTimeService(timeBeggining, timeEnd, tipoServico.Text, CalendarSchedule.SelectionStart);
+                int idEmployee = FindEmployeeId(funcionarioServico.Text);
+                bool TimeValidation = ValidateTimeService(timeBeggining, timeEnd, tipoServico.Text, animalName.Text, idEmployee, CalendarSchedule.SelectionStart);
 
                 if (TimeValidation)
                 {
@@ -202,9 +215,9 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
         private void btrConfirm_Click(object sender, EventArgs e)
         {
 
-            int commonPosition = funcionarioServico.Text.IndexOf(",");
-            int idEmployee = Int32.Parse(funcionarioServico.Text.Substring(commonPosition + 1).Trim());
-            int idOwner = FindPersonId("CLIENTE");
+           
+            int idEmployee = FindEmployeeId(funcionarioServico.Text);
+            int idOwner = FindClientId();
             string animalName_s = animalName.Text;
             string typeService_s = tipoServico.Text;
             string timeBeggining = horaIni.Text;
@@ -259,13 +272,14 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
 
-            string query = $" {connection.search_path} SELECT horaini, horafim, tipo, funcid FROM SERVICO WHERE data = '{Today.ToString("yyyy-MM-dd")}';";
+            string query = $" {connection.search_path} SELECT horaini, horafim, nomeanimal, tipo, funcid FROM SERVICO WHERE data = '{Today.ToString("yyyy-MM-dd")}' ORDER BY horaini;";
             command.CommandText = query;
             NpgsqlDataReader scheduleReader = command.ExecuteReader();
             DataTable dataTable = new DataTable();
             dataTable.Load(scheduleReader);
             todaysScheduleDataGrid.DataSource = dataTable;
             todaysScheduleDataGrid.Columns["horaini"].HeaderText = "Hora de início";
+            todaysScheduleDataGrid.Columns["nomeanimal"].HeaderText = "Animal";
             todaysScheduleDataGrid.Columns["horafim"].HeaderText = "Hora de fim";
             todaysScheduleDataGrid.Columns["tipo"].HeaderText = "Tipo de serviço";
             todaysScheduleDataGrid.Columns["funcid"].HeaderText = "Id do funcionário";
@@ -289,7 +303,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             {
                 case "Vacinação":
                 case "Consulta":
-                    typeEmployee = "Auxiliar de Veterinário";
+                    typeEmployee = "Auxiliar Veterinário";
                     break;
                 case "Procedimento Cirúrgico":
                     typeEmployee = "Veterinário";
@@ -299,7 +313,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
                     break;
             }
 
-            string query = $" {connection.search_path} SELECT PESSOA.nome as Nome, PESSOA.id as ID FROM FUNCIONARIO JOIN Pessoa ON PESSOA.id = FUNCIONARIO.id WHERE funcao = '{typeEmployee}';";
+            string query = $" {connection.search_path} SELECT PESSOA.nome as Nome, PESSOA.id as ID FROM FUNCIONARIO JOIN Pessoa ON PESSOA.id = FUNCIONARIO.id WHERE FUNCIONARIO.funcao = '{typeEmployee}';";
             command.CommandText = query;
             NpgsqlDataReader employeeReader = command.ExecuteReader();
             if (!(employeeReader.HasRows))
@@ -317,16 +331,16 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
 
         }
 
-        private bool ValidateTimeService(string timeBeggining, string timeEnd, string typeService, DateTime date_selected)
+        private bool ValidateTimeService(string timeBeggining, string timeEnd, string typeService, string animalName_s, int idEmployee, DateTime date_selected)
         {
-
+            
             DbConnection connection = new DbConnection();
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
             string date_selected_s = date_selected.ToString("yyyy-MM-dd");
 
-            string query = $" {connection.search_path} SELECT * FROM SERVICO as s1 WHERE s1.data = '{date_selected_s}' AND EXISTS ((SELECT * FROM SERVICO as s2 WHERE '{timeBeggining}' < s2.horaini AND '{timeEnd}' > s2.horaini AND s2.data = '{date_selected_s}') UNION (SELECT *  FROM SERVICO as s2 WHERE '{timeBeggining}' < s2.horafim AND '{timeEnd}' > s2.horafim AND s2.data = '{date_selected_s}') UNION (SELECT *  FROM SERVICO as s2 WHERE '{timeBeggining}' = s2.horaini AND '{timeEnd}' = s2.horafim AND s2.data = '{date_selected_s}'))";
+            string query = $" {connection.search_path} SELECT * FROM SERVICO as s1 WHERE s1.data = '{date_selected_s}' AND (s1.tipo = '{typeService}' OR s1.nomeanimal = '{animalName_s}' OR s1.funcid = {idEmployee}) AND EXISTS ((SELECT * FROM SERVICO as s2 WHERE '{timeBeggining}' < s2.horaini AND '{timeEnd}' > s2.horaini AND s2.data = '{date_selected_s}' AND (s2.tipo = '{typeService}' OR s1.nomeanimal = '{animalName_s}' OR s1.funcid = {idEmployee})) UNION (SELECT *  FROM SERVICO as s2 WHERE '{timeBeggining}' < s2.horafim AND '{timeEnd}' > s2.horafim AND s2.data = '{date_selected_s}' AND (s2.tipo = '{typeService}' OR s1.nomeanimal = '{animalName_s}' OR s1.funcid = {idEmployee})) UNION (SELECT *  FROM SERVICO as s2 WHERE '{timeBeggining}' = s2.horaini AND '{timeEnd}' = s2.horafim AND s2.data = '{date_selected_s}' AND (s2.tipo = '{typeService}' OR s1.nomeanimal = '{animalName_s}' OR s1.funcid = {idEmployee})) UNION (SELECT *  FROM SERVICO as s2 WHERE '{timeBeggining}' > s2.horaini AND '{timeEnd}' < s2.horafim AND s2.data = '{date_selected_s}' AND (s2.tipo = '{typeService}' OR s1.nomeanimal = '{animalName_s}' OR s1.funcid = {idEmployee})));)";
 
             command.CommandText = query;
             NpgsqlDataReader timeReader = command.ExecuteReader();
@@ -335,19 +349,26 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             return false;
         }
 
-        private int FindPersonId(string typePerson)
+        private int FindClientId()
         {
             DbConnection connection = new DbConnection();
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
 
-            string query = $" {connection.search_path} SELECT {typePerson}.id as ID FROM PESSOA, {typePerson} WHERE PESSOA.id = {typePerson}.id AND PESSOA.CPF = '{cpfOwner.Text}';";
+            string query = $" {connection.search_path} SELECT CLIENTE.id as ID FROM PESSOA, CLIENTE WHERE PESSOA.id = CLIENTE.id AND PESSOA.CPF = '{cpfOwner.Text}';";
             command.CommandText = query;
             NpgsqlDataReader IdReader = command.ExecuteReader();
 
             IdReader.Read();
             return Int32.Parse(IdReader["ID"].ToString());
+
+        }
+
+        private int FindEmployeeId (string employeeService )
+        {
+            int commonPosition = employeeService.IndexOf(",");
+            return Int32.Parse(funcionarioServico.Text.Substring(commonPosition + 1).Trim());
 
         }
     }

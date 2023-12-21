@@ -34,11 +34,11 @@
             Buscapormes = new RadioButton();
             Buscaporsemana = new RadioButton();
             Btn_confirmarbusca = new Button();
-            INPUT_ID_cliente = new TextBox();
+            INPUT_CPF_cliente = new TextBox();
             SchedulingViewer = new DataGridView();
             label_id_cliente = new Label();
             label_id_funcionario = new Label();
-            INPUT_ID_funcionario = new TextBox();
+            INPUT_CPF_funcionario = new TextBox();
             Maneiradebusca.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SchedulingViewer).BeginInit();
             SuspendLayout();
@@ -49,9 +49,10 @@
             Maneiradebusca.Controls.Add(Buscaporcliente);
             Maneiradebusca.Controls.Add(Buscapormes);
             Maneiradebusca.Controls.Add(Buscaporsemana);
-            Maneiradebusca.Location = new Point(30, 71);
+            Maneiradebusca.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            Maneiradebusca.Location = new Point(34, 12);
             Maneiradebusca.Name = "Maneiradebusca";
-            Maneiradebusca.Size = new Size(469, 203);
+            Maneiradebusca.Size = new Size(976, 93);
             Maneiradebusca.TabIndex = 0;
             Maneiradebusca.TabStop = false;
             Maneiradebusca.Text = "Escolha a maneira de busca";
@@ -59,9 +60,9 @@
             // Buscaporfuncionario
             // 
             Buscaporfuncionario.AutoSize = true;
-            Buscaporfuncionario.Location = new Point(61, 157);
+            Buscaporfuncionario.Location = new Point(717, 49);
             Buscaporfuncionario.Name = "Buscaporfuncionario";
-            Buscaporfuncionario.Size = new Size(141, 19);
+            Buscaporfuncionario.Size = new Size(219, 32);
             Buscaporfuncionario.TabIndex = 3;
             Buscaporfuncionario.TabStop = true;
             Buscaporfuncionario.Text = "Busca por funcionário";
@@ -71,9 +72,9 @@
             // Buscaporcliente
             // 
             Buscaporcliente.AutoSize = true;
-            Buscaporcliente.Location = new Point(61, 122);
+            Buscaporcliente.Location = new Point(523, 49);
             Buscaporcliente.Name = "Buscaporcliente";
-            Buscaporcliente.Size = new Size(115, 19);
+            Buscaporcliente.Size = new Size(177, 32);
             Buscaporcliente.TabIndex = 2;
             Buscaporcliente.TabStop = true;
             Buscaporcliente.Text = "Busca por cliente";
@@ -83,9 +84,9 @@
             // Buscapormes
             // 
             Buscapormes.AutoSize = true;
-            Buscapormes.Location = new Point(61, 85);
+            Buscapormes.Location = new Point(306, 49);
             Buscapormes.Name = "Buscapormes";
-            Buscapormes.Size = new Size(119, 19);
+            Buscapormes.Size = new Size(183, 32);
             Buscapormes.TabIndex = 1;
             Buscapormes.TabStop = true;
             Buscapormes.Text = "Consultas do mês";
@@ -97,7 +98,7 @@
             Buscaporsemana.AutoSize = true;
             Buscaporsemana.Location = new Point(61, 49);
             Buscaporsemana.Name = "Buscaporsemana";
-            Buscaporsemana.Size = new Size(137, 19);
+            Buscaporsemana.Size = new Size(212, 32);
             Buscaporsemana.TabIndex = 0;
             Buscaporsemana.Text = "Consultas da semana";
             Buscaporsemana.UseVisualStyleBackColor = true;
@@ -105,69 +106,71 @@
             // 
             // Btn_confirmarbusca
             // 
-            Btn_confirmarbusca.Location = new Point(584, 339);
+            Btn_confirmarbusca.Location = new Point(704, 149);
             Btn_confirmarbusca.Name = "Btn_confirmarbusca";
-            Btn_confirmarbusca.Size = new Size(126, 42);
+            Btn_confirmarbusca.Size = new Size(245, 59);
             Btn_confirmarbusca.TabIndex = 1;
             Btn_confirmarbusca.Text = "Confirmar";
             Btn_confirmarbusca.UseVisualStyleBackColor = true;
             Btn_confirmarbusca.Click += Btn_confirmarbusca_Click;
             // 
-            // INPUT_ID_cliente
+            // INPUT_CPF_cliente
             // 
-            INPUT_ID_cliente.Location = new Point(572, 120);
-            INPUT_ID_cliente.Name = "INPUT_ID_cliente";
-            INPUT_ID_cliente.Size = new Size(159, 23);
-            INPUT_ID_cliente.TabIndex = 2;
-            INPUT_ID_cliente.TextChanged += Informacao_ID_TextChanged;
+            INPUT_CPF_cliente.Location = new Point(49, 180);
+            INPUT_CPF_cliente.Name = "INPUT_CPF_cliente";
+            INPUT_CPF_cliente.Size = new Size(159, 23);
+            INPUT_CPF_cliente.TabIndex = 2;
+            INPUT_CPF_cliente.TextChanged += Informacao_ID_TextChanged;
             // 
             // SchedulingViewer
             // 
             SchedulingViewer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             SchedulingViewer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SchedulingViewer.Location = new Point(1, 426);
+            SchedulingViewer.Location = new Point(-1, 271);
             SchedulingViewer.Name = "SchedulingViewer";
             SchedulingViewer.RowHeadersVisible = false;
             SchedulingViewer.RowTemplate.Height = 25;
-            SchedulingViewer.Size = new Size(1120, 178);
+            SchedulingViewer.Size = new Size(1120, 354);
             SchedulingViewer.TabIndex = 3;
             // 
             // label_id_cliente
             // 
             label_id_cliente.AutoSize = true;
-            label_id_cliente.Location = new Point(572, 102);
+            label_id_cliente.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label_id_cliente.Location = new Point(49, 149);
             label_id_cliente.Name = "label_id_cliente";
-            label_id_cliente.Size = new Size(73, 15);
+            label_id_cliente.Size = new Size(136, 28);
             label_id_cliente.TabIndex = 4;
-            label_id_cliente.Text = "ID do cliente";
+            label_id_cliente.Text = "CPF do cliente";
             // 
             // label_id_funcionario
             // 
             label_id_funcionario.AutoSize = true;
-            label_id_funcionario.Location = new Point(572, 171);
+            label_id_funcionario.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label_id_funcionario.Location = new Point(238, 149);
             label_id_funcionario.Name = "label_id_funcionario";
-            label_id_funcionario.Size = new Size(99, 15);
+            label_id_funcionario.Size = new Size(178, 28);
             label_id_funcionario.TabIndex = 5;
-            label_id_funcionario.Text = "ID do funcionário";
+            label_id_funcionario.Text = "CPF do funcionário";
             // 
-            // INPUT_ID_funcionario
+            // INPUT_CPF_funcionario
             // 
-            INPUT_ID_funcionario.Location = new Point(572, 189);
-            INPUT_ID_funcionario.Name = "INPUT_ID_funcionario";
-            INPUT_ID_funcionario.Size = new Size(159, 23);
-            INPUT_ID_funcionario.TabIndex = 6;
-            INPUT_ID_funcionario.TextChanged += Info_ID_func_TextChanged;
+            INPUT_CPF_funcionario.Location = new Point(243, 180);
+            INPUT_CPF_funcionario.Name = "INPUT_CPF_funcionario";
+            INPUT_CPF_funcionario.Size = new Size(159, 23);
+            INPUT_CPF_funcionario.TabIndex = 6;
+            INPUT_CPF_funcionario.TextChanged += Info_ID_func_TextChanged;
             // 
             // Frm_BuscaServico
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1120, 678);
-            Controls.Add(INPUT_ID_funcionario);
+            Controls.Add(INPUT_CPF_funcionario);
             Controls.Add(label_id_funcionario);
             Controls.Add(label_id_cliente);
             Controls.Add(SchedulingViewer);
-            Controls.Add(INPUT_ID_cliente);
+            Controls.Add(INPUT_CPF_cliente);
             Controls.Add(Btn_confirmarbusca);
             Controls.Add(Maneiradebusca);
             Name = "Frm_BuscaServico";
@@ -187,10 +190,10 @@
         private RadioButton Buscapormes;
         private RadioButton Buscaporsemana;
         private Button Btn_confirmarbusca;
-        private TextBox INPUT_ID_cliente;
+        private TextBox INPUT_CPF_cliente;
         private DataGridView SchedulingViewer;
         private Label label_id_cliente;
         private Label label_id_funcionario;
-        private TextBox INPUT_ID_funcionario;
+        private TextBox INPUT_CPF_funcionario;
     }
 }
