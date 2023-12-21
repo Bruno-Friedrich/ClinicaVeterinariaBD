@@ -15,6 +15,29 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 {
     public partial class Adiciona_Alergia : Form
     {
+        public bool verificaIdCliente(int idCliente)
+        {
+            using (DbConnection Connection = new DbConnection())
+            {
+                string query = $"{Connection.search_path} SELECT * FROM Pessoa WHERE id = '{idCliente}';";
+
+                using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
+                {
+
+                    Command.CommandText = query;
+                    NpgsqlDataReader dr = Command.ExecuteReader();
+
+                    if (!dr.HasRows)
+                    {
+                        MessageBox.Show("Digite um ID válido!", "Erro", MessageBoxButtons.OK
+                            , MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         public void ProcurarAnimal(String Id)
         {
             using (DbConnection Connection = new DbConnection())
@@ -46,6 +69,8 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             }
 
             int idDono = Int32.Parse(temp);
+            if (!verificaIdCliente(idDono))
+                return;
 
             using (DbConnection Connection = new DbConnection())
             {
@@ -74,16 +99,28 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             }
 
             int idDono = Int32.Parse(temp);
+            verificaIdCliente(idDono);
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = $"{Connection.search_path} SELECT * FROM Alergia_animal WHERE iddono = @iddono";
+                string nomeAnimal = box_NomeAnimal.Text;
+                string query;
+
+                if (string.IsNullOrEmpty(nomeAnimal))
+                {
+                    query = $"{Connection.search_path} SELECT * FROM Alergia_animal WHERE iddono = @iddono";
+                }
+                else
+                {
+                    query = $"{Connection.search_path} SELECT * FROM Alergia_animal WHERE iddono = @iddono AND nomeanimal = '{nomeAnimal}';";
+                }
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
                     Command.Parameters.AddWithValue("@iddono", idDono);
 
                     NpgsqlDataReader dr = Command.ExecuteReader();
+
                     DataTable dt = new DataTable();
                     dt.Load(dr);
                     dataGridView1.DataSource = dt;
@@ -104,6 +141,11 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         private void button2_Click(object sender, EventArgs e)
         {
             verificaAlergias();
+        }
+
+        private void box_IdDono_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
         }
     }
 }
