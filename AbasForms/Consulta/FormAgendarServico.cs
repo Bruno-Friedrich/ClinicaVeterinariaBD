@@ -238,6 +238,15 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             connection.Connection.Close();
 
             MessageBox.Show($"INSERÇÃO BEM SUCEDIDA", "SUCESSO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            horaIni.Text = null;
+            horaIni.Enabled = false;
+            horaFim.Text = null;
+            horaFim.Enabled = false;
+            valorServico.Text = null;
+            valorServico.Enabled = false;
+            obsServico.Text = null;
+            obsServico.Enabled = false;
+            
 
         }
 
