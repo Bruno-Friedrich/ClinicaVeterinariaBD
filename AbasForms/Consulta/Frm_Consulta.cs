@@ -46,7 +46,7 @@ namespace ClinicaVeterinariaBD
             SchedulingViewer.Columns["horafim"].HeaderText = "Horário de fim";
             SchedulingViewer.Columns["custo"].HeaderText = "Custo";
             SchedulingViewer.Columns["tipo"].HeaderText = "Tipo";
-            
+
             command.Dispose();
             connection.Connection.Close();
         }
@@ -67,6 +67,11 @@ namespace ClinicaVeterinariaBD
         {
             s scheduleWindows = new s();
             scheduleWindows.Show();
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -32,6 +32,29 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             }
         }*/
 
+        public bool verificaIdCliente(int idCliente)
+        {
+            using (DbConnection Connection = new DbConnection())
+            {
+                string query = $"{Connection.search_path} SELECT * FROM Pessoa WHERE id = '{idCliente}';";
+
+                using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
+                {
+
+                    Command.CommandText = query;
+                    NpgsqlDataReader dr = Command.ExecuteReader();
+
+                    if (!dr.HasRows)
+                    {
+                        MessageBox.Show("Digite um ID válido!", "Erro", MessageBoxButtons.OK
+                            , MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         public void insereAnimal(int IdCliente)
         {
             string nomeAnimal, especieAnimal, racaAnimal;
@@ -100,6 +123,10 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
                 MessageBox.Show("Insira o Id", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            int IdCliente = Int32.Parse(userImput);
+
+            if (!verificaIdCliente(IdCliente))
+                return;
 
             insereAnimal(Int32.Parse(userImput));
         }

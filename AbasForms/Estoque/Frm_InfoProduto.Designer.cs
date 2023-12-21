@@ -53,6 +53,8 @@
             Btn_Cancelar = new FontAwesome.Sharp.IconButton();
             label2 = new Label();
             Cmb_Tipo = new ComboBox();
+            Msk_Lucro = new MaskedTextBox();
+            Lbl_Lucro = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -324,12 +326,34 @@
             Cmb_Tipo.Size = new Size(151, 28);
             Cmb_Tipo.TabIndex = 39;
             // 
+            // Msk_Lucro
+            // 
+            Msk_Lucro.Location = new Point(101, 440);
+            Msk_Lucro.Mask = "000%";
+            Msk_Lucro.Name = "Msk_Lucro";
+            Msk_Lucro.Size = new Size(49, 27);
+            Msk_Lucro.TabIndex = 42;
+            Msk_Lucro.TextAlign = HorizontalAlignment.Right;
+            // 
+            // Lbl_Lucro
+            // 
+            Lbl_Lucro.AutoSize = true;
+            Lbl_Lucro.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            Lbl_Lucro.ForeColor = Color.Gainsboro;
+            Lbl_Lucro.Location = new Point(22, 414);
+            Lbl_Lucro.Name = "Lbl_Lucro";
+            Lbl_Lucro.Size = new Size(233, 23);
+            Lbl_Lucro.TabIndex = 41;
+            Lbl_Lucro.Text = "Porcentagem de Lucro";
+            // 
             // Frm_InfoProduto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(25, 26, 72);
             ClientSize = new Size(660, 481);
+            Controls.Add(Msk_Lucro);
+            Controls.Add(Lbl_Lucro);
             Controls.Add(label2);
             Controls.Add(Cmb_Tipo);
             Controls.Add(Btn_Cancelar);
@@ -393,5 +417,7 @@
         private FontAwesome.Sharp.IconButton Btn_Cancelar;
         private Label label2;
         private ComboBox Cmb_Tipo;
+        private MaskedTextBox Msk_Lucro;
+        private Label Lbl_Lucro;
     }
 }

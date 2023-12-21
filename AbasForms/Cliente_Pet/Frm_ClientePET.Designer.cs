@@ -54,7 +54,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(700, 49);
+            panel1.Size = new Size(737, 49);
             panel1.TabIndex = 1;
             // 
             // Icn_Titulo
@@ -93,7 +93,7 @@
             btnExit.IconColor = Color.Gainsboro;
             btnExit.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnExit.IconSize = 25;
-            btnExit.Location = new Point(1042, 9);
+            btnExit.Location = new Point(1079, 9);
             btnExit.Margin = new Padding(3, 2, 3, 2);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(25, 25);
@@ -113,7 +113,7 @@
             Dt_Consulta.Name = "Dt_Consulta";
             Dt_Consulta.RowHeadersWidth = 51;
             Dt_Consulta.RowTemplate.Height = 29;
-            Dt_Consulta.Size = new Size(676, 177);
+            Dt_Consulta.Size = new Size(713, 177);
             Dt_Consulta.TabIndex = 6;
             Dt_Consulta.CellContentClick += Dt_Consulta_CellContentClick;
             // 
@@ -179,7 +179,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(737, 338);
             Controls.Add(textBox1);
             Controls.Add(button3);
             Controls.Add(button2);

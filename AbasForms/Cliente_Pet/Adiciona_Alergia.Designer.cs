@@ -122,7 +122,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ButtonFace;
-            label4.Location = new Point(203, 276);
+            label4.Location = new Point(199, 273);
             label4.Name = "label4";
             label4.Size = new Size(116, 20);
             label4.TabIndex = 35;
@@ -178,7 +178,7 @@
             button1.AutoSize = true;
             button1.Location = new Point(260, 352);
             button1.Name = "button1";
-            button1.Size = new Size(108, 25);
+            button1.Size = new Size(118, 25);
             button1.TabIndex = 39;
             button1.Text = "Adicionar Alergia";
             button1.UseVisualStyleBackColor = true;
@@ -244,6 +244,7 @@
             box_IdDono.Name = "box_IdDono";
             box_IdDono.Size = new Size(208, 23);
             box_IdDono.TabIndex = 44;
+            box_IdDono.MaskInputRejected += box_IdDono_MaskInputRejected;
             // 
             // Adiciona_Alergia
             // 

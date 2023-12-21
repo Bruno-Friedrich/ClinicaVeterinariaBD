@@ -56,6 +56,8 @@
             iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             Cmb_Tipo = new ComboBox();
             Lbl_Tipo = new Label();
+            Lbl_Lucro = new Label();
+            Msk_Lucro = new MaskedTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -103,7 +105,7 @@
             // btnExit
             // 
             btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnExit.BackColor = Color.FromArgb(26, 25, 72);
+            btnExit.BackColor = Color.FromArgb(34, 33, 74);
             btnExit.ForeColor = Color.Gainsboro;
             btnExit.IconChar = FontAwesome.Sharp.IconChar.Xmark;
             btnExit.IconColor = Color.Gainsboro;
@@ -372,12 +374,34 @@
             Lbl_Tipo.TabIndex = 38;
             Lbl_Tipo.Text = "Tipo*";
             // 
+            // Lbl_Lucro
+            // 
+            Lbl_Lucro.AutoSize = true;
+            Lbl_Lucro.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            Lbl_Lucro.ForeColor = Color.Gainsboro;
+            Lbl_Lucro.Location = new Point(21, 416);
+            Lbl_Lucro.Name = "Lbl_Lucro";
+            Lbl_Lucro.Size = new Size(233, 23);
+            Lbl_Lucro.TabIndex = 39;
+            Lbl_Lucro.Text = "Porcentagem de Lucro";
+            // 
+            // Msk_Lucro
+            // 
+            Msk_Lucro.Location = new Point(100, 442);
+            Msk_Lucro.Mask = "000%";
+            Msk_Lucro.Name = "Msk_Lucro";
+            Msk_Lucro.Size = new Size(49, 27);
+            Msk_Lucro.TabIndex = 40;
+            Msk_Lucro.TextAlign = HorizontalAlignment.Right;
+            // 
             // Frm_EditaProduto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(25, 26, 72);
             ClientSize = new Size(660, 481);
+            Controls.Add(Msk_Lucro);
+            Controls.Add(Lbl_Lucro);
             Controls.Add(Lbl_Tipo);
             Controls.Add(Cmb_Tipo);
             Controls.Add(iconPictureBox1);
@@ -448,5 +472,7 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private ComboBox Cmb_Tipo;
         private Label Lbl_Tipo;
+        private Label Lbl_Lucro;
+        private MaskedTextBox Msk_Lucro;
     }
 }
