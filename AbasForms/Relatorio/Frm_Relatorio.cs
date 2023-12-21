@@ -22,6 +22,8 @@ namespace ClinicaVeterinariaBD.AbasForms
             InitializeComponent();
             this.begginingDate = begginingDate;
             this.endingDate = endDate;
+            dataInicio.Text = $"Data inicial: {begginingDate.ToString("yyyy/MM/dd")}";
+            dataFim.Text = $"Data final: {endDate.ToString("yyyy/MM/dd")}";
         }
 
         private void procCirur_MouseClick(object sender, MouseEventArgs e)
@@ -50,28 +52,91 @@ namespace ClinicaVeterinariaBD.AbasForms
 
         private void GenerateReport(DateTime begginingDate, DateTime endDate, string typeService)
         {
-            dataInicio.Text = $"Data inicial: {begginingDate.ToString("yyyy/MM/dd")}";
-            dataFim.Text = $"Data final: {begginingDate.ToString("yyyy/MM/dd")}";
+            int total_sales = GetTotalSales(begginingDate, endDate, typeService);
+            int total_cost = GetTotalCost(begginingDate, endDate, typeService);
+            int total_profit = total_sales - total_cost;
+            int total_services = GetTotalServices(begginingDate, endDate, typeService);
+        }
 
+        private int GetTotalSales(DateTime begginingDate, DateTime endDate, string typeService)
+        {
             DbConnection connection = new DbConnection();
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
-            string query = $"{connection.search_path} SELECT SUM(custo) as Faturamento FROM SERVICO WHERE tipo = '{typeService}'";
+            string dateBeggining_s = begginingDate.ToString("yyyy-MM-dd");
+            string dateEnd_s = endDate.ToString("yyyy-MM-dd");
+
+
+            string query = $"{connection.search_path} SELECT SUM(custo) as Faturamento FROM SERVICO WHERE tipo = '{typeService}' and data BETWEEN '{dateBeggining_s}' AND '{dateEnd_s}'";
             command.CommandText = query;
 
             NpgsqlDataReader dataReader = command.ExecuteReader();
-            BigInteger sales;
             dataReader.Read();
-
+            int result;
             if (dataReader["Faturamento"].ToString().Equals(""))
-                sales = 0;
+               result =  0;
             else
-                sales = BigInteger.Parse(dataReader["Faturamento"].ToString());
-
-            MessageBox.Show(sales.ToString());
+                result = Int32.Parse(dataReader["Faturamento"].ToString());
             command.Dispose();
             connection.Connection.Close();
+            return result;
+
         }
+
+        private int GetTotalCost(DateTime begginingDate, DateTime endDate, string typeService)
+        {
+            DbConnection connection = new DbConnection();
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection.Connection;
+            command.CommandType = CommandType.Text;
+            string dateBeggining_s = begginingDate.ToString("yyyy-MM-dd");
+            string dateEnd_s = endDate.ToString("yyyy-MM-dd");
+
+
+            string query = $"{connection.search_path} SELECT SUM(Custo_servico) AS Custo_total FROM (SELECT (preco * quantidadeconsumida) AS Custo_servico FROM (SELECT PRODUTO.preco as preco, quantidadeconsumida FROM PRODUTO, SERVICO_CONSOME_PRODUTO, SERVICO WHERE SERVICO.tipo = '{typeService}' AND SERVICO.id = idservico AND PRODUTO.id = idproduto))'";
+            command.CommandText = query;
+
+            NpgsqlDataReader dataReader = command.ExecuteReader();
+            dataReader.Read();
+            int result;
+            if (dataReader["Custo_total"].ToString().Equals(""))
+                result = 0;
+            else
+                result = Int32.Parse(dataReader["Custo_total"].ToString());
+            command.Dispose();
+            connection.Connection.Close();
+            return result;
+
+        }
+
+        private int GetTotalServices(DateTime begginingDate, DateTime endDate, string typeService)
+        {
+            DbConnection connection = new DbConnection();
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection.Connection;
+            command.CommandType = CommandType.Text;
+            string dateBeggining_s = begginingDate.ToString("yyyy-MM-dd");
+            string dateEnd_s = endDate.ToString("yyyy-MM-dd");
+
+
+            string query = $"{connection.search_path} SELECT COUNT(*) as total_servicos FROM SERVICO WHERE SERVICO.tipo = '{typeService}'";
+            command.CommandText = query;
+
+            NpgsqlDataReader dataReader = command.ExecuteReader();
+            dataReader.Read();
+            int result;
+            if (dataReader["total_servicos"].ToString().Equals(""))
+                result = 0;
+            else
+                result = Int32.Parse(dataReader["total_servicos"].ToString());
+            command.Dispose();
+            connection.Connection.Close();
+            return result;
+
+        }
+
+
+
     }
 }

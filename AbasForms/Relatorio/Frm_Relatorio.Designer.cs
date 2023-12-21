@@ -30,13 +30,15 @@
         {
             dataInicio = new Label();
             dataFim = new Label();
-            ReportDataGrid = new DataGridView();
             Maneiradebusca = new GroupBox();
             consultas = new RadioButton();
             procCirur = new RadioButton();
             procEstetico = new RadioButton();
             vacinacao = new RadioButton();
-            ((System.ComponentModel.ISupportInitialize)ReportDataGrid).BeginInit();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
             Maneiradebusca.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,15 +61,6 @@
             dataFim.Size = new Size(103, 28);
             dataFim.TabIndex = 1;
             dataFim.Text = "Data Final:";
-            // 
-            // ReportDataGrid
-            // 
-            ReportDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ReportDataGrid.Location = new Point(12, 219);
-            ReportDataGrid.Name = "ReportDataGrid";
-            ReportDataGrid.RowTemplate.Height = 25;
-            ReportDataGrid.Size = new Size(976, 350);
-            ReportDataGrid.TabIndex = 2;
             // 
             // Maneiradebusca
             // 
@@ -129,18 +122,60 @@
             vacinacao.UseVisualStyleBackColor = true;
             vacinacao.MouseClick += vacinacao_MouseClick;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(34, 211);
+            label1.Name = "label1";
+            label1.Size = new Size(700, 50);
+            label1.TabIndex = 4;
+            label1.Text = "Quantidade total de serviços prestados";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(34, 297);
+            label2.Name = "label2";
+            label2.Size = new Size(244, 50);
+            label2.TabIndex = 5;
+            label2.Text = "Faturamento";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(34, 379);
+            label3.Name = "label3";
+            label3.Size = new Size(120, 50);
+            label3.TabIndex = 6;
+            label3.Text = "Custo";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(34, 456);
+            label4.Name = "label4";
+            label4.Size = new Size(119, 50);
+            label4.TabIndex = 7;
+            label4.Text = "Lucro";
+            // 
             // Frm_Relatorio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1088, 672);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(Maneiradebusca);
-            Controls.Add(ReportDataGrid);
             Controls.Add(dataFim);
             Controls.Add(dataInicio);
             Name = "Frm_Relatorio";
             Text = "Frm_Relatorio";
-            ((System.ComponentModel.ISupportInitialize)ReportDataGrid).EndInit();
             Maneiradebusca.ResumeLayout(false);
             Maneiradebusca.PerformLayout();
             ResumeLayout(false);
@@ -151,11 +186,14 @@
 
         private Label dataInicio;
         private Label dataFim;
-        private DataGridView ReportDataGrid;
         private GroupBox Maneiradebusca;
         private RadioButton consultas;
         private RadioButton procCirur;
         private RadioButton procEstetico;
         private RadioButton vacinacao;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
     }
 }
