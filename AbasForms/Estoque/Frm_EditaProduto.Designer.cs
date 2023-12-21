@@ -1,6 +1,6 @@
 ﻿namespace ClinicaVeterinariaBD.AbasForms.Estoque
 {
-    partial class Frm_InfoProduto
+    partial class Frm_EditaProduto
     {
         /// <summary>
         /// Required designer variable.
@@ -49,11 +49,15 @@
             Msk_Vencimento = new MaskedTextBox();
             Msk_Lote = new MaskedTextBox();
             Msk_Preco = new MaskedTextBox();
-            Btn_Enviar = new FontAwesome.Sharp.IconButton();
+            Btn_Remove = new FontAwesome.Sharp.IconButton();
             Btn_Cancelar = new FontAwesome.Sharp.IconButton();
+            label1 = new Label();
+            Txt_Codigo = new TextBox();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -136,6 +140,7 @@
             // 
             Txt_Nome.Location = new Point(21, 117);
             Txt_Nome.Name = "Txt_Nome";
+            Txt_Nome.ReadOnly = true;
             Txt_Nome.Size = new Size(249, 27);
             Txt_Nome.TabIndex = 11;
             // 
@@ -165,6 +170,7 @@
             // 
             Txt_Quantidade.Location = new Point(164, 205);
             Txt_Quantidade.Name = "Txt_Quantidade";
+            Txt_Quantidade.ReadOnly = true;
             Txt_Quantidade.Size = new Size(133, 27);
             Txt_Quantidade.TabIndex = 15;
             // 
@@ -183,6 +189,7 @@
             // 
             Txt_Marca.Location = new Point(318, 117);
             Txt_Marca.Name = "Txt_Marca";
+            Txt_Marca.ReadOnly = true;
             Txt_Marca.Size = new Size(307, 27);
             Txt_Marca.TabIndex = 17;
             // 
@@ -202,6 +209,7 @@
             Txt_Descricao.Location = new Point(318, 202);
             Txt_Descricao.Multiline = true;
             Txt_Descricao.Name = "Txt_Descricao";
+            Txt_Descricao.ReadOnly = true;
             Txt_Descricao.ScrollBars = ScrollBars.Vertical;
             Txt_Descricao.Size = new Size(307, 191);
             Txt_Descricao.TabIndex = 19;
@@ -227,6 +235,7 @@
             Lbl_Lote.Size = new Size(51, 23);
             Lbl_Lote.TabIndex = 24;
             Lbl_Lote.Text = "Lote";
+            Lbl_Lote.Visible = false;
             // 
             // Lbl_Dose
             // 
@@ -243,6 +252,7 @@
             // 
             Txt_Dose.Location = new Point(22, 372);
             Txt_Dose.Name = "Txt_Dose";
+            Txt_Dose.ReadOnly = true;
             Txt_Dose.Size = new Size(71, 27);
             Txt_Dose.TabIndex = 25;
             // 
@@ -251,6 +261,7 @@
             Msk_Vencimento.Location = new Point(21, 287);
             Msk_Vencimento.Mask = "00/00/0000";
             Msk_Vencimento.Name = "Msk_Vencimento";
+            Msk_Vencimento.ReadOnly = true;
             Msk_Vencimento.Size = new Size(100, 27);
             Msk_Vencimento.TabIndex = 27;
             Msk_Vencimento.TextAlign = HorizontalAlignment.Center;
@@ -261,6 +272,7 @@
             Msk_Lote.Location = new Point(164, 287);
             Msk_Lote.Mask = "AAAAAAAAAAAAAAAAAAAA";
             Msk_Lote.Name = "Msk_Lote";
+            Msk_Lote.ReadOnly = true;
             Msk_Lote.Size = new Size(133, 27);
             Msk_Lote.TabIndex = 28;
             // 
@@ -269,24 +281,28 @@
             Msk_Preco.Location = new Point(21, 202);
             Msk_Preco.Mask = "$##0.00";
             Msk_Preco.Name = "Msk_Preco";
+            Msk_Preco.ReadOnly = true;
             Msk_Preco.Size = new Size(100, 27);
             Msk_Preco.TabIndex = 31;
             Msk_Preco.TextAlign = HorizontalAlignment.Center;
             Msk_Preco.ValidatingType = typeof(DateTime);
             // 
-            // Btn_Enviar
+            // Btn_Remove
             // 
-            Btn_Enviar.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Enviar.IconChar = FontAwesome.Sharp.IconChar.None;
-            Btn_Enviar.IconColor = Color.Black;
-            Btn_Enviar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            Btn_Enviar.Location = new Point(476, 414);
-            Btn_Enviar.Name = "Btn_Enviar";
-            Btn_Enviar.Size = new Size(149, 46);
-            Btn_Enviar.TabIndex = 32;
-            Btn_Enviar.Text = "Enviar";
-            Btn_Enviar.UseVisualStyleBackColor = true;
-            Btn_Enviar.Click += Btn_Enviar_Click;
+            Btn_Remove.BackColor = Color.White;
+            Btn_Remove.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Remove.IconChar = FontAwesome.Sharp.IconChar.None;
+            Btn_Remove.IconColor = Color.Black;
+            Btn_Remove.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            Btn_Remove.Location = new Point(476, 414);
+            Btn_Remove.Name = "Btn_Remove";
+            Btn_Remove.Size = new Size(149, 46);
+            Btn_Remove.TabIndex = 32;
+            Btn_Remove.Text = "Remover";
+            Btn_Remove.UseVisualStyleBackColor = false;
+            Btn_Remove.Click += Btn_Remove_Click;
+            Btn_Remove.MouseEnter += Btn_Remove_MouseEnter;
+            Btn_Remove.MouseLeave += Btn_Remove_MouseLeave;
             // 
             // Btn_Cancelar
             // 
@@ -300,16 +316,51 @@
             Btn_Cancelar.TabIndex = 33;
             Btn_Cancelar.Text = "Cancelar";
             Btn_Cancelar.UseVisualStyleBackColor = true;
-            Btn_Cancelar.Click += Btn_Cancelar_Click;
             // 
-            // Frm_InfoProduto
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Gainsboro;
+            label1.Location = new Point(163, 346);
+            label1.Name = "label1";
+            label1.Size = new Size(83, 23);
+            label1.TabIndex = 35;
+            label1.Text = "Código";
+            // 
+            // Txt_Codigo
+            // 
+            Txt_Codigo.Location = new Point(164, 372);
+            Txt_Codigo.Name = "Txt_Codigo";
+            Txt_Codigo.Size = new Size(82, 27);
+            Txt_Codigo.TabIndex = 34;
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.FromArgb(25, 26, 72);
+            iconPictureBox1.ForeColor = Color.Gainsboro;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
+            iconPictureBox1.IconColor = Color.Gainsboro;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 36;
+            iconPictureBox1.Location = new Point(249, 368);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(45, 36);
+            iconPictureBox1.TabIndex = 36;
+            iconPictureBox1.TabStop = false;
+            iconPictureBox1.Click += iconPictureBox1_Click;
+            // 
+            // Frm_RemoveProduto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(25, 26, 72);
             ClientSize = new Size(660, 481);
+            Controls.Add(iconPictureBox1);
+            Controls.Add(label1);
+            Controls.Add(Txt_Codigo);
             Controls.Add(Btn_Cancelar);
-            Controls.Add(Btn_Enviar);
+            Controls.Add(Btn_Remove);
             Controls.Add(Msk_Preco);
             Controls.Add(Msk_Lote);
             Controls.Add(Msk_Vencimento);
@@ -331,13 +382,14 @@
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "Frm_InfoProduto";
+            Name = "Frm_RemoveProduto";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Frm_InfoProduto";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).EndInit();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -365,7 +417,11 @@
         private MaskedTextBox Msk_Vencimento;
         private MaskedTextBox Msk_Lote;
         private MaskedTextBox Msk_Preco;
-        private FontAwesome.Sharp.IconButton Btn_Enviar;
+        private FontAwesome.Sharp.IconButton Btn_Remove;
         private FontAwesome.Sharp.IconButton Btn_Cancelar;
+        private Label label1;
+        private TextBox Txt_Codigo;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }
+    
