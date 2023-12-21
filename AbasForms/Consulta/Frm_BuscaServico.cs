@@ -45,8 +45,8 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
                 string firstDayWeek_s = firstDayWeek.ToString("yyyy-MM-dd");
                 string lastDayWeek_s = lastDayWeek.ToString("yyyy-MM-dd");
 
-                query =  query + $" data BETWEEN ' {firstDayWeek_s} ' AND  '{lastDayWeek_s}'";
-                 
+                query = query + $" data BETWEEN ' {firstDayWeek_s} ' AND  '{lastDayWeek_s}'";
+
             }
 
             else if (Buscapormes.Checked)
@@ -57,7 +57,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
                 string lastDayMonth_s = lastDayMonth.ToString("yyyy-MM-dd");
 
                 query = query + $" data BETWEEN ' {firstDayMonth_s} ' AND  '{lastDayMonth_s}'";
-              
+
             }
 
             else if (Buscaporcliente.Checked)
@@ -65,7 +65,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             {
                 string entrada = INPUT_CPF_cliente.Text;
                 query = query + $" PCLIENTE.CPF = '{entrada}'";
-             
+
             }
 
             else if (Buscaporfuncionario.Checked)
@@ -74,7 +74,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
                 string entrada = INPUT_CPF_funcionario.Text;
 
                 query = query + $" PFUNC.CPF = '{entrada}'";
-                         
+
 
             }
 
@@ -129,7 +129,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
 
         private void Buscaporcliente_CheckedChanged(object sender, EventArgs e)
         {
- 
+
             INPUT_CPF_cliente.Enabled = true;
             INPUT_CPF_funcionario.Enabled = false;
 
@@ -156,6 +156,16 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
         private void Info_ID_func_TextChanged(object sender, EventArgs e)
         {
             Btn_confirmarbusca.Enabled = true;
+
+        }
+
+        private void Maneiradebusca_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Icn_Titulo_Click(object sender, EventArgs e)
+        {
 
         }
     }

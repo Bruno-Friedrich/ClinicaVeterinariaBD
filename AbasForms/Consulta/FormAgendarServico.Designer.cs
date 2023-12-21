@@ -54,96 +54,107 @@
             InvalidTimeLabel = new Label();
             horaIni = new MaskedTextBox();
             horaFim = new MaskedTextBox();
+            Icn_Titulo = new FontAwesome.Sharp.IconPictureBox();
             ((System.ComponentModel.ISupportInitialize)todaysScheduleDataGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
             label1.Location = new Point(42, 46);
             label1.Name = "label1";
-            label1.Size = new Size(97, 28);
+            label1.Size = new Size(83, 19);
             label1.TabIndex = 0;
             label1.Text = "CPF dono";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
             label2.Location = new Point(279, 46);
             label2.Name = "label2";
-            label2.Size = new Size(132, 28);
+            label2.Size = new Size(118, 19);
             label2.TabIndex = 1;
             label2.Text = "Nome Animal";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
             label3.Location = new Point(500, 46);
             label3.Name = "label3";
-            label3.Size = new Size(51, 28);
+            label3.Size = new Size(41, 19);
             label3.TabIndex = 2;
             label3.Text = "Tipo";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.White;
             label4.Location = new Point(42, 150);
             label4.Name = "label4";
-            label4.Size = new Size(53, 28);
+            label4.Size = new Size(46, 19);
             label4.TabIndex = 3;
             label4.Text = "Data";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.White;
             label5.Location = new Point(42, 404);
             label5.Name = "label5";
-            label5.Size = new Size(134, 28);
+            label5.Size = new Size(117, 19);
             label5.TabIndex = 4;
             label5.Text = "Hora de início";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.White;
             label6.Location = new Point(274, 404);
             label6.Name = "label6";
-            label6.Size = new Size(147, 28);
+            label6.Size = new Size(124, 19);
             label6.TabIndex = 5;
             label6.Text = "Horários de fim";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.White;
             label8.Location = new Point(715, 46);
             label8.Name = "label8";
-            label8.Size = new Size(115, 28);
+            label8.Size = new Size(101, 19);
             label8.TabIndex = 7;
             label8.Text = "Funcionário";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.ForeColor = Color.White;
             label9.Location = new Point(46, 487);
             label9.Name = "label9";
-            label9.Size = new Size(57, 28);
+            label9.Size = new Size(50, 19);
             label9.TabIndex = 8;
             label9.Text = "Valor";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.ForeColor = Color.White;
             label10.Location = new Point(274, 487);
             label10.Name = "label10";
-            label10.Size = new Size(115, 28);
+            label10.Size = new Size(105, 19);
             label10.TabIndex = 9;
             label10.Text = "Observação";
             // 
@@ -188,9 +199,10 @@
             // btrConfirm
             // 
             btrConfirm.Enabled = false;
-            btrConfirm.Location = new Point(735, 439);
+            btrConfirm.Font = new Font("Century Gothic", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            btrConfirm.Location = new Point(735, 467);
             btrConfirm.Name = "btrConfirm";
-            btrConfirm.Size = new Size(161, 105);
+            btrConfirm.Size = new Size(161, 57);
             btrConfirm.TabIndex = 19;
             btrConfirm.Text = "Confirmar";
             btrConfirm.UseVisualStyleBackColor = true;
@@ -208,6 +220,7 @@
             // cpfInvalido
             // 
             cpfInvalido.AutoSize = true;
+            cpfInvalido.ForeColor = Color.White;
             cpfInvalido.Location = new Point(42, 103);
             cpfInvalido.Name = "cpfInvalido";
             cpfInvalido.Size = new Size(83, 15);
@@ -236,6 +249,7 @@
             // dateInvalid
             // 
             dateInvalid.AutoSize = true;
+            dateInvalid.ForeColor = Color.White;
             dateInvalid.Location = new Point(105, 358);
             dateInvalid.Name = "dateInvalid";
             dateInvalid.Size = new Size(75, 15);
@@ -246,10 +260,11 @@
             // todaysScheduleLabel
             // 
             todaysScheduleLabel.AutoSize = true;
-            todaysScheduleLabel.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            todaysScheduleLabel.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            todaysScheduleLabel.ForeColor = Color.White;
             todaysScheduleLabel.Location = new Point(407, 150);
             todaysScheduleLabel.Name = "todaysScheduleLabel";
-            todaysScheduleLabel.Size = new Size(144, 28);
+            todaysScheduleLabel.Size = new Size(125, 19);
             todaysScheduleLabel.TabIndex = 26;
             todaysScheduleLabel.Text = "Serviços no dia";
             todaysScheduleLabel.Visible = false;
@@ -273,9 +288,11 @@
             // InvalidTimeLabel
             // 
             InvalidTimeLabel.AutoSize = true;
+            InvalidTimeLabel.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            InvalidTimeLabel.ForeColor = Color.White;
             InvalidTimeLabel.Location = new Point(558, 451);
             InvalidTimeLabel.Name = "InvalidTimeLabel";
-            InvalidTimeLabel.Size = new Size(114, 15);
+            InvalidTimeLabel.Size = new Size(122, 16);
             InvalidTimeLabel.TabIndex = 31;
             InvalidTimeLabel.Text = "HORÁRIO INVÁLIDO";
             InvalidTimeLabel.Visible = false;
@@ -302,11 +319,28 @@
             horaFim.ValidatingType = typeof(DateTime);
             horaFim.KeyUp += horaFim_KeyUp;
             // 
+            // Icn_Titulo
+            // 
+            Icn_Titulo.BackColor = Color.FromArgb(34, 33, 74);
+            Icn_Titulo.ForeColor = Color.Thistle;
+            Icn_Titulo.IconChar = FontAwesome.Sharp.IconChar.Pen;
+            Icn_Titulo.IconColor = Color.Thistle;
+            Icn_Titulo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            Icn_Titulo.IconSize = 33;
+            Icn_Titulo.Location = new Point(12, 11);
+            Icn_Titulo.Margin = new Padding(3, 2, 3, 2);
+            Icn_Titulo.Name = "Icn_Titulo";
+            Icn_Titulo.Size = new Size(113, 33);
+            Icn_Titulo.TabIndex = 34;
+            Icn_Titulo.TabStop = false;
+            // 
             // s
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(977, 589);
+            Controls.Add(Icn_Titulo);
             Controls.Add(horaFim);
             Controls.Add(horaIni);
             Controls.Add(InvalidTimeLabel);
@@ -332,8 +366,9 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "s";
-            Text = "FormAgendarServico";
+            Text = "Agendar Servico";
             ((System.ComponentModel.ISupportInitialize)todaysScheduleDataGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Icn_Titulo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -365,5 +400,6 @@
         private Label InvalidTimeLabel;
         private MaskedTextBox horaIni;
         private MaskedTextBox horaFim;
+        private FontAwesome.Sharp.IconPictureBox Icn_Titulo;
     }
 }
