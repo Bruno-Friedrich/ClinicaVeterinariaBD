@@ -18,7 +18,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Animal WHERE iddono = cast(@IdBuscado as int)";
+                string query = "SELECT * FROM clinicaveterinaria.Animal WHERE iddono = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -39,7 +39,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "INSERT INTO clinicaveterinaria2.Alergia_animal (iddono, nomeanimal, alergia) " +
+                string query = "INSERT INTO clinicaveterinaria.Alergia_animal (iddono, nomeanimal, alergia) " +
                     "VALUES (@iddono, @nome, @alergia)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
@@ -60,7 +60,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Alergia_animal WHERE iddono = @iddono";
+                string query = "SELECT * FROM clinicaveterinaria.Alergia_animal WHERE iddono = @iddono";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {

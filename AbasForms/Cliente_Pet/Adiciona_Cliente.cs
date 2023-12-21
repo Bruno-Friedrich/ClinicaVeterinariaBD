@@ -38,7 +38,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             //Pessoa
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "INSERT INTO clinicaveterinaria2.Pessoa (tipo, cpf, nome, email, celular1, celular2, complemento, cidade, bairro, " +
+                string query = "INSERT INTO clinicaveterinaria.Pessoa (tipo, cpf, nome, email, celular1, celular2, complemento, cidade, bairro, " +
                     "numero, logradouro, cep) VALUES (@tipo, @cpf, @nome, @email, @celular1, @celular2, @complemento, @cidade, @bairro, @numero, " +
                     "@logradouro, @cep)";
 

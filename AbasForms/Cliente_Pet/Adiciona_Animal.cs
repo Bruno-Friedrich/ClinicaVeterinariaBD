@@ -55,7 +55,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "INSERT INTO clinicaveterinaria2.Animal (iddono, nome, especie, raca, idade, sexo, peso) " +
+                string query = "INSERT INTO clinicaveterinaria.Animal (iddono, nome, especie, raca, idade, sexo, peso) " +
                     "VALUES (@iddono, @nome, @especie, @raca, @idade, @sexo, @peso)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))

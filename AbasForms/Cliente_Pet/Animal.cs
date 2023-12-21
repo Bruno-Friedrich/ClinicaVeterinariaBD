@@ -24,7 +24,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente' AND id = cast(@IdBuscado as int)";
+                string query = "SELECT * FROM clinicaveterinaria.Pessoa WHERE tipo = 'cliente' AND id = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -41,7 +41,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Animal WHERE iddono = cast(@IdBuscado as int)";
+                string query = "SELECT * FROM clinicaveterinaria.Animal WHERE iddono = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {

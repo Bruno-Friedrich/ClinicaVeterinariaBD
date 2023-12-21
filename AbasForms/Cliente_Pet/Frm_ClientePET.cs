@@ -20,7 +20,7 @@ namespace ClinicaVeterinariaBD.AbasForms
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente'";
+                string query = "SELECT * FROM clinicaveterinaria.Pessoa WHERE tipo = 'cliente'";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -52,7 +52,7 @@ namespace ClinicaVeterinariaBD.AbasForms
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT id FROM clinicaveterinaria2.Pessoa WHERE id = cast(@IdBuscado as int)";
+                string query = "SELECT id FROM clinicaveterinaria.Pessoa WHERE id = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -95,7 +95,7 @@ namespace ClinicaVeterinariaBD.AbasForms
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente' AND LOWER(nome) LIKE @Nome_cliente";
+                string query = "SELECT * FROM clinicaveterinaria.Pessoa WHERE tipo = 'cliente' AND LOWER(nome) LIKE @Nome_cliente";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
