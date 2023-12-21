@@ -94,7 +94,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
         private void animalName_SelectedIndexChanged(object sender, EventArgs e)
         {
             tipoServico.Enabled = true;
-            tipoServico.Text= null;
+            tipoServico.Text = null;
             horaIni.Text = null;
             horaFim.Text = null;
             horaIni.Enabled = false;
@@ -215,7 +215,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
         private void btrConfirm_Click(object sender, EventArgs e)
         {
 
-           
+
             int idEmployee = FindEmployeeId(funcionarioServico.Text);
             int idOwner = FindClientId();
             string animalName_s = animalName.Text;
@@ -238,15 +238,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             connection.Connection.Close();
 
             MessageBox.Show($"INSERÇÃO BEM SUCEDIDA", "SUCESSO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            horaIni.Text = null;
-            horaIni.Enabled = false;
-            horaFim.Text = null;
-            horaFim.Enabled = false;
-            valorServico.Text = null;
-            valorServico.Enabled = false;
-            obsServico.Text = null;
-            obsServico.Enabled = false;
-            
+            this.Close();
 
         }
 
@@ -342,7 +334,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
 
         private bool ValidateTimeService(string timeBeggining, string timeEnd, string typeService, string animalName_s, int idEmployee, DateTime date_selected)
         {
-            
+
             DbConnection connection = new DbConnection();
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection.Connection;
@@ -374,11 +366,17 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
 
         }
 
-        private int FindEmployeeId (string employeeService )
+        private int FindEmployeeId(string employeeService)
         {
             int commonPosition = employeeService.IndexOf(",");
             return Int32.Parse(funcionarioServico.Text.Substring(commonPosition + 1).Trim());
 
+        }
+
+        private void maskedTextBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            obsServico.Enabled = true;
+            btrConfirm.Enabled = true;
         }
     }
 

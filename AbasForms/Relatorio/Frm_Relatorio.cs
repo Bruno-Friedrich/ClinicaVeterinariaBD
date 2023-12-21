@@ -96,19 +96,22 @@ namespace ClinicaVeterinariaBD.AbasForms
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
             string dateBeggining_s = begginingDate.ToString("yyyy-MM-dd");
-            string dateEnd_s = endDate.ToString("yyyy-MM-dd");
-
-
-            string query = $"{connection.search_path} SELECT SUM(Custo_servico) AS Custo_total FROM (SELECT (preco * quantidadeconsumida) AS Custo_servico FROM (SELECT PRODUTO.preco as preco, quantidadeconsumida FROM PRODUTO, SERVICO_CONSOME_PRODUTO, SERVICO WHERE SERVICO.tipo = '{typeService}' AND SERVICO.id = idservico AND PRODUTO.id = idproduto));";
-            command.CommandText = query;
-
-            NpgsqlDataReader dataReader = command.ExecuteReader();
-            dataReader.Read();
-            int result;
-            if (dataReader["Custo_total"].ToString().Equals(""))
-                result = 0;
-            else
-                result = Int32.Parse(dataReader["Custo_total"].ToString());
+            string dateEnd_s = endingDate.ToString("yyyy-MM-dd");
+            float idle_cost = 0;
+            switch (typeService)
+            {
+                case "Procedimentos Cirúrgicos":
+                case "Procedimentos Estéticos":
+                    idle_cost = 350;
+                    break;
+                case "Vacinação":
+                    idle_cost = 30;
+                    break;
+                default:
+                    idle_cost = 10; 
+                    break;
+            }
+            float result = idle_cost * total_services;
             command.Dispose();
             connection.Connection.Close();
             return result;
