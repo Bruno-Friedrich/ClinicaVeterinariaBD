@@ -120,7 +120,8 @@ namespace ClinicaVeterinariaBD
         private void Btn_Relatorio_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
-            OpenChildForm(new Frm_Relatorio());
+            this.WindowState = FormWindowState.Maximized;
+            OpenChildForm(new Frm_RelatorioPeriodo());
         }
 
         private void Btn_Estoque_Click(object sender, EventArgs e)
