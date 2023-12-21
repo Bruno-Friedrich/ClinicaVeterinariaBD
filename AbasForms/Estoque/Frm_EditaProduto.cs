@@ -65,7 +65,6 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
             // Verifica se o valor em Txt_Codigo é um número inteiro
             if (int.TryParse(Txt_Codigo.Text, out int idProduto))
             {
-
                 DbConnection Connection = new DbConnection();
                 // Construa a consulta SQL para obter os dados do produto com base no ID
                 string query = $"{Connection.search_path} SELECT * FROM produto WHERE Id = @IdProduto";
@@ -76,7 +75,6 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
 
                     try
                     {
-
                         using (NpgsqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
@@ -103,15 +101,12 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                                 Txt_Dose.Text = reader["Dose"].ToString();
                                 Cmb_Tipo.SelectedItem = reader["Tipo"].ToString();
 
-                                //Liberando para a edição
-                                Txt_Nome.ReadOnly = false;
-                                Txt_Quantidade.ReadOnly = false;
-                                Txt_Marca.ReadOnly = false;
-                                Txt_Descricao.ReadOnly = false  ;
-                                Txt_Dose.ReadOnly = false;
-                                Msk_Vencimento.ReadOnly = false;
-                                Msk_Lote.ReadOnly = false;
-                                Msk_Preco.ReadOnly = false;
+                                // Novo campo adicionado
+                                int porcentagemLucro;
+                                if (int.TryParse(reader["PorcentagemLucro"].ToString(), out porcentagemLucro))
+                                {
+                                    Msk_Lucro.Text = porcentagemLucro.ToString();
+                                }
                             }
                             else
                             {
@@ -135,6 +130,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                 MessageBox.Show("O valor em Txt_Codigo não é um número inteiro válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void iconPictureBox1_Click(object sender, EventArgs e)
@@ -244,7 +240,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                 {
                     MessageBox.Show("Problema na edição!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                   
+
             }
             // Se o usuário escolher Não, não é necessário fazer nada
         }
@@ -292,15 +288,27 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                 // Obtém o valor selecionado no ComboBox Cmb_Tipo
                 string tipo = Cmb_Tipo.SelectedItem?.ToString();
 
+                // Validação do campo Msk_Lucro
+                string lucroTexto = Msk_Lucro.Text;
+
+                // Remover caracteres não numéricos
+                lucroTexto = Regex.Replace(lucroTexto, @"[^\d]", "");
+
+                if (int.TryParse(lucroTexto, out int porcentagemLucro))
+                {
+                    // O valor é um número válido
+                }
+
                 using (DbConnection Connection = new DbConnection())
                 {
                     // Cria um comando SQL com parâmetros nomeados
-                    using (NpgsqlCommand command = new NpgsqlCommand($"{Connection.search_path} UPDATE produto SET NomeProd = @Nome, Preco = @Preco, QntEstoque = @Quantidade, Marca = @Marca, Descricao = @Descricao, Lote = @Lote, Dose = @Dose, DataVenc = @DataVenc, Tipo = @Tipo WHERE Id = @IdProduto", Connection.Connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand($"{Connection.search_path} UPDATE produto SET NomeProd = @Nome, Preco = @Preco, PorcentagemLucro = @PorcentagemLucro, QntEstoque = @Quantidade, Marca = @Marca, Descricao = @Descricao, Lote = @Lote, Dose = @Dose, DataVenc = @DataVenc, Tipo = @Tipo WHERE Id = @IdProduto", Connection.Connection))
                     {
                         // Adicione os parâmetros
                         command.Parameters.AddWithValue("@IdProduto", idProduto);
                         command.Parameters.AddWithValue("@Nome", nome);
                         command.Parameters.AddWithValue("@Preco", preco);
+                        command.Parameters.AddWithValue("@PorcentagemLucro", porcentagemLucro);
                         command.Parameters.AddWithValue("@Quantidade", quantidade);
                         command.Parameters.AddWithValue("@Marca", marca);
                         command.Parameters.AddWithValue("@Descricao", descricao);
@@ -319,6 +327,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                 MessageBox.Show("O valor em Txt_Codigo não é um número inteiro válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
 

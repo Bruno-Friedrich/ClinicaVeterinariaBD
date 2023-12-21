@@ -1,6 +1,6 @@
-﻿namespace ClinicaVeterinariaBD.AbasForms
+﻿namespace ClinicaVeterinariaBD.AbasForms.Pagamento
 {
-    partial class Frm_Pagamento
+    partial class Frm_VisualizaNF
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Frm_Pagamento";
+            SuspendLayout();
+            // 
+            // Frm_VisualizaNF
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(25, 26, 72);
+            ClientSize = new Size(800, 450);
+            Name = "Frm_VisualizaNF";
+            Text = "Frm_VisualizaNF";
+            ResumeLayout(false);
         }
 
         #endregion

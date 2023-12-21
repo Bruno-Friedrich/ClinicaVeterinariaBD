@@ -9,8 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BouncyCastle" Version="1.8.9" />
     <PackageReference Include="Bunifu.UI.WinForms" Version="6.1.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+    <PackageReference Include="itext7" Version="8.0.1" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="Npgsql" Version="8.0.0" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>

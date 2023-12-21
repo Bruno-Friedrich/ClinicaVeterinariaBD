@@ -56,6 +56,7 @@ namespace ClinicaVeterinariaBD.AbasForms
                         Dt_Estoque.Columns["lote"].HeaderText = "Lote";
                         Dt_Estoque.Columns["dose"].HeaderText = "Dose";
                         Dt_Estoque.Columns["tipo"].HeaderText = "Tipo";
+                        Dt_Estoque.Columns["PorcentagemLucro"].HeaderText = "Porcentagem de Lucro";
 
                     }
                     catch (Exception ex)
@@ -209,8 +210,8 @@ namespace ClinicaVeterinariaBD.AbasForms
             {
                 consultaSQL += $" AND LOWER(NomeProd) LIKE LOWER('%{filtroNome}%')";
             }
-            
-            
+
+
             // Validação do campo Preco Max
             string precoMaxTexto = Msk_PrecoMax.Text;
 

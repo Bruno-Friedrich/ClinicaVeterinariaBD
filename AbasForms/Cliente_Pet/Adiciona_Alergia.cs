@@ -35,7 +35,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         private void insereAlergia()
         {
             string temp = box_IdDono.Text;
-            
+
             string nomeAnimal = box_NomeAnimal.Text.ToLower().Trim();
             string Alergia = box_Alergia.Text.ToLower().Trim();
 
@@ -72,7 +72,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
                 MessageBox.Show("Insira o Id", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             int idDono = Int32.Parse(temp);
 
             using (DbConnection Connection = new DbConnection())

@@ -63,7 +63,6 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
             // Verifica se o valor em Txt_Codigo é um número inteiro
             if (int.TryParse(Txt_Codigo.Text, out int idProduto))
             {
-
                 DbConnection Connection = new DbConnection();
                 // Construa a consulta SQL para obter os dados do produto com base no ID
                 string query = $"{Connection.search_path} SELECT * FROM produto WHERE Id = @IdProduto";
@@ -74,7 +73,6 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
 
                     try
                     {
-
                         using (NpgsqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
@@ -100,6 +98,13 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                                 Msk_Lote.Text = reader["Lote"].ToString();
                                 Txt_Dose.Text = reader["Dose"].ToString();
                                 Cmb_Tipo.SelectedItem = reader["Tipo"].ToString();
+
+                                // Novo campo adicionado
+                                int porcentagemLucro;
+                                if (int.TryParse(reader["PorcentagemLucro"].ToString(), out porcentagemLucro))
+                                {
+                                    Msk_Lucro.Text = porcentagemLucro.ToString();
+                                }
                             }
                             else
                             {
@@ -123,6 +128,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                 MessageBox.Show("O valor em Txt_Codigo não é um número inteiro válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void iconPictureBox1_Click(object sender, EventArgs e)

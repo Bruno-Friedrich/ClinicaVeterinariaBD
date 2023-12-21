@@ -236,27 +236,44 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
             // Obtém o valor selecionado no ComboBox Cmb_Tipo
             string tipo = Cmb_Tipo.SelectedItem?.ToString();
 
-            using (DbConnection Connection = new DbConnection())
-            {
-                // Cria um comando SQL com parâmetros nomeados
-                using (NpgsqlCommand command = new NpgsqlCommand($"{Connection.search_path} INSERT INTO produto (NomeProd, Preco, QntEstoque, Marca, Descricao, Lote, Dose, DataVenc, Tipo) VALUES (@Nome, @Preco, @Quantidade, @Marca, @Descricao, @Lote, @Dose, @DataVenc, @Tipo)", Connection.Connection))
-                {
-                    // Adicione os parâmetros
-                    command.Parameters.AddWithValue("@Nome", nome);
-                    command.Parameters.AddWithValue("@Preco", preco);
-                    command.Parameters.AddWithValue("@Quantidade", quantidade);
-                    command.Parameters.AddWithValue("@Marca", marca);
-                    command.Parameters.AddWithValue("@Descricao", descricao);
-                    command.Parameters.AddWithValue("@Lote", lote ?? (object)DBNull.Value); // Trata o valor nulo
-                    command.Parameters.AddWithValue("@Dose", dose ?? (object)DBNull.Value); // Trata o valor nulo
-                    command.Parameters.AddWithValue("@DataVenc", dataVencimento ?? (object)DBNull.Value); // Trata o valor nulo
-                    command.Parameters.AddWithValue("@Tipo", tipo);
+            // Validação do campo Msk_Lucro
+            string lucroTexto = Msk_Lucro.Text;
 
-                    // Execute o comando de inserção
-                    command.ExecuteNonQuery();
+            // Remover caracteres não numéricos
+            lucroTexto = Regex.Replace(lucroTexto, @"[^\d]", "");
+
+            if (int.TryParse(lucroTexto, out int porcentagemLucro))
+            {
+                // O valor é um número válido
+
+                using (DbConnection Connection = new DbConnection())
+                {
+                    // Cria um comando SQL com parâmetros nomeados
+                    using (NpgsqlCommand command = new NpgsqlCommand($"{Connection.search_path} INSERT INTO produto (NomeProd, Preco, PorcentagemLucro, QntEstoque, Marca, Descricao, Lote, Dose, DataVenc, Tipo) VALUES (@Nome, @Preco, @PorcentagemLucro, @Quantidade, @Marca, @Descricao, @Lote, @Dose, @DataVenc, @Tipo)", Connection.Connection))
+                    {
+                        // Adicione os parâmetros
+                        command.Parameters.AddWithValue("@Nome", nome);
+                        command.Parameters.AddWithValue("@Preco", preco);
+                        command.Parameters.AddWithValue("@PorcentagemLucro", porcentagemLucro);
+                        command.Parameters.AddWithValue("@Quantidade", quantidade);
+                        command.Parameters.AddWithValue("@Marca", marca);
+                        command.Parameters.AddWithValue("@Descricao", descricao);
+                        command.Parameters.AddWithValue("@Lote", lote ?? (object)DBNull.Value); // Trata o valor nulo
+                        command.Parameters.AddWithValue("@Dose", dose ?? (object)DBNull.Value); // Trata o valor nulo
+                        command.Parameters.AddWithValue("@DataVenc", dataVencimento ?? (object)DBNull.Value); // Trata o valor nulo
+                        command.Parameters.AddWithValue("@Tipo", tipo);
+
+                        // Execute o comando de inserção
+                        command.ExecuteNonQuery();
+                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("O valor em Msk_Lucro não é um número inteiro válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
     }
 }

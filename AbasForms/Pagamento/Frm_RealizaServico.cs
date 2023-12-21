@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClinicaVeterinariaBD.AbasForms
+namespace ClinicaVeterinariaBD.AbasForms.Pagamento
 {
-    public partial class Frm_Pagamento : Form
+    public partial class Frm_RealizaServico : Form
     {
-        public Frm_Pagamento()
+        public Frm_RealizaServico()
         {
             InitializeComponent();
         }
