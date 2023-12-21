@@ -53,9 +53,14 @@ namespace ClinicaVeterinariaBD.AbasForms
         private void GenerateReport(DateTime begginingDate, DateTime endDate, string typeService)
         {
             int total_sales = GetTotalSales(begginingDate, endDate, typeService);
-            int total_cost = GetTotalCost(begginingDate, endDate, typeService);
-            int total_profit = total_sales - total_cost;
             int total_services = GetTotalServices(begginingDate, endDate, typeService);
+
+            float total_cost = GetTotalCost(total_services, typeService);
+            float total_profit = total_sales - total_cost;
+            totalFaturamento.Text = $"Total de faturamento: {total_sales.ToString()}";
+            totalLucro.Text = $"Total de lucro: {total_profit.ToString()}";
+            totalservicosLabel.Text = $"Quantidade de serviços prestada: {total_services.ToString()}";
+            totalCusto.Text = $"Total de custo: {total_cost.ToString()}";
         }
 
         private int GetTotalSales(DateTime begginingDate, DateTime endDate, string typeService)
@@ -84,29 +89,23 @@ namespace ClinicaVeterinariaBD.AbasForms
 
         }
 
-        private int GetTotalCost(DateTime begginingDate, DateTime endDate, string typeService)
+        private float GetTotalCost(int total_services, string typeService)
         {
-            DbConnection connection = new DbConnection();
-            NpgsqlCommand command = new NpgsqlCommand();
-            command.Connection = connection.Connection;
-            command.CommandType = CommandType.Text;
-            string dateBeggining_s = begginingDate.ToString("yyyy-MM-dd");
-            string dateEnd_s = endDate.ToString("yyyy-MM-dd");
-
-
-            string query = $"{connection.search_path} SELECT SUM(Custo_servico) AS Custo_total FROM (SELECT (preco * quantidadeconsumida) AS Custo_servico FROM (SELECT PRODUTO.preco as preco, quantidadeconsumida FROM PRODUTO, SERVICO_CONSOME_PRODUTO, SERVICO WHERE SERVICO.tipo = '{typeService}' AND SERVICO.id = idservico AND PRODUTO.id = idproduto))'";
-            command.CommandText = query;
-
-            NpgsqlDataReader dataReader = command.ExecuteReader();
-            dataReader.Read();
-            int result;
-            if (dataReader["Custo_total"].ToString().Equals(""))
-                result = 0;
-            else
-                result = Int32.Parse(dataReader["Custo_total"].ToString());
-            command.Dispose();
-            connection.Connection.Close();
-            return result;
+            int idleCostService;
+            switch (typeService)
+            {
+                case "Procedimentos Estéticos":
+                case "Procedimentos Cirúrgicos":
+                    idleCostService = 300;
+                    break;
+                case "Vacinação":
+                    idleCostService = 30;
+                    break;
+                default:
+                    idleCostService = 0;
+                    break;
+            }
+            return idleCostService * total_services;
 
         }
 
@@ -120,7 +119,7 @@ namespace ClinicaVeterinariaBD.AbasForms
             string dateEnd_s = endDate.ToString("yyyy-MM-dd");
 
 
-            string query = $"{connection.search_path} SELECT COUNT(*) as total_servicos FROM SERVICO WHERE SERVICO.tipo = '{typeService}'";
+            string query = $"{connection.search_path} SELECT COUNT(*) as total_servicos FROM SERVICO WHERE SERVICO.tipo = '{typeService}' and data BETWEEN '{dateBeggining_s}' AND '{dateEnd_s}'";
             command.CommandText = query;
 
             NpgsqlDataReader dataReader = command.ExecuteReader();

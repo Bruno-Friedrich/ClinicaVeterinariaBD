@@ -35,10 +35,10 @@
             procCirur = new RadioButton();
             procEstetico = new RadioButton();
             vacinacao = new RadioButton();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
+            totalservicosLabel = new Label();
+            totalFaturamento = new Label();
+            totalCusto = new Label();
+            totalLucro = new Label();
             Maneiradebusca.SuspendLayout();
             SuspendLayout();
             // 
@@ -122,55 +122,55 @@
             vacinacao.UseVisualStyleBackColor = true;
             vacinacao.MouseClick += vacinacao_MouseClick;
             // 
-            // label1
+            // totalservicosLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(34, 211);
-            label1.Name = "label1";
-            label1.Size = new Size(700, 50);
-            label1.TabIndex = 4;
-            label1.Text = "Quantidade total de serviços prestados";
+            totalservicosLabel.AutoSize = true;
+            totalservicosLabel.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            totalservicosLabel.Location = new Point(34, 211);
+            totalservicosLabel.Name = "totalservicosLabel";
+            totalservicosLabel.Size = new Size(700, 50);
+            totalservicosLabel.TabIndex = 4;
+            totalservicosLabel.Text = "Quantidade total de serviços prestados";
             // 
-            // label2
+            // totalFaturamento
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(34, 297);
-            label2.Name = "label2";
-            label2.Size = new Size(244, 50);
-            label2.TabIndex = 5;
-            label2.Text = "Faturamento";
+            totalFaturamento.AutoSize = true;
+            totalFaturamento.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            totalFaturamento.Location = new Point(34, 297);
+            totalFaturamento.Name = "totalFaturamento";
+            totalFaturamento.Size = new Size(244, 50);
+            totalFaturamento.TabIndex = 5;
+            totalFaturamento.Text = "Faturamento";
             // 
-            // label3
+            // totalCusto
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(34, 379);
-            label3.Name = "label3";
-            label3.Size = new Size(120, 50);
-            label3.TabIndex = 6;
-            label3.Text = "Custo";
+            totalCusto.AutoSize = true;
+            totalCusto.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            totalCusto.Location = new Point(34, 379);
+            totalCusto.Name = "totalCusto";
+            totalCusto.Size = new Size(120, 50);
+            totalCusto.TabIndex = 6;
+            totalCusto.Text = "Custo";
             // 
-            // label4
+            // totalLucro
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(34, 456);
-            label4.Name = "label4";
-            label4.Size = new Size(119, 50);
-            label4.TabIndex = 7;
-            label4.Text = "Lucro";
+            totalLucro.AutoSize = true;
+            totalLucro.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            totalLucro.Location = new Point(34, 456);
+            totalLucro.Name = "totalLucro";
+            totalLucro.Size = new Size(119, 50);
+            totalLucro.TabIndex = 7;
+            totalLucro.Text = "Lucro";
             // 
             // Frm_Relatorio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1088, 672);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(totalLucro);
+            Controls.Add(totalCusto);
+            Controls.Add(totalFaturamento);
+            Controls.Add(totalservicosLabel);
             Controls.Add(Maneiradebusca);
             Controls.Add(dataFim);
             Controls.Add(dataInicio);
@@ -191,9 +191,9 @@
         private RadioButton procCirur;
         private RadioButton procEstetico;
         private RadioButton vacinacao;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
+        private Label totalservicosLabel;
+        private Label totalFaturamento;
+        private Label totalCusto;
+        private Label totalLucro;
     }
 }
