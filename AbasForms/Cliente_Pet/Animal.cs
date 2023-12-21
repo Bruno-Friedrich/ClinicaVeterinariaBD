@@ -61,7 +61,12 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             tb1 = textBox1;
         }
 
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Adiciona_Alergia adiciona_Alergia = new Adiciona_Alergia();
+            adiciona_Alergia.ProcurarAnimal(Id_Cliente);
+            adiciona_Alergia.Show();
+        }
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
@@ -85,7 +90,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
