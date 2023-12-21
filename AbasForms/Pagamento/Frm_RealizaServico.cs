@@ -12,7 +12,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Pagamento
 {
     public partial class Frm_RealizaServico : Form
     {
-        public Frm_RealizaServico()
+        public Frm_RealizaServico(int idServico)
         {
             InitializeComponent();
         }

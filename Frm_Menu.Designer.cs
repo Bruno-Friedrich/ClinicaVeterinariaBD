@@ -136,7 +136,7 @@
             Btn_Pagamento.Padding = new Padding(10, 0, 20, 0);
             Btn_Pagamento.Size = new Size(220, 60);
             Btn_Pagamento.TabIndex = 3;
-            Btn_Pagamento.Text = "Pagamento";
+            Btn_Pagamento.Text = "Serviços e Pagamentos";
             Btn_Pagamento.TextAlign = ContentAlignment.MiddleLeft;
             Btn_Pagamento.TextImageRelation = TextImageRelation.ImageBeforeText;
             Btn_Pagamento.UseVisualStyleBackColor = true;
@@ -182,7 +182,7 @@
             Btn_Consultas.Padding = new Padding(10, 0, 20, 0);
             Btn_Consultas.Size = new Size(220, 60);
             Btn_Consultas.TabIndex = 1;
-            Btn_Consultas.Text = "Consulta";
+            Btn_Consultas.Text = "Agendamento";
             Btn_Consultas.TextAlign = ContentAlignment.MiddleLeft;
             Btn_Consultas.TextImageRelation = TextImageRelation.ImageBeforeText;
             Btn_Consultas.UseVisualStyleBackColor = true;

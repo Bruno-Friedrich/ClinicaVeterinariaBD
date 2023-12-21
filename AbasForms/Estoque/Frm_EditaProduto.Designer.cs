@@ -144,7 +144,6 @@
             // 
             Txt_Nome.Location = new Point(21, 117);
             Txt_Nome.Name = "Txt_Nome";
-            Txt_Nome.ReadOnly = true;
             Txt_Nome.Size = new Size(249, 27);
             Txt_Nome.TabIndex = 11;
             // 
@@ -174,7 +173,6 @@
             // 
             Txt_Quantidade.Location = new Point(164, 205);
             Txt_Quantidade.Name = "Txt_Quantidade";
-            Txt_Quantidade.ReadOnly = true;
             Txt_Quantidade.Size = new Size(133, 27);
             Txt_Quantidade.TabIndex = 15;
             // 
@@ -193,7 +191,6 @@
             // 
             Txt_Marca.Location = new Point(318, 117);
             Txt_Marca.Name = "Txt_Marca";
-            Txt_Marca.ReadOnly = true;
             Txt_Marca.Size = new Size(150, 27);
             Txt_Marca.TabIndex = 17;
             // 
@@ -213,7 +210,6 @@
             Txt_Descricao.Location = new Point(318, 202);
             Txt_Descricao.Multiline = true;
             Txt_Descricao.Name = "Txt_Descricao";
-            Txt_Descricao.ReadOnly = true;
             Txt_Descricao.ScrollBars = ScrollBars.Vertical;
             Txt_Descricao.Size = new Size(307, 191);
             Txt_Descricao.TabIndex = 19;
@@ -256,7 +252,6 @@
             // 
             Txt_Dose.Location = new Point(22, 372);
             Txt_Dose.Name = "Txt_Dose";
-            Txt_Dose.ReadOnly = true;
             Txt_Dose.Size = new Size(71, 27);
             Txt_Dose.TabIndex = 25;
             // 
@@ -265,7 +260,6 @@
             Msk_Vencimento.Location = new Point(21, 287);
             Msk_Vencimento.Mask = "00/00/0000";
             Msk_Vencimento.Name = "Msk_Vencimento";
-            Msk_Vencimento.ReadOnly = true;
             Msk_Vencimento.Size = new Size(100, 27);
             Msk_Vencimento.TabIndex = 27;
             Msk_Vencimento.TextAlign = HorizontalAlignment.Center;
@@ -276,7 +270,6 @@
             Msk_Lote.Location = new Point(164, 287);
             Msk_Lote.Mask = "AAAAAAAAAAAAAAAAAAAA";
             Msk_Lote.Name = "Msk_Lote";
-            Msk_Lote.ReadOnly = true;
             Msk_Lote.Size = new Size(133, 27);
             Msk_Lote.TabIndex = 28;
             // 
@@ -285,7 +278,6 @@
             Msk_Preco.Location = new Point(21, 202);
             Msk_Preco.Mask = "$##0.00";
             Msk_Preco.Name = "Msk_Preco";
-            Msk_Preco.ReadOnly = true;
             Msk_Preco.Size = new Size(100, 27);
             Msk_Preco.TabIndex = 31;
             Msk_Preco.TextAlign = HorizontalAlignment.Center;
