@@ -41,6 +41,7 @@
             SchedulingViewer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SchedulingViewer.Location = new Point(3, 34);
             SchedulingViewer.Name = "SchedulingViewer";
+            SchedulingViewer.RowHeadersVisible = false;
             SchedulingViewer.RowTemplate.Height = 25;
             SchedulingViewer.Size = new Size(685, 178);
             SchedulingViewer.TabIndex = 0;
