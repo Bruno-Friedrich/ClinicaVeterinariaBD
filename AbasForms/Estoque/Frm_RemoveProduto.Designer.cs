@@ -54,6 +54,8 @@
             label1 = new Label();
             Txt_Codigo = new TextBox();
             iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            label2 = new Label();
+            Cmb_Tipo = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -190,7 +192,7 @@
             Txt_Marca.Location = new Point(318, 117);
             Txt_Marca.Name = "Txt_Marca";
             Txt_Marca.ReadOnly = true;
-            Txt_Marca.Size = new Size(307, 27);
+            Txt_Marca.Size = new Size(150, 27);
             Txt_Marca.TabIndex = 17;
             // 
             // Lbl_Descricao
@@ -350,12 +352,34 @@
             iconPictureBox1.TabStop = false;
             iconPictureBox1.Click += iconPictureBox1_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.Gainsboro;
+            label2.Location = new Point(476, 91);
+            label2.Name = "label2";
+            label2.Size = new Size(58, 23);
+            label2.TabIndex = 40;
+            label2.Text = "Tipo*";
+            // 
+            // Cmb_Tipo
+            // 
+            Cmb_Tipo.FormattingEnabled = true;
+            Cmb_Tipo.Items.AddRange(new object[] { "Medicamentos", "Comida", "Outros" });
+            Cmb_Tipo.Location = new Point(476, 117);
+            Cmb_Tipo.Name = "Cmb_Tipo";
+            Cmb_Tipo.Size = new Size(151, 28);
+            Cmb_Tipo.TabIndex = 39;
+            // 
             // Frm_RemoveProduto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(25, 26, 72);
             ClientSize = new Size(660, 481);
+            Controls.Add(label2);
+            Controls.Add(Cmb_Tipo);
             Controls.Add(iconPictureBox1);
             Controls.Add(label1);
             Controls.Add(Txt_Codigo);
@@ -422,5 +446,7 @@
         private Label label1;
         private TextBox Txt_Codigo;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private Label label2;
+        private ComboBox Cmb_Tipo;
     }
 }

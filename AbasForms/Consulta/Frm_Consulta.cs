@@ -28,7 +28,7 @@ namespace ClinicaVeterinariaBD
             //Configuração do comando de busca
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
-            string query = $"SET search_path TO clinicaveterinaria2; SELECT nomeanimal, iddono, funcid, horaini, horafim, custo, tipo FROM SERVICO WHERE data = '{currentDate.ToString("yyyy-MM-dd")}'";
+            string query = $"{connection.search_path} SELECT nomeanimal, iddono, funcid, horaini, horafim, custo, tipo FROM SERVICO WHERE data = '{currentDate.ToString("yyyy-MM-dd")}'";
             command.CommandText = query;
 
 
@@ -47,6 +47,18 @@ namespace ClinicaVeterinariaBD
 
             Frm_BuscaServico searchServiceWindow = new Frm_BuscaServico();
             searchServiceWindow.Show();
+        }
+
+        private void Frm_Consulta_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            s scheduleWindows = new s();
+            scheduleWindows.Show();
+
         }
     }
 }

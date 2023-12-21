@@ -20,7 +20,7 @@ namespace ClinicaVeterinariaBD.AbasForms
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente'";
+                string query = $"{Connection.search_path} SELECT * FROM Pessoa WHERE tipo = 'cliente'";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -52,7 +52,7 @@ namespace ClinicaVeterinariaBD.AbasForms
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT id FROM clinicaveterinaria2.Pessoa WHERE id = cast(@IdBuscado as int)";
+                string query = $"{Connection.search_path} SELECT id FROM Pessoa WHERE id = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -95,7 +95,7 @@ namespace ClinicaVeterinariaBD.AbasForms
 
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente' AND LOWER(nome) LIKE @Nome_cliente";
+                string query = $"{Connection.search_path} SELECT * FROM Pessoa WHERE tipo = 'cliente' AND LOWER(nome) LIKE @Nome_cliente";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -122,6 +122,12 @@ namespace ClinicaVeterinariaBD.AbasForms
         {
             Adiciona_Cliente adiciona_cliente = new Adiciona_Cliente();
             adiciona_cliente.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Adiciona_Animal adiciona_Animal = new Adiciona_Animal();
+            adiciona_Animal.Show();
         }
 
         private void iconPictureBox1_Click(object sender, EventArgs e)

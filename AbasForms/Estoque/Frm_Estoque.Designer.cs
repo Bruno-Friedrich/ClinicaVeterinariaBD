@@ -45,9 +45,18 @@
             Btn_Vencimento = new Bunifu.Framework.UI.BunifuThinButton2();
             Bnt_Lote = new Bunifu.Framework.UI.BunifuThinButton2();
             Bnt_Dose = new Bunifu.Framework.UI.BunifuThinButton2();
+            Btn_Tipo = new Bunifu.Framework.UI.BunifuThinButton2();
+            Lbl_Marca = new Label();
+            label1 = new Label();
+            label2 = new Label();
+            Cmb_Tipo = new ComboBox();
+            Btn_Filtro = new FontAwesome.Sharp.IconPictureBox();
+            Msk_PrecoMin = new MaskedTextBox();
+            Msk_PrecoMax = new MaskedTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dbConnectionBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Dt_Estoque).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Btn_Filtro).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -170,8 +179,6 @@
             Txt_Pesquisa.PlaceholderText = "Digite o Nome do Produto";
             Txt_Pesquisa.Size = new Size(183, 27);
             Txt_Pesquisa.TabIndex = 2;
-            Txt_Pesquisa.TextChanged += Txt_Pesquisa_TextChanged;
-            Txt_Pesquisa.KeyDown += Txt_Pesquisa_KeyDown;
             // 
             // Btn_Id
             // 
@@ -373,12 +380,118 @@
             Bnt_Dose.TextAlign = ContentAlignment.MiddleCenter;
             Bnt_Dose.Click += Bnt_Dose_Click;
             // 
+            // Btn_Tipo
+            // 
+            Btn_Tipo.ActiveBorderThickness = 1;
+            Btn_Tipo.ActiveCornerRadius = 20;
+            Btn_Tipo.ActiveFillColor = Color.FromArgb(47, 33, 74);
+            Btn_Tipo.ActiveForecolor = Color.White;
+            Btn_Tipo.ActiveLineColor = Color.FromArgb(47, 33, 74);
+            Btn_Tipo.BackColor = Color.FromArgb(34, 33, 74);
+            Btn_Tipo.BackgroundImage = (Image)resources.GetObject("Btn_Tipo.BackgroundImage");
+            Btn_Tipo.ButtonText = "Tipo";
+            Btn_Tipo.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Btn_Tipo.ForeColor = Color.FromArgb(33, 45, 74);
+            Btn_Tipo.IdleBorderThickness = 1;
+            Btn_Tipo.IdleCornerRadius = 20;
+            Btn_Tipo.IdleFillColor = Color.White;
+            Btn_Tipo.IdleForecolor = Color.FromArgb(47, 33, 74);
+            Btn_Tipo.IdleLineColor = Color.FromArgb(47, 33, 74);
+            Btn_Tipo.Location = new Point(791, 102);
+            Btn_Tipo.Margin = new Padding(4);
+            Btn_Tipo.Name = "Btn_Tipo";
+            Btn_Tipo.Size = new Size(78, 37);
+            Btn_Tipo.TabIndex = 14;
+            Btn_Tipo.TextAlign = ContentAlignment.MiddleCenter;
+            Btn_Tipo.Click += Btn_Tipo_Click;
+            // 
+            // Lbl_Marca
+            // 
+            Lbl_Marca.AutoSize = true;
+            Lbl_Marca.Font = new Font("Century Gothic", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            Lbl_Marca.ForeColor = Color.Gainsboro;
+            Lbl_Marca.Location = new Point(230, 69);
+            Lbl_Marca.Name = "Lbl_Marca";
+            Lbl_Marca.Size = new Size(153, 23);
+            Lbl_Marca.TabIndex = 19;
+            Lbl_Marca.Text = "Filtrar por valor:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Gainsboro;
+            label1.Location = new Point(437, 71);
+            label1.Name = "label1";
+            label1.Size = new Size(42, 23);
+            label1.TabIndex = 33;
+            label1.Text = "até";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Century Gothic", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.Gainsboro;
+            label2.Location = new Point(537, 69);
+            label2.Name = "label2";
+            label2.Size = new Size(142, 23);
+            label2.TabIndex = 35;
+            label2.Text = "Filtrar por tipo:";
+            // 
+            // Cmb_Tipo
+            // 
+            Cmb_Tipo.FormattingEnabled = true;
+            Cmb_Tipo.Items.AddRange(new object[] { "Medicamentos", "Comida", "Outros", "Todos" });
+            Cmb_Tipo.Location = new Point(680, 67);
+            Cmb_Tipo.Name = "Cmb_Tipo";
+            Cmb_Tipo.Size = new Size(127, 28);
+            Cmb_Tipo.TabIndex = 40;
+            // 
+            // Btn_Filtro
+            // 
+            Btn_Filtro.BackColor = Color.FromArgb(34, 33, 74);
+            Btn_Filtro.ForeColor = Color.Gainsboro;
+            Btn_Filtro.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
+            Btn_Filtro.IconColor = Color.Gainsboro;
+            Btn_Filtro.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            Btn_Filtro.IconSize = 36;
+            Btn_Filtro.Location = new Point(813, 61);
+            Btn_Filtro.Name = "Btn_Filtro";
+            Btn_Filtro.Size = new Size(45, 36);
+            Btn_Filtro.TabIndex = 41;
+            Btn_Filtro.TabStop = false;
+            Btn_Filtro.Click += Btn_Filtro_Click;
+            // 
+            // Msk_PrecoMin
+            // 
+            Msk_PrecoMin.Location = new Point(382, 68);
+            Msk_PrecoMin.Mask = "$000.00";
+            Msk_PrecoMin.Name = "Msk_PrecoMin";
+            Msk_PrecoMin.Size = new Size(56, 27);
+            Msk_PrecoMin.TabIndex = 42;
+            // 
+            // Msk_PrecoMax
+            // 
+            Msk_PrecoMax.Location = new Point(477, 68);
+            Msk_PrecoMax.Mask = "$000.00";
+            Msk_PrecoMax.Name = "Msk_PrecoMax";
+            Msk_PrecoMax.Size = new Size(56, 27);
+            Msk_PrecoMax.TabIndex = 43;
+            // 
             // Frm_Estoque
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(892, 492);
+            Controls.Add(Msk_PrecoMax);
+            Controls.Add(Msk_PrecoMin);
+            Controls.Add(Btn_Filtro);
+            Controls.Add(Cmb_Tipo);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(Lbl_Marca);
+            Controls.Add(Btn_Tipo);
             Controls.Add(Bnt_Dose);
             Controls.Add(Bnt_Lote);
             Controls.Add(Btn_Vencimento);
@@ -395,6 +508,7 @@
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dbConnectionBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)Dt_Estoque).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Btn_Filtro).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -416,5 +530,13 @@
         private Bunifu.Framework.UI.BunifuThinButton2 Btn_Vencimento;
         private Bunifu.Framework.UI.BunifuThinButton2 Bnt_Lote;
         private Bunifu.Framework.UI.BunifuThinButton2 Bnt_Dose;
+        private Bunifu.Framework.UI.BunifuThinButton2 Btn_Tipo;
+        private Label Lbl_Marca;
+        private Label label1;
+        private Label label2;
+        private ComboBox Cmb_Tipo;
+        private FontAwesome.Sharp.IconPictureBox Btn_Filtro;
+        private MaskedTextBox Msk_PrecoMin;
+        private MaskedTextBox Msk_PrecoMax;
     }
 }

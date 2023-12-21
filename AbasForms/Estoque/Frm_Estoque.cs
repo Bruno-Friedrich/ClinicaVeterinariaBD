@@ -4,7 +4,9 @@ using ClinicaVeterinariaBD.Arquitetura;
 using Npgsql;
 using System;
 using System.Data;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Schema;
 
 namespace ClinicaVeterinariaBD.AbasForms
 {
@@ -18,18 +20,20 @@ namespace ClinicaVeterinariaBD.AbasForms
         private bool estadoBtnMarca = true;
         private bool estadoBtnLote = true;
         private bool estadoBtnDose = true;
+        private bool estadoBtnTipo = true;
 
         public Frm_Estoque()
         {
             InitializeComponent();
             CarregarDadosDoBanco();
+            Cmb_Tipo.SelectedItem = "Todos";
         }
 
         private void CarregarDadosDoBanco()
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Produto";
+                string query = $"{Connection.search_path} SELECT * FROM Produto";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -51,6 +55,7 @@ namespace ClinicaVeterinariaBD.AbasForms
                         Dt_Estoque.Columns["marca"].HeaderText = "Marca";
                         Dt_Estoque.Columns["lote"].HeaderText = "Lote";
                         Dt_Estoque.Columns["dose"].HeaderText = "Dose";
+                        Dt_Estoque.Columns["tipo"].HeaderText = "Tipo";
 
                     }
                     catch (Exception ex)
@@ -75,48 +80,6 @@ namespace ClinicaVeterinariaBD.AbasForms
             }
         }
 
-        private void Txt_Pesquisa_KeyDown(object sender, KeyEventArgs e)
-        {
-            //string produtoBuscado = Txt_Pesquisa.Text.ToLower().Trim();
-
-            // Utilize o método separado para executar a consulta
-            //ExecutarConsulta(produtoBuscado);
-        }
-
-        private void ExecutarConsulta(string produtoBuscado)
-        {
-            using (DbConnection Connection = new DbConnection())
-            {
-                string query = "SELECT * FROM clinicaveterinaria2.Produto WHERE LOWER(NomeProd) LIKE @ProdutoBuscado";
-
-                using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
-                {
-                    Command.Parameters.AddWithValue("@ProdutoBuscado", "%" + produtoBuscado + "%");
-
-                    try
-                    {
-                        NpgsqlDataReader dr = Command.ExecuteReader();
-
-                        DataTable dt = new DataTable();
-                        dt.Load(dr);
-                        Dt_Estoque.DataSource = dt;
-                    }
-                    catch (Exception ex)
-                    {
-                        // Trate a exceção adequadamente
-                        MessageBox.Show("Erro ao executar a consulta: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                } // O bloco using garante que o comando seja descartado e a conexão seja fechada automaticamente
-            } // O bloco using garante que a conexão seja fechada automaticamente
-        }
-
-        private void Txt_Pesquisa_TextChanged(object sender, EventArgs e)
-        {
-            string produtoBuscado = Txt_Pesquisa.Text.ToLower().Trim();
-
-            // Utilize o método separado para executar a consulta
-            ExecutarConsulta(produtoBuscado);
-        }
 
         private void Btn_RemoveProduto_Click(object sender, EventArgs e)
         {
@@ -134,7 +97,7 @@ namespace ClinicaVeterinariaBD.AbasForms
         private void Btn_EditProduto_Click(object sender, EventArgs e)
         {
             // Crie uma instância do formulário filho
-            using (Frm_InfoProduto formFilho = new Frm_InfoProduto("Editar Produto"))
+            using (Frm_EditaProduto formFilho = new Frm_EditaProduto("Editar Produto"))
             {
                 // Exiba o formulário filho como um diálogo modal
                 formFilho.ShowDialog();
@@ -224,5 +187,105 @@ namespace ClinicaVeterinariaBD.AbasForms
         {
             AjustarBotaoEColuna(Bnt_Dose, Dt_Estoque, "dose", ref estadoBtnDose);
         }
+
+        private void Btn_Tipo_Click(object sender, EventArgs e)
+        {
+            AjustarBotaoEColuna(Btn_Tipo, Dt_Estoque, "tipo", ref estadoBtnTipo);
+        }
+
+        private void Btn_Filtro_Click(object sender, EventArgs e)
+        {
+            AplicarFiltros();
+        }
+
+        private void AplicarFiltros()
+        {
+            // Construa a consulta SQL base
+            string consultaSQL = "SELECT * FROM clinicaveterinaria.Produto WHERE 1 = 1";
+
+            // Filtro por Nome do Produto
+            string filtroNome = Txt_Pesquisa.Text;
+            if (!string.IsNullOrEmpty(filtroNome))
+            {
+                consultaSQL += $" AND LOWER(NomeProd) LIKE LOWER('%{filtroNome}%')";
+            }
+            
+            
+            // Validação do campo Preco Max
+            string precoMaxTexto = Msk_PrecoMax.Text;
+
+            // Remover o símbolo de moeda e outros caracteres não numéricos
+            precoMaxTexto = Regex.Replace(precoMaxTexto, @"[^\d,]", "");
+            precoMaxTexto = precoMaxTexto.Replace(",", ".");
+
+
+            // Validação do campo Preco Min
+            string precoMinTexto = Msk_PrecoMin.Text;
+
+            precoMinTexto = Regex.Replace(precoMinTexto, @"[^\d,]", "");
+            precoMinTexto = precoMinTexto.Replace(",", ".");
+
+            double? precoMin = null;
+            double? precoMax = null;
+
+            if (!string.IsNullOrEmpty(precoMinTexto) && double.TryParse(precoMinTexto, out double precoMinValue))
+            {
+                precoMin = precoMinValue;
+            }
+
+            if (!string.IsNullOrEmpty(precoMaxTexto) && double.TryParse(precoMaxTexto, out double precoMaxValue))
+            {
+                precoMax = precoMaxValue;
+            }
+
+            if (precoMin != null || precoMax != null)
+            {
+                consultaSQL += FiltrarPorFaixaDePrecoSQL(precoMin, precoMax);
+            }
+
+            // Filtro por Tipo
+            string tipoSelecionado = Cmb_Tipo.SelectedItem?.ToString();
+            if (!string.IsNullOrEmpty(tipoSelecionado) && tipoSelecionado != "Todos")
+            {
+                consultaSQL += $" AND Tipo = '{tipoSelecionado}'";
+            }
+
+            // Executar a consulta SQL e atualizar o DataGridView
+            AtualizarDataGridView(consultaSQL);
+        }
+
+        private string FiltrarPorFaixaDePrecoSQL(double? precoMin, double? precoMax)
+        {
+            string filtro = "";
+
+            if (precoMin != null)
+            {
+                filtro += $" AND Preco >= {precoMin}";
+            }
+
+            if (precoMax != null)
+            {
+                filtro += $" AND Preco <= {precoMax}";
+            }
+
+            return filtro;
+        }
+
+        private void AtualizarDataGridView(string consultaSQL)
+        {
+            using (DbConnection Connection = new DbConnection())
+            {
+                // Crie um adaptador de dados para preencher um DataTable
+                using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(consultaSQL, Connection.Connection))
+                {
+                    DataTable dtFiltrado = new DataTable();
+                    adapter.Fill(dtFiltrado);
+
+                    // Atribua o DataTable ao seu DataGridView (Dt_Estoque)
+                    Dt_Estoque.DataSource = dtFiltrado;
+                }
+            }
+        }
+
     }
 }

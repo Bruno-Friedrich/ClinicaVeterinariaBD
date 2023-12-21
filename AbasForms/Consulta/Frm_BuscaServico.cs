@@ -40,7 +40,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Consulta
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
 
-            string query = "SET search_path TO clinicaveterinaria2;SELECT * FROM SERVICO WHERE ";
+            string query = $"{connection.search_path} SELECT * FROM SERVICO WHERE ";
             DateTime currentDate = DateTime.Now;
 
             if (Buscaporsemana.Checked)

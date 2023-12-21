@@ -49,11 +49,13 @@
             Msk_Vencimento = new MaskedTextBox();
             Msk_Lote = new MaskedTextBox();
             Msk_Preco = new MaskedTextBox();
-            Btn_Remove = new FontAwesome.Sharp.IconButton();
+            Btn_Edita = new FontAwesome.Sharp.IconButton();
             Btn_Cancelar = new FontAwesome.Sharp.IconButton();
             label1 = new Label();
             Txt_Codigo = new TextBox();
             iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            Cmb_Tipo = new ComboBox();
+            Lbl_Tipo = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -190,7 +192,7 @@
             Txt_Marca.Location = new Point(318, 117);
             Txt_Marca.Name = "Txt_Marca";
             Txt_Marca.ReadOnly = true;
-            Txt_Marca.Size = new Size(307, 27);
+            Txt_Marca.Size = new Size(150, 27);
             Txt_Marca.TabIndex = 17;
             // 
             // Lbl_Descricao
@@ -287,22 +289,22 @@
             Msk_Preco.TextAlign = HorizontalAlignment.Center;
             Msk_Preco.ValidatingType = typeof(DateTime);
             // 
-            // Btn_Remove
+            // Btn_Edita
             // 
-            Btn_Remove.BackColor = Color.White;
-            Btn_Remove.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Remove.IconChar = FontAwesome.Sharp.IconChar.None;
-            Btn_Remove.IconColor = Color.Black;
-            Btn_Remove.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            Btn_Remove.Location = new Point(476, 414);
-            Btn_Remove.Name = "Btn_Remove";
-            Btn_Remove.Size = new Size(149, 46);
-            Btn_Remove.TabIndex = 32;
-            Btn_Remove.Text = "Remover";
-            Btn_Remove.UseVisualStyleBackColor = false;
-            Btn_Remove.Click += Btn_Remove_Click;
-            Btn_Remove.MouseEnter += Btn_Remove_MouseEnter;
-            Btn_Remove.MouseLeave += Btn_Remove_MouseLeave;
+            Btn_Edita.BackColor = Color.White;
+            Btn_Edita.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Edita.IconChar = FontAwesome.Sharp.IconChar.None;
+            Btn_Edita.IconColor = Color.Black;
+            Btn_Edita.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            Btn_Edita.Location = new Point(476, 414);
+            Btn_Edita.Name = "Btn_Edita";
+            Btn_Edita.Size = new Size(149, 46);
+            Btn_Edita.TabIndex = 32;
+            Btn_Edita.Text = "Edita";
+            Btn_Edita.UseVisualStyleBackColor = false;
+            Btn_Edita.Click += Btn_Edita_Click;
+            Btn_Edita.MouseEnter += Btn_Edita_MouseEnter;
+            Btn_Edita.MouseLeave += Btn_Edita_MouseLeave;
             // 
             // Btn_Cancelar
             // 
@@ -350,17 +352,39 @@
             iconPictureBox1.TabStop = false;
             iconPictureBox1.Click += iconPictureBox1_Click;
             // 
-            // Frm_RemoveProduto
+            // Cmb_Tipo
+            // 
+            Cmb_Tipo.FormattingEnabled = true;
+            Cmb_Tipo.Items.AddRange(new object[] { "Medicamentos", "Comida", "Outros" });
+            Cmb_Tipo.Location = new Point(476, 117);
+            Cmb_Tipo.Name = "Cmb_Tipo";
+            Cmb_Tipo.Size = new Size(151, 28);
+            Cmb_Tipo.TabIndex = 37;
+            // 
+            // Lbl_Tipo
+            // 
+            Lbl_Tipo.AutoSize = true;
+            Lbl_Tipo.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            Lbl_Tipo.ForeColor = Color.Gainsboro;
+            Lbl_Tipo.Location = new Point(476, 91);
+            Lbl_Tipo.Name = "Lbl_Tipo";
+            Lbl_Tipo.Size = new Size(58, 23);
+            Lbl_Tipo.TabIndex = 38;
+            Lbl_Tipo.Text = "Tipo*";
+            // 
+            // Frm_EditaProduto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(25, 26, 72);
             ClientSize = new Size(660, 481);
+            Controls.Add(Lbl_Tipo);
+            Controls.Add(Cmb_Tipo);
             Controls.Add(iconPictureBox1);
             Controls.Add(label1);
             Controls.Add(Txt_Codigo);
             Controls.Add(Btn_Cancelar);
-            Controls.Add(Btn_Remove);
+            Controls.Add(Btn_Edita);
             Controls.Add(Msk_Preco);
             Controls.Add(Msk_Lote);
             Controls.Add(Msk_Vencimento);
@@ -382,7 +406,7 @@
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "Frm_RemoveProduto";
+            Name = "Frm_EditaProduto";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Frm_InfoProduto";
             panel1.ResumeLayout(false);
@@ -417,11 +441,12 @@
         private MaskedTextBox Msk_Vencimento;
         private MaskedTextBox Msk_Lote;
         private MaskedTextBox Msk_Preco;
-        private FontAwesome.Sharp.IconButton Btn_Remove;
+        private FontAwesome.Sharp.IconButton Btn_Edita;
         private FontAwesome.Sharp.IconButton Btn_Cancelar;
         private Label label1;
         private TextBox Txt_Codigo;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private ComboBox Cmb_Tipo;
+        private Label Lbl_Tipo;
     }
 }
-    

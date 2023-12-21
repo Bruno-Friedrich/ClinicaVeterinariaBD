@@ -24,7 +24,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Pessoa WHERE tipo = 'cliente' AND id = cast(@IdBuscado as int)";
+                string query = $"{Connection.search_path} SELECT * FROM Pessoa WHERE tipo = 'cliente' AND id = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -41,7 +41,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
         {
             using (DbConnection Connection = new DbConnection())
             {
-                string query = "SELECT * FROM clinicaveterinaria2.Animal WHERE iddono = cast(@IdBuscado as int)";
+                string query = $"{Connection.search_path} SELECT * FROM Animal WHERE iddono = cast(@IdBuscado as int)";
 
                 using (NpgsqlCommand Command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -61,31 +61,11 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             tb1 = textBox1;
         }
 
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-
-        }
-
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
+            Adiciona_Alergia adiciona_Alergia = new Adiciona_Alergia();
+            adiciona_Alergia.ProcurarAnimal(Id_Cliente);
+            adiciona_Alergia.Show();
         }
     }
 }

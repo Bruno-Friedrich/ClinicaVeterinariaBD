@@ -66,7 +66,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
 
                 DbConnection Connection = new DbConnection();
                 // Construa a consulta SQL para obter os dados do produto com base no ID
-                string query = "SELECT * FROM clinicaveterinaria2.produto WHERE Id = @IdProduto";
+                string query = $"{Connection.search_path} SELECT * FROM produto WHERE Id = @IdProduto";
 
                 using (NpgsqlCommand command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -99,6 +99,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
 
                                 Msk_Lote.Text = reader["Lote"].ToString();
                                 Txt_Dose.Text = reader["Dose"].ToString();
+                                Cmb_Tipo.SelectedItem = reader["Tipo"].ToString();
                             }
                             else
                             {
@@ -149,7 +150,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
             {
                 DbConnection Connection = new DbConnection();
 
-                string query = "DELETE FROM clinicaveterinaria2.produto WHERE Id = @IdProduto";
+                string query = $"{Connection.search_path} DELETE FROM produto WHERE Id = @IdProduto";
 
                 using (NpgsqlCommand command = new NpgsqlCommand(query, Connection.Connection))
                 {

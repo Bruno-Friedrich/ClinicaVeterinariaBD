@@ -51,6 +51,8 @@
             Msk_Preco = new MaskedTextBox();
             Btn_Enviar = new FontAwesome.Sharp.IconButton();
             Btn_Cancelar = new FontAwesome.Sharp.IconButton();
+            label2 = new Label();
+            Cmb_Tipo = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -183,7 +185,7 @@
             // 
             Txt_Marca.Location = new Point(318, 117);
             Txt_Marca.Name = "Txt_Marca";
-            Txt_Marca.Size = new Size(307, 27);
+            Txt_Marca.Size = new Size(150, 27);
             Txt_Marca.TabIndex = 17;
             // 
             // Lbl_Descricao
@@ -302,12 +304,34 @@
             Btn_Cancelar.UseVisualStyleBackColor = true;
             Btn_Cancelar.Click += Btn_Cancelar_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.Gainsboro;
+            label2.Location = new Point(476, 91);
+            label2.Name = "label2";
+            label2.Size = new Size(58, 23);
+            label2.TabIndex = 40;
+            label2.Text = "Tipo*";
+            // 
+            // Cmb_Tipo
+            // 
+            Cmb_Tipo.FormattingEnabled = true;
+            Cmb_Tipo.Items.AddRange(new object[] { "Medicamentos", "Comida", "Outros" });
+            Cmb_Tipo.Location = new Point(476, 117);
+            Cmb_Tipo.Name = "Cmb_Tipo";
+            Cmb_Tipo.Size = new Size(151, 28);
+            Cmb_Tipo.TabIndex = 39;
+            // 
             // Frm_InfoProduto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(25, 26, 72);
             ClientSize = new Size(660, 481);
+            Controls.Add(label2);
+            Controls.Add(Cmb_Tipo);
             Controls.Add(Btn_Cancelar);
             Controls.Add(Btn_Enviar);
             Controls.Add(Msk_Preco);
@@ -367,5 +391,7 @@
         private MaskedTextBox Msk_Preco;
         private FontAwesome.Sharp.IconButton Btn_Enviar;
         private FontAwesome.Sharp.IconButton Btn_Cancelar;
+        private Label label2;
+        private ComboBox Cmb_Tipo;
     }
 }

@@ -71,7 +71,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
             {
 
                 // Consulta para verificar se o código já existe
-                string query = "SELECT COUNT(*) FROM clinicaveterinaria2.produto WHERE Id = @Codigo";
+                string query = $"{Connection.search_path} SELECT COUNT(*) FROM produto WHERE Id = @Codigo";
                 using (NpgsqlCommand command = new NpgsqlCommand(query, Connection.Connection))
                 {
                     if (int.TryParse(codigo, out int codigoInt))
@@ -233,11 +233,13 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                 }
             }
 
+            // Obtém o valor selecionado no ComboBox Cmb_Tipo
+            string tipo = Cmb_Tipo.SelectedItem?.ToString();
+
             using (DbConnection Connection = new DbConnection())
             {
-
                 // Cria um comando SQL com parâmetros nomeados
-                using (NpgsqlCommand command = new NpgsqlCommand("INSERT INTO clinicaveterinaria2.produto (NomeProd, Preco, QntEstoque, Marca, Descricao, Lote, Dose, DataVenc) VALUES (@Nome, @Preco, @Quantidade, @Marca, @Descricao, @Lote, @Dose, @DataVenc)", Connection.Connection))
+                using (NpgsqlCommand command = new NpgsqlCommand($"{Connection.search_path} INSERT INTO produto (NomeProd, Preco, QntEstoque, Marca, Descricao, Lote, Dose, DataVenc, Tipo) VALUES (@Nome, @Preco, @Quantidade, @Marca, @Descricao, @Lote, @Dose, @DataVenc, @Tipo)", Connection.Connection))
                 {
                     // Adicione os parâmetros
                     command.Parameters.AddWithValue("@Nome", nome);
@@ -248,13 +250,13 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                     command.Parameters.AddWithValue("@Lote", lote ?? (object)DBNull.Value); // Trata o valor nulo
                     command.Parameters.AddWithValue("@Dose", dose ?? (object)DBNull.Value); // Trata o valor nulo
                     command.Parameters.AddWithValue("@DataVenc", dataVencimento ?? (object)DBNull.Value); // Trata o valor nulo
-
+                    command.Parameters.AddWithValue("@Tipo", tipo);
 
                     // Execute o comando de inserção
                     command.ExecuteNonQuery();
                 }
             }
-
         }
+
     }
 }

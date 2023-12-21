@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,9 +17,10 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
 {
     public partial class Frm_EditaProduto : Form
     {
-        public Frm_EditaProduto()
+        public Frm_EditaProduto(string stringTexto)
         {
             InitializeComponent();
+            Lbl_Titulo.Text = stringTexto;
         }
 
         // Used for Drag Form
@@ -47,14 +50,14 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
             btnExit.ForeColor = Color.Gainsboro;
         }
 
-        private void Btn_Remove_MouseEnter(object sender, EventArgs e)
+        private void Btn_Edita_MouseEnter(object sender, EventArgs e)
         {
-            Btn_Remove.BackColor = Color.Red;
+            Btn_Edita.BackColor = Color.Blue;
         }
 
-        private void Btn_Remove_MouseLeave(object sender, EventArgs e)
+        private void Btn_Edita_MouseLeave(object sender, EventArgs e)
         {
-            Btn_Remove.BackColor = Color.White;
+            Btn_Edita.BackColor = Color.White;
         }
 
         private void PreencherCamposComProduto()
@@ -65,7 +68,7 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
 
                 DbConnection Connection = new DbConnection();
                 // Construa a consulta SQL para obter os dados do produto com base no ID
-                string query = "SELECT * FROM clinicaveterinaria2.produto WHERE Id = @IdProduto";
+                string query = $"{Connection.search_path} SELECT * FROM produto WHERE Id = @IdProduto";
 
                 using (NpgsqlCommand command = new NpgsqlCommand(query, Connection.Connection))
                 {
@@ -98,6 +101,17 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
 
                                 Msk_Lote.Text = reader["Lote"].ToString();
                                 Txt_Dose.Text = reader["Dose"].ToString();
+                                Cmb_Tipo.SelectedItem = reader["Tipo"].ToString();
+
+                                //Liberando para a edição
+                                Txt_Nome.ReadOnly = false;
+                                Txt_Quantidade.ReadOnly = false;
+                                Txt_Marca.ReadOnly = false;
+                                Txt_Descricao.ReadOnly = false  ;
+                                Txt_Dose.ReadOnly = false;
+                                Msk_Vencimento.ReadOnly = false;
+                                Msk_Lote.ReadOnly = false;
+                                Msk_Preco.ReadOnly = false;
                             }
                             else
                             {
@@ -128,52 +142,175 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
             PreencherCamposComProduto();
         }
 
-        private void Btn_Remove_Click(object sender, EventArgs e)
+        private bool ValidarCampos()
         {
-            DialogResult result = MessageBox.Show("Tem certeza de que deseja remover este produto?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            // Validação do campo NomeProd
+            if (!string.IsNullOrEmpty(Txt_Nome.Text) && Txt_Nome.Text.Length > 30)
+            {
+                MessageBox.Show("O campo NomeProd não pode ter mais de 30 caracteres.", "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validação do campo Preco
+            string precoTexto = Msk_Preco.Text;
+
+            // Remover o símbolo de moeda e outros caracteres não numéricos
+            precoTexto = Regex.Replace(precoTexto, @"[^\d,]", "");
+
+            // Substituir a vírgula por ponto para formatar corretamente o valor double
+            precoTexto = precoTexto.Replace(",", ".");
+
+            if (!string.IsNullOrEmpty(precoTexto) && double.TryParse(precoTexto, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out double preco))
+            {
+                // O valor é um número válido
+            }
+            else if (!string.IsNullOrEmpty(precoTexto))
+            {
+                // O valor não é um número válido
+                MessageBox.Show($"Formato Invalido: {Msk_Preco.Text}", "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validação do campo QntEstoque
+            if (!string.IsNullOrEmpty(Txt_Quantidade.Text) && (!int.TryParse(Txt_Quantidade.Text, out int quantidade) || quantidade < 0))
+            {
+                MessageBox.Show("O campo Quantidade em Estoque deve ser um número inteiro não negativo.", "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validação do campo Descricao
+            if (!string.IsNullOrEmpty(Txt_Descricao.Text) && Txt_Descricao.Text.Length > 1000)
+            {
+                MessageBox.Show("A descrição não pode ter mais de 1000 caracteres.", "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validação do campo Marca
+            if (!string.IsNullOrEmpty(Txt_Marca.Text) && Txt_Marca.Text.Length > 30)
+            {
+                MessageBox.Show("O campo Marca não pode ter mais de 30 caracteres.", "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validação do campo Dose
+            if (!string.IsNullOrEmpty(Txt_Dose.Text) && !int.TryParse(Txt_Dose.Text, out int dose))
+            {
+                MessageBox.Show("O campo Dose deve ser um número inteiro.", "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validação do campo Lote
+            if (!string.IsNullOrEmpty(Msk_Lote.Text) && Msk_Lote.Text.Length > 20)
+            {
+                MessageBox.Show("O campo Lote não pode ter mais de 20 caracteres.", "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validação do campo DataVenc
+            string dataVencimentoTexto = Msk_Vencimento.Text.Replace("/", "").Replace(" ", "");
+
+            if (string.IsNullOrEmpty(dataVencimentoTexto))
+            {
+                // O valor é nulo ou vazio, não há validação a ser feita
+            }
+
+            else if (DateTime.TryParseExact(dataVencimentoTexto, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dataVenc))
+            {
+                // Se desejar, você pode usar a variável 'dataVenc' conforme necessário.
+            }
+            else
+            {
+                MessageBox.Show($"Formato de data inválido. Utilize DD/MM/AAAA", "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Se todas as validações passaram, retorna true
+            return true;
+        }
+
+        private void Btn_Edita_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Tem certeza de que deseja editar este produto?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                // O usuário escolheu Sim, proceder com a remoção
-                RemoverProduto();
-                this.Close();
+                // O usuário escolheu Sim, proceder com a edição
+                if (ValidarCampos())
+                {
+                    AtualizarDadosNoBanco();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Problema na edição!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                   
             }
             // Se o usuário escolher Não, não é necessário fazer nada
         }
 
-        private void RemoverProduto()
+        private void AtualizarDadosNoBanco()
         {
-            // O código de remoção do produto
+            // Verifica se o valor em Txt_Codigo é um número inteiro
             if (int.TryParse(Txt_Codigo.Text, out int idProduto))
             {
-                DbConnection Connection = new DbConnection();
+                string nome = Txt_Nome.Text;
 
-                string query = "DELETE FROM clinicaveterinaria2.produto WHERE Id = @IdProduto";
+                // Validação do campo Preco
+                string precoTexto = Msk_Preco.Text;
 
-                using (NpgsqlCommand command = new NpgsqlCommand(query, Connection.Connection))
+                // Remover o símbolo de moeda e outros caracteres não numéricos
+                precoTexto = Regex.Replace(precoTexto, @"[^\d,]", "");
+
+                // Substituir a vírgula por ponto para formatar corretamente o valor double
+                precoTexto = precoTexto.Replace(",", ".");
+
+                if (double.TryParse(precoTexto, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out double preco))
                 {
-                    command.Parameters.AddWithValue("@IdProduto", idProduto);
+                    // O valor é um número válido
+                }
 
-                    try
-                    {
-                        int rowsAffected = command.ExecuteNonQuery();
+                int quantidade = int.Parse(Txt_Quantidade.Text);
+                string marca = Txt_Marca.Text;
+                string descricao = Txt_Descricao.Text;
 
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Produto removido com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Produto não encontrado para remoção.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    catch (Exception ex)
+                // Campos opcionais que podem ser nulos
+                string lote = !string.IsNullOrEmpty(Msk_Lote.Text) ? Msk_Lote.Text : null;
+                int? dose = !string.IsNullOrEmpty(Txt_Dose.Text) ? int.Parse(Txt_Dose.Text) : (int?)null;
+
+                // Campos de data
+                DateTime? dataVencimento = null;
+                string dataVencimentoTexto = Msk_Vencimento.Text.Replace("/", "").Replace(" ", "");
+                if (!string.IsNullOrEmpty(dataVencimentoTexto))
+                {
+                    if (DateTime.TryParseExact(dataVencimentoTexto, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dataVenc))
                     {
-                        MessageBox.Show("Erro ao remover o produto: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dataVencimento = dataVenc;
                     }
-                    finally
+                }
+
+                // Obtém o valor selecionado no ComboBox Cmb_Tipo
+                string tipo = Cmb_Tipo.SelectedItem?.ToString();
+
+                using (DbConnection Connection = new DbConnection())
+                {
+                    // Cria um comando SQL com parâmetros nomeados
+                    using (NpgsqlCommand command = new NpgsqlCommand($"{Connection.search_path} UPDATE produto SET NomeProd = @Nome, Preco = @Preco, QntEstoque = @Quantidade, Marca = @Marca, Descricao = @Descricao, Lote = @Lote, Dose = @Dose, DataVenc = @DataVenc, Tipo = @Tipo WHERE Id = @IdProduto", Connection.Connection))
                     {
-                        Connection.Connection.Close();
+                        // Adicione os parâmetros
+                        command.Parameters.AddWithValue("@IdProduto", idProduto);
+                        command.Parameters.AddWithValue("@Nome", nome);
+                        command.Parameters.AddWithValue("@Preco", preco);
+                        command.Parameters.AddWithValue("@Quantidade", quantidade);
+                        command.Parameters.AddWithValue("@Marca", marca);
+                        command.Parameters.AddWithValue("@Descricao", descricao);
+                        command.Parameters.AddWithValue("@Lote", lote ?? (object)DBNull.Value); // Trata o valor nulo
+                        command.Parameters.AddWithValue("@Dose", dose ?? (object)DBNull.Value); // Trata o valor nulo
+                        command.Parameters.AddWithValue("@DataVenc", dataVencimento ?? (object)DBNull.Value); // Trata o valor nulo
+                        command.Parameters.AddWithValue("@Tipo", tipo);
+
+                        // Execute o comando de atualização
+                        command.ExecuteNonQuery();
                     }
                 }
             }
@@ -182,6 +319,8 @@ namespace ClinicaVeterinariaBD.AbasForms.Estoque
                 MessageBox.Show("O valor em Txt_Codigo não é um número inteiro válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
     }
 }
-  

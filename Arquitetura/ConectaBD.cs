@@ -9,6 +9,8 @@ namespace ClinicaVeterinariaBD.Arquitetura
 {
     public class DbConnection : IDisposable
     {
+
+        public string search_path = "set search_path TO clinicaveterinaria;";
         public NpgsqlConnection Connection { get; set; }
         
         public DbConnection()
