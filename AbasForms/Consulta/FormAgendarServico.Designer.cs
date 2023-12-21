@@ -50,9 +50,10 @@
             dateInvalid = new Label();
             todaysScheduleLabel = new Label();
             todaysScheduleDataGrid = new DataGridView();
-            horaFim = new TextBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
-            horaIni = new TextBox();
+            InvalidTimeLabel = new Label();
+            horaIni = new MaskedTextBox();
+            horaFim = new MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)todaysScheduleDataGrid).BeginInit();
             SuspendLayout();
             // 
@@ -148,13 +149,16 @@
             // 
             // valorServico
             // 
+            valorServico.Enabled = false;
             valorServico.Location = new Point(46, 518);
             valorServico.Name = "valorServico";
             valorServico.Size = new Size(181, 23);
             valorServico.TabIndex = 12;
+            valorServico.TextChanged += valorServico_TextChanged;
             // 
             // obsServico
             // 
+            obsServico.Enabled = false;
             obsServico.Location = new Point(274, 518);
             obsServico.Multiline = true;
             obsServico.Name = "obsServico";
@@ -163,6 +167,7 @@
             // 
             // tipoServico
             // 
+            tipoServico.Enabled = false;
             tipoServico.FormattingEnabled = true;
             tipoServico.Items.AddRange(new object[] { "Procedimento Estético", "Vacinação", "Procedimento Cirúrgico", "Consulta" });
             tipoServico.Location = new Point(503, 77);
@@ -189,6 +194,7 @@
             btrConfirm.TabIndex = 19;
             btrConfirm.Text = "Confirmar";
             btrConfirm.UseVisualStyleBackColor = true;
+            btrConfirm.Click += btrConfirm_Click;
             // 
             // cpfOwner
             // 
@@ -197,7 +203,7 @@
             cpfOwner.Name = "cpfOwner";
             cpfOwner.Size = new Size(181, 23);
             cpfOwner.TabIndex = 20;
-            cpfOwner.Leave += cpfOwner_Leave;
+            cpfOwner.KeyUp += cpfOwner_KeyUp;
             // 
             // cpfInvalido
             // 
@@ -217,6 +223,7 @@
             animalName.Name = "animalName";
             animalName.Size = new Size(168, 23);
             animalName.TabIndex = 22;
+            animalName.SelectedIndexChanged += animalName_SelectedIndexChanged;
             // 
             // CalendarSchedule
             // 
@@ -252,38 +259,57 @@
             todaysScheduleDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             todaysScheduleDataGrid.Location = new Point(341, 187);
             todaysScheduleDataGrid.Name = "todaysScheduleDataGrid";
+            todaysScheduleDataGrid.RowHeadersVisible = false;
             todaysScheduleDataGrid.RowTemplate.Height = 25;
             todaysScheduleDataGrid.Size = new Size(463, 167);
             todaysScheduleDataGrid.TabIndex = 27;
             todaysScheduleDataGrid.Visible = false;
-            // 
-            // horaFim
-            // 
-            horaFim.Location = new Point(274, 451);
-            horaFim.Name = "horaFim";
-            horaFim.Size = new Size(267, 23);
-            horaFim.TabIndex = 29;
-            horaFim.TextChanged += horaFim_TextChanged;
             // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
+            // InvalidTimeLabel
+            // 
+            InvalidTimeLabel.AutoSize = true;
+            InvalidTimeLabel.Location = new Point(558, 451);
+            InvalidTimeLabel.Name = "InvalidTimeLabel";
+            InvalidTimeLabel.Size = new Size(114, 15);
+            InvalidTimeLabel.TabIndex = 31;
+            InvalidTimeLabel.Text = "HORÁRIO INVÁLIDO";
+            InvalidTimeLabel.Visible = false;
+            // 
             // horaIni
             // 
-            horaIni.Location = new Point(46, 451);
+            horaIni.Enabled = false;
+            horaIni.Location = new Point(46, 443);
+            horaIni.Mask = "00:00";
             horaIni.Name = "horaIni";
-            horaIni.Size = new Size(181, 23);
-            horaIni.TabIndex = 30;
+            horaIni.Size = new Size(177, 23);
+            horaIni.TabIndex = 32;
+            horaIni.ValidatingType = typeof(DateTime);
+            horaIni.KeyUp += horaIni_KeyUp;
+            // 
+            // horaFim
+            // 
+            horaFim.Enabled = false;
+            horaFim.Location = new Point(274, 448);
+            horaFim.Mask = "00:00";
+            horaFim.Name = "horaFim";
+            horaFim.Size = new Size(267, 23);
+            horaFim.TabIndex = 33;
+            horaFim.ValidatingType = typeof(DateTime);
+            horaFim.KeyUp += horaFim_KeyUp;
             // 
             // s
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(977, 589);
-            Controls.Add(horaIni);
             Controls.Add(horaFim);
+            Controls.Add(horaIni);
+            Controls.Add(InvalidTimeLabel);
             Controls.Add(todaysScheduleDataGrid);
             Controls.Add(todaysScheduleLabel);
             Controls.Add(dateInvalid);
@@ -335,8 +361,9 @@
         private Label dateInvalid;
         private Label todaysScheduleLabel;
         private DataGridView todaysScheduleDataGrid;
-        private TextBox horaFim;
         private ContextMenuStrip contextMenuStrip1;
-        private TextBox horaIni;
+        private Label InvalidTimeLabel;
+        private MaskedTextBox horaIni;
+        private MaskedTextBox horaFim;
     }
 }
