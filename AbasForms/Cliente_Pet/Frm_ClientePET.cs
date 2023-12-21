@@ -124,6 +124,12 @@ namespace ClinicaVeterinariaBD.AbasForms
             adiciona_cliente.Show();
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Adiciona_Animal adiciona_Animal = new Adiciona_Animal();
+            adiciona_Animal.Show();
+        }
+
         private void iconPictureBox1_Click(object sender, EventArgs e)
         {
 
