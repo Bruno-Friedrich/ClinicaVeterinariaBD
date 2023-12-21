@@ -50,6 +50,12 @@ namespace ClinicaVeterinariaBD.AbasForms
         {
             string UserInputText = textBox1.Text.ToLower().Trim();
 
+            if (string.IsNullOrEmpty(UserInputText))
+            {
+                MessageBox.Show("Insira o Id", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             using (DbConnection Connection = new DbConnection())
             {
                 string query = "SELECT id FROM clinicaveterinaria.Pessoa WHERE id = cast(@IdBuscado as int)";

@@ -37,13 +37,13 @@
             label1 = new Label();
             box_Alergia = new TextBox();
             box_NomeAnimal = new TextBox();
-            box_IdDono = new TextBox();
             label2 = new Label();
             button1 = new Button();
             dataGridView2 = new DataGridView();
             panel2 = new Panel();
             button2 = new Button();
             dataGridView1 = new DataGridView();
+            box_IdDono = new MaskedTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Icn_Titulo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -162,18 +162,6 @@
             box_NomeAnimal.TabIndex = 31;
             box_NomeAnimal.Tag = "";
             // 
-            // box_IdDono
-            // 
-            box_IdDono.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            box_IdDono.ForeColor = Color.Black;
-            box_IdDono.Location = new Point(325, 246);
-            box_IdDono.Margin = new Padding(3, 2, 3, 2);
-            box_IdDono.Name = "box_IdDono";
-            box_IdDono.PlaceholderText = "12";
-            box_IdDono.Size = new Size(208, 23);
-            box_IdDono.TabIndex = 37;
-            box_IdDono.Tag = "";
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -249,19 +237,27 @@
             dataGridView1.Size = new Size(737, 82);
             dataGridView1.TabIndex = 43;
             // 
+            // box_IdDono
+            // 
+            box_IdDono.Location = new Point(325, 245);
+            box_IdDono.Mask = "0000";
+            box_IdDono.Name = "box_IdDono";
+            box_IdDono.Size = new Size(208, 23);
+            box_IdDono.TabIndex = 44;
+            // 
             // Adiciona_Alergia
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(34, 33, 74);
             ClientSize = new Size(800, 517);
+            Controls.Add(box_IdDono);
             Controls.Add(dataGridView1);
             Controls.Add(button2);
             Controls.Add(panel2);
             Controls.Add(dataGridView2);
             Controls.Add(button1);
             Controls.Add(label2);
-            Controls.Add(box_IdDono);
             Controls.Add(label5);
             Controls.Add(panel1);
             Controls.Add(label4);
@@ -291,12 +287,12 @@
         private Label label1;
         private TextBox box_Alergia;
         private TextBox box_NomeAnimal;
-        private TextBox box_IdDono;
         private Label label2;
         private Button button1;
         private DataGridView dataGridView2;
         private Panel panel2;
         private Button button2;
         private DataGridView dataGridView1;
+        private MaskedTextBox box_IdDono;
     }
 }
