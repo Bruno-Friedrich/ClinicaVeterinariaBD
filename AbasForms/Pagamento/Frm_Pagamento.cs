@@ -22,7 +22,7 @@ namespace ClinicaVeterinariaBD.AbasForms
         private void Btn_RealizarConsulta_Click(object sender, EventArgs e)
         {
             // Crie uma instância do formulário filho
-            using (Frm_RealizaServico formFilho = new Frm_RealizaServico())
+            using (Frm_SelecionaServico formFilho = new Frm_SelecionaServico())
             {
                 // Exiba o formulário filho como um diálogo modal
                 formFilho.ShowDialog();

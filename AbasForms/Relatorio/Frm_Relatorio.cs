@@ -94,7 +94,7 @@ namespace ClinicaVeterinariaBD.AbasForms
             string dateEnd_s = endDate.ToString("yyyy-MM-dd");
 
 
-            string query = $"{connection.search_path} SELECT SUM(Custo_servico) AS Custo_total FROM (SELECT (preco * quantidadeconsumida) AS Custo_servico FROM (SELECT PRODUTO.preco as preco, quantidadeconsumida FROM PRODUTO, SERVICO_CONSOME_PRODUTO, SERVICO WHERE SERVICO.tipo = '{typeService}' AND SERVICO.id = idservico AND PRODUTO.id = idproduto))'";
+            string query = $"{connection.search_path} SELECT SUM(Custo_servico) AS Custo_total FROM (SELECT (preco * quantidadeconsumida) AS Custo_servico FROM (SELECT PRODUTO.preco as preco, quantidadeconsumida FROM PRODUTO, SERVICO_CONSOME_PRODUTO, SERVICO WHERE SERVICO.tipo = '{typeService}' AND SERVICO.id = idservico AND PRODUTO.id = idproduto));";
             command.CommandText = query;
 
             NpgsqlDataReader dataReader = command.ExecuteReader();

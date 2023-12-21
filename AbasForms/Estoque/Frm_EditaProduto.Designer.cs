@@ -105,7 +105,7 @@
             // btnExit
             // 
             btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnExit.BackColor = Color.FromArgb(26, 25, 72);
+            btnExit.BackColor = Color.FromArgb(34, 33, 74);
             btnExit.ForeColor = Color.Gainsboro;
             btnExit.IconChar = FontAwesome.Sharp.IconChar.Xmark;
             btnExit.IconColor = Color.Gainsboro;
