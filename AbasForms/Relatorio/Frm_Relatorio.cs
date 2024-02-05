@@ -1,5 +1,6 @@
 ﻿using ClinicaVeterinariaBD.Arquitetura;
 using Npgsql;
+using Org.BouncyCastle.Asn1.Cms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,7 +56,7 @@ namespace ClinicaVeterinariaBD.AbasForms
             int total_sales = GetTotalSales(begginingDate, endDate, typeService);
             int total_services = GetTotalServices(begginingDate, endDate, typeService);
 
-            float total_cost = GetTotalCost(total_services, typeService);
+            float total_cost = GetTotalCost( begginingDate, endDate, total_services, typeService);
             float total_profit = total_sales - total_cost;
             totalFaturamento.Text = $"Total de faturamento: {total_sales.ToString()}";
             totalLucro.Text = $"Total de lucro: {total_profit.ToString()}";
@@ -89,32 +90,69 @@ namespace ClinicaVeterinariaBD.AbasForms
 
         }
 
-        private float GetTotalCost(int total_services, string typeService)
+        private float GetTotalCost(DateTime begginingDate, DateTime endDate, int total_services, string typeService)
         {
             DbConnection connection = new DbConnection();
             NpgsqlCommand command = new NpgsqlCommand();
             command.Connection = connection.Connection;
             command.CommandType = CommandType.Text;
-            string dateBeggining_s = begginingDate.ToString("yyyy-MM-dd");
-            string dateEnd_s = endingDate.ToString("yyyy-MM-dd");
-            float idle_cost = 0;
+
+            string typeEmployee = "";
+            switch (typeService)
+            {
+                case "Vacinação":
+                case "Consulta":
+                    typeEmployee = "Auxiliar Veterinário";
+                    break;
+                case "Procedimento Cirúrgico":
+                    typeEmployee = "Veterinário";
+                    break;
+                case "Procedimento Estético":
+                    typeEmployee = "Banhista/Tosador";
+                    break;
+            }
+            TimeSpan time = endDate - begginingDate;
+            int number_months = (int)(time.TotalDays / 30);
+
+            numMeses.Visible = true;
+            numMeses.Text = $"Meses contabilizados: {number_months.ToString()}";
+
+            string query = $"{connection.search_path} SELECT (SUM(salario) * 8) AS custo_funcionarios FROM FUNCIONARIO WHERE funcao = '{typeEmployee}'";
+            command.CommandText = query;
+
+
+            NpgsqlDataReader costReader = command.ExecuteReader();
+            costReader.Read();
+            float total_costEmployee;
+            if (costReader["custo_funcionarios"].ToString().Equals(""))
+                total_costEmployee = 0;
+            else
+                total_costEmployee = float.Parse(costReader["custo_funcionarios"].ToString());
+
+            float idle_cost_service = 0;
             switch (typeService)
             {
                 case "Procedimentos Cirúrgicos":
                 case "Procedimentos Estéticos":
-                    idle_cost = 350;
+                    idle_cost_service = 350;
                     break;
                 case "Vacinação":
-                    idle_cost = 30;
+                    idle_cost_service = 30;
                     break;
                 default:
-                    idle_cost = 10; 
+                    idle_cost_service = 10; 
                     break;
             }
-            float result = idle_cost * total_services;
+
+
             command.Dispose();
             connection.Connection.Close();
-            return result;
+
+
+            float total_idle_cost = idle_cost_service * total_services;
+            command.Dispose();
+            connection.Connection.Close();
+            return total_idle_cost + total_costEmployee;
 
         }
 

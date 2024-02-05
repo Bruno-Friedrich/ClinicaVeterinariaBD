@@ -12,6 +12,7 @@ using ClinicaVeterinariaBD.Arquitetura;
 using ClinicaVeterinariaBD.AbasForms.Cliente_Pet;
 using System.CodeDom.Compiler;
 using System.Text.RegularExpressions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
 {
@@ -87,6 +88,8 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
                     try
                     {
                         NpgsqlDataReader dr = Command.ExecuteReader();
+                        int idcliente = FindClientId(cpf);
+                        add_tupla_cliente(idcliente);
                         MessageBox.Show("Inserido com Sucesso!");
                     }
                     catch (Exception ex)
@@ -98,6 +101,40 @@ namespace ClinicaVeterinariaBD.AbasForms.Cliente_Pet
             }
 
         }
+
+        private void add_tupla_cliente(int chave)
+        {
+
+            DbConnection connection = new DbConnection();
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection.Connection;
+            command.CommandType = CommandType.Text;
+
+            string insertion = $" {connection.search_path} INSERT INTO CLIENTE (id) VALUES({chave});";
+            command.CommandText = insertion;
+            command.ExecuteNonQuery();
+
+            command.Dispose();
+            connection.Connection.Close();
+
+        }
+
+        private int FindClientId(string CPF)
+        {
+            DbConnection connection = new DbConnection();
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.Connection = connection.Connection;
+            command.CommandType = CommandType.Text;
+
+            string query = $" {connection.search_path} SELECT PESSOA.ID FROM PESSOA WHERE CPF = '{CPF}';";
+            command.CommandText = query;
+            NpgsqlDataReader IdReader = command.ExecuteReader();
+
+            IdReader.Read();
+            return Int32.Parse(IdReader["ID"].ToString());
+
+        }
+
 
         public Adiciona_Cliente()
         {

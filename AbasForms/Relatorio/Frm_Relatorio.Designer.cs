@@ -39,6 +39,8 @@
             totalFaturamento = new Label();
             totalCusto = new Label();
             totalLucro = new Label();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            numMeses = new Label();
             Maneiradebusca.SuspendLayout();
             SuspendLayout();
             // 
@@ -162,11 +164,22 @@
             totalLucro.TabIndex = 7;
             totalLucro.Text = "Lucro";
             // 
+            // numMeses
+            // 
+            numMeses.AutoSize = true;
+            numMeses.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            numMeses.Location = new Point(530, 456);
+            numMeses.Name = "numMeses";
+            numMeses.Size = new Size(392, 50);
+            numMeses.TabIndex = 9;
+            numMeses.Text = "Meses contabilizados";
+            // 
             // Frm_Relatorio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1088, 672);
+            Controls.Add(numMeses);
             Controls.Add(totalLucro);
             Controls.Add(totalCusto);
             Controls.Add(totalFaturamento);
@@ -195,5 +208,7 @@
         private Label totalFaturamento;
         private Label totalCusto;
         private Label totalLucro;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Label numMeses;
     }
 }

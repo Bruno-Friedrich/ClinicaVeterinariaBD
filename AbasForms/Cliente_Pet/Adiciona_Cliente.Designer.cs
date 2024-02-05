@@ -120,7 +120,7 @@
             // 
             box_nome.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
             box_nome.ForeColor = Color.Black;
-            box_nome.Location = new Point(341, 114);
+            box_nome.Location = new Point(341, 113);
             box_nome.Margin = new Padding(3, 2, 3, 2);
             box_nome.Name = "box_nome";
             box_nome.PlaceholderText = "Rodrigues Orkblezhuk";
